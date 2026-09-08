@@ -157,14 +157,14 @@
 
     <section id="resumen">
       <h2 class="section-title">1. Resumen ejecutivo</h2>
-      <p>UTP participa junto a otras universidades de la Red MetaRed en un estudio internacional sobre la demanda de empleo sostenible, a partir del análisis de ofertas laborales publicadas en los principales portales de empleo del Perú (por ejemplo Bumeran, LinkedIn, Trabajando/Teletrabajo, entre otros). Hoy, la recolección se hace con Octoparse (manual y laboriosa) o con un script artesanal que pierde datos —como el salario— si se corre con demasiada frecuencia. Además, buena parte de lo descargado no está realmente vinculado a sostenibilidad y debe filtrarse a mano.</p>
+      <p>UTP participa junto a otras universidades de la Red MetaRed en un estudio internacional sobre la demanda de empleo sostenible, a partir del análisis de ofertas laborales publicadas en los principales portales de empleo del Perú (por ejemplo Bumeran, LinkedIn, Trabajando/Teletrabajo, entre otros). Dentro de la red, una universidad española ya usa Octoparse para esta recolección; UTP evalúa si seguir esa misma vía o usar una alternativa distinta. Además, buena parte de lo descargado no está realmente vinculado a sostenibilidad y debe filtrarse a mano.</p>
       <p>Esta propuesta cubre la investigación y construcción de la estrategia de extracción (web scraping o API, según lo que permita cada plataforma), el análisis de los empleos sostenibles resultantes, y su entrega en un informe — es decir, transformar los datos recolectados en conocimiento útil para el estudio. El trabajo se realiza en coordinación constante con UTP para entender la necesidad y afinar el análisis presentado en los informes.</p>
     </section>
 
     <section id="actual">
       <h2 class="section-title">2. Situación actual</h2>
       <h3 class="sub">2.1 Proceso actual</h3>
-      <p>El equipo busca ofertas con las palabras clave de sostenibilidad listadas arriba. La descarga se hace por dos vías: la app Octoparse, o un script que navega y descarga datos — más rápido, pero pierde información si se corre más de una vez en pocos días; funciona bien cada 7 días. Luego se filtran manualmente las ofertas no vinculadas realmente a sostenibilidad.</p>
+      <p>El equipo busca ofertas con las palabras clave de sostenibilidad listadas arriba. Dentro de la Red MetaRed, la vía de recolección varía según la universidad: una universidad española usa la app Octoparse, mientras que en UTP se ha probado un script propio que navega y descarga datos — más rápido, pero pierde información si se corre más de una vez en pocos días; funciona bien cada 7 días. Luego se filtran manualmente las ofertas no vinculadas realmente a sostenibilidad.</p>
 
       <div class="diagram-wrap" onclick="openLightbox('svg-flow')">
         <span class="hint">🔍 Clic para ampliar</span>
@@ -176,10 +176,9 @@
       <table>
         <tr><th></th><th>Problema</th><th>Causa</th><th>Impacto</th></tr>
         <tr><td class="n">1</td><td>Pérdida de datos en la descarga</td><td>El script pierde campos si se ejecuta muy seguido</td><td>Obliga a espaciar corridas cada 7 días</td></tr>
-        <tr><td class="n">2</td><td>Alto esfuerzo manual con Octoparse</td><td>Proceso paso a paso, laborioso</td><td>Consume tiempo del equipo</td></tr>
+        <tr><td class="n">2</td><td>Falta de estandarización entre universidades</td><td>Cada una usa una herramienta distinta (Octoparse, script propio, u otra)</td><td>Riesgo de datos no comparables para MetaRed</td></tr>
         <tr><td class="n">3</td><td>Falsos positivos en las ofertas</td><td>La keyword aparece sin relación real con sostenibilidad</td><td>Filtrado manual adicional</td></tr>
-        <tr><td class="n">4</td><td>Falta de estandarización entre universidades</td><td>Cada una ejecuta el proceso por su cuenta</td><td>Riesgo de datos no comparables para MetaRed</td></tr>
-        <tr><td class="n">5</td><td>Incertidumbre tecnológica</td><td>El piloto se percibe complejo; se sugiere Java sin decidir</td><td>Riesgo de construir sobre base poco clara</td></tr>
+        <tr><td class="n">4</td><td>Herramienta aún no definida para UTP</td><td>Falta decidir si usar Octoparse (como la universidad española), el script actual, u otra alternativa</td><td>Riesgo de construir sobre una base que luego haya que migrar</td></tr>
       </table>
     </section>
 
@@ -201,9 +200,9 @@
 
     <section id="enfoque">
       <h2 class="section-title">4. Cómo se hace</h2>
-      <p>El trabajo parte de una investigación de la estrategia de extracción más adecuada para cada plataforma de empleo considerada (web scraping o API, según lo que permita cada una), para luego construir la solución de recolección de ofertas laborales. Sobre los datos recolectados se aplica un filtrado por sostenibilidad y un análisis, cuyos hallazgos se entregan en un informe — transformando los datos en conocimiento útil para el estudio de la Red MetaRed.</p>
+      <p>El trabajo parte de una investigación de la estrategia de extracción más adecuada para cada plataforma de empleo considerada (web scraping o API, según lo que permita cada una), incluyendo si conviene usar Octoparse —como ya lo hace una universidad de la red en España— o construir una alternativa propia, según lo que prefiera UTP. Con esa decisión tomada, se construye la solución de recolección de ofertas laborales; sobre los datos recolectados se aplica un filtrado por sostenibilidad y un análisis, cuyos hallazgos se entregan en un informe — transformando los datos en conocimiento útil para el estudio de la Red MetaRed.</p>
       <ul>
-        <li>Investigación de la vía de extracción más viable por plataforma (scraping o API)</li>
+        <li>Investigación de la vía de extracción más viable por plataforma (Octoparse, scraping propio, o API)</li>
         <li>Filtrado de ofertas realmente vinculadas a sostenibilidad</li>
         <li>Análisis de los datos y entrega de hallazgos en informes</li>
         <li>Coordinación constante con UTP para entender la necesidad y ajustar el análisis</li>
@@ -240,10 +239,10 @@
       <p class="section-sub">Todo lo necesario para esta investigación se resuelve con acceso a las plataformas de empleo objetivo y, de ser el caso, almacenamiento ligero para los datos recolectados.</p>
 
       <h3 class="sub">6.1 Acceso necesario</h3>
-      <p>Acceso al script/piloto existente, si se decide partir de él, y a cualquier credencial o API oficial que alguna plataforma de empleo requiera para la extracción. La forma de otorgarlo queda a criterio de UTP; basta con que el acceso quede solicitado de forma explícita antes de iniciar el desarrollo.</p>
+      <p>Acceso al script/piloto existente, si se decide partir de él, a la cuenta de Octoparse si se opta por esa vía, y a cualquier credencial o API oficial que alguna plataforma de empleo requiera para la extracción. La forma de otorgarlo queda a criterio de UTP; basta con que el acceso quede solicitado de forma explícita antes de iniciar el desarrollo.</p>
 
       <h3 class="sub">6.2 Licencias y herramientas</h3>
-      <p>No se anticipan costos recurrentes significativos. Si alguna plataforma solo permite extracción vía API oficial con costo, o si se requiere almacenamiento en la nube para los datos, el plan gratuito o de menor costo suele ser suficiente para este volumen — se valida como parte de la investigación inicial.</p>
+      <p>No se anticipan costos recurrentes significativos. Si se opta por Octoparse, o si alguna plataforma solo permite extracción vía API oficial con costo, o si se requiere almacenamiento en la nube para los datos, el plan gratuito o de menor costo suele ser suficiente para este volumen — se valida como parte de la investigación inicial.</p>
 
       <h3 class="sub">6.3 Supuestos</h3>
       <ul>
@@ -332,13 +331,12 @@ const flowSVG = `
   <line x1="760" y1="115" x2="798" y2="115" stroke="#8FA0B8" stroke-width="1.5" marker-end="url(#a1)"/>
   <defs><marker id="a1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#8FA0B8"/></marker></defs>
 
-  <circle cx="230" cy="150" r="9" fill="#C4523F"/><text x="230" y="153.5" font-family="Poppins, sans-serif" font-weight="700" font-size="10.5" fill="#fff" text-anchor="middle">1</text>
-  <circle cx="490" cy="150" r="9" fill="#C4523F"/><text x="490" y="153.5" font-family="Poppins, sans-serif" font-weight="700" font-size="10.5" fill="#fff" text-anchor="middle">2</text>
+  <circle cx="360" cy="150" r="9" fill="#C4523F"/><text x="360" y="153.5" font-family="Poppins, sans-serif" font-weight="700" font-size="10.5" fill="#fff" text-anchor="middle">1</text>
   <circle cx="750" cy="150" r="9" fill="#C4523F"/><text x="750" y="153.5" font-family="Poppins, sans-serif" font-weight="700" font-size="10.5" fill="#fff" text-anchor="middle">3</text>
 
   <rect x="280" y="200" width="480" height="60" rx="10" fill="#FBEBE7" stroke="#E3A794"/>
-  <text x="294" y="225" font-size="11.5" font-weight="700" fill="#A8402C">🔴 4 y 5 · Falta de estandarización entre universidades</text>
-  <text x="294" y="243" font-size="10.5" fill="#A8402C">e incertidumbre sobre la tecnología a usar (Java vs. enfoque actual)</text>
+  <text x="294" y="225" font-size="11.5" font-weight="700" fill="#A8402C">🔴 2 y 4 · Falta de estandarización entre universidades</text>
+  <text x="294" y="243" font-size="10.5" fill="#A8402C">y herramienta aún no definida para UTP (Octoparse u otra alternativa)</text>
 </svg>`;
 
 document.getElementById('svg-flow-holder').innerHTML = flowSVG;
