@@ -188,20 +188,18 @@
     <a href="#resumen">Resumen ejecutivo</a>
     <a href="#actual">Situación actual</a>
     <a href="#propuesta">Situación propuesta</a>
-    <a href="#alternativas">Alternativas</a>
+    <a href="#solucion">Cómo se automatiza</a>
     <a href="#alcance">Alcance</a>
-    <a href="#requisitos">Requisitos de acceso</a>
+    <a href="#requisitos">Requisitos y supuestos</a>
     <a href="#inversion">Inversión</a>
     <a href="#cronograma">Cronograma</a>
-    <a href="#operativos">Costos operativos</a>
-    <a href="#supuestos">Supuestos</a>
     <a href="#comerciales">Condiciones comerciales</a>
     <a href="#pasos">Próximos pasos</a>
   </nav>
 
   <main>
     <div class="hero">
-      <span class="tag">✅ Propuesta aceptada · Opción 1 — Automatización sobre Microsoft 365</span>
+      <span class="tag">Propuesta comercial · Automatización sobre Microsoft 365</span>
       <h1>Programa de Mentoría Inclusiva</h1>
       <p class="lead">Automatización del registro, validación y seguimiento de reuniones entre estudiantes y mentores, construida enteramente dentro de la suite Microsoft 365 que UTP ya utiliza — sin salir de ese ecosistema ni incorporar plataformas externas.</p>
       <div class="meta">
@@ -218,7 +216,7 @@
     <section id="resumen">
       <h2 class="section-title">1. Resumen ejecutivo</h2>
       <p>El Programa de Mentoría Inclusiva (PMI) conecta a aproximadamente 640 estudiantes con 200 mentores mediante reuniones de seguimiento registradas en Microsoft Forms. Hoy, el equipo PMI dedica cerca de <b>9 horas semanales</b> a cruzar, corregir y consolidar esta información manualmente en Excel, lo que genera acumulación de trabajo cerca de las fechas de corte, errores de digitación y duplicados.</p>
-      <p>Esta propuesta evaluó originalmente <b>dos alternativas de solución</b>: automatizar el proceso aprovechando la suite Microsoft 365 que UTP ya utiliza, o construir una plataforma web propia y a medida para la gestión de mentorías. <b>UTP aceptó la Opción 1</b> (automatización sobre Microsoft 365), por lo que el resto de este documento describe el proyecto sobre esa base: sin salir del ecosistema Microsoft que UTP ya opera, con cambio mínimo para mentores y equipo PMI.</p>
+      <p>Esta propuesta plantea automatizar el proceso aprovechando la suite Microsoft 365 que UTP ya utiliza, sin salir de ese ecosistema ni incorporar plataformas externas, con cambio mínimo para mentores y equipo PMI.</p>
     </section>
 
     <section id="actual">
@@ -273,43 +271,14 @@
       </div>
     </section>
 
-    <section id="alternativas">
-      <h2 class="section-title">4. Alternativas evaluadas</h2>
-      <p class="section-sub">Se evaluaron dos caminos posibles. UTP aceptó la <b>Opción 1</b>, que es la que se desarrolla en el resto de este documento.</p>
-      <div class="cards2">
-        <div class="opt-card" style="border:2px solid var(--sage-600); position:relative;">
-          <span style="position:absolute; top:-12px; right:20px; background:var(--sage-600); color:#fff; font-family:'Poppins',sans-serif; font-weight:700; font-size:12px; padding:4px 12px; border-radius:20px;">✅ ACEPTADA</span>
-          <div class="kicker">OPCIÓN 1</div>
-          <h4>Automatización sobre Microsoft 365</h4>
-          <p style="font-size:14px; margin-top:8px;">Optimiza el proceso actual sin reemplazar las herramientas existentes, usando Power Automate para integrar Forms, SharePoint, Excel, Outlook y Power BI. La solución permanece 100% dentro del ecosistema Microsoft 365 de UTP — no se incorpora ninguna plataforma o servicio externo.</p>
-          <ul>
-            <li>Menor inversión, implementación más rápida</li>
-            <li>Cambio mínimo para los usuarios</li>
-            <li>Aprovecha licencias que UTP ya tiene</li>
-          </ul>
-        </div>
-        <div class="opt-card" style="opacity:.6;">
-          <div class="kicker">OPCIÓN 2 · NO SELECCIONADA</div>
-          <h4>Plataforma web propia para PMI</h4>
-          <p style="font-size:14px; margin-top:8px;">Aplicación web simple, independiente de la infraestructura de UTP (stand-alone). Se descartó a favor de la Opción 1.</p>
-          <ul>
-            <li>Mayor personalización y control del proceso</li>
-            <li>Código fuente completo entregado dentro del alcance</li>
-          </ul>
-        </div>
-      </div>
-
-      <table style="margin-top:28px;">
-        <tr><th>Aspecto</th><th>Opción 1 — M365 ✅</th><th>Opción 2 — Plataforma propia</th></tr>
-        <tr><td>Inversión</td><td>US$650 sin IGV</td><td>US$1,000 sin IGV</td></tr>
-        <tr><td>Tiempo de implementación</td><td>Más rápido</td><td>Mayor, por desarrollo a medida</td></tr>
-        <tr><td>Complejidad</td><td>Baja–media</td><td>Media–alta</td></tr>
-        <tr><td>Cambio para usuarios</td><td>Mínimo</td><td>Mayor (plataforma nueva)</td></tr>
-        <tr><td>Personalización</td><td>Media</td><td>Alta</td></tr>
-        <tr><td>Escalabilidad</td><td>Media</td><td>Alta</td></tr>
-        <tr><td>Mantenimiento</td><td>Bajo</td><td>Medio</td></tr>
-      </table>
-      <p style="margin-top:16px; font-size:14.5px; max-width:none;"><b>Decisión:</b> UTP aceptó la Opción 1 por su menor inversión, implementación más rápida y porque no requiere que el equipo ni los mentores salgan del ecosistema Microsoft 365 que ya usan a diario.</p>
+    <section id="solucion">
+      <h2 class="section-title">4. Cómo se automatiza</h2>
+      <p>La automatización se construye con <b>Power Automate</b>, integrando Forms, SharePoint, Excel, Outlook y Power BI, sin reemplazar ninguna herramienta que UTP ya usa. La solución permanece 100% dentro del ecosistema Microsoft 365 de UTP — no se incorpora ninguna plataforma o servicio externo.</p>
+      <ul>
+        <li>Menor inversión, implementación más rápida</li>
+        <li>Cambio mínimo para los usuarios</li>
+        <li>Aprovecha licencias que UTP ya tiene</li>
+      </ul>
     </section>
 
     <section id="alcance">
@@ -342,48 +311,34 @@
     </section>
 
     <section id="requisitos">
-      <h2 class="section-title">6. Requisitos de acceso y licencias</h2>
+      <h2 class="section-title">6. Requisitos y supuestos</h2>
       <p class="section-sub">Todo lo necesario para construir y operar la automatización vive dentro de Microsoft 365 — no se requiere ninguna herramienta ni plataforma externa a UTP.</p>
 
-      <h3 class="sub">6.1 Cuenta para el desarrollo de la automatización</h3>
-      <p>Para diseñar, construir y probar los flujos de Power Automate se necesita una cuenta dentro del tenant de Microsoft 365 de UTP (como usuario interno o como invitado/guest, según defina el equipo de TI de UTP) para el desarrollador a cargo del proyecto:</p>
-      <ul>
-        <li><b>Max Carbajal</b> — maxcarbajalh@gmail.com</li>
-      </ul>
-      <p>Esta cuenta necesita permisos para:</p>
-      <ul>
-        <li>Crear, editar y publicar flujos en Power Automate</li>
-        <li>Acceder al formulario de Microsoft Forms del PMI (respuestas y estructura de preguntas)</li>
-        <li>Leer y escribir en el sitio de SharePoint donde se centralizará la información y evidencias</li>
-        <li>Acceder a la base maestra de estudiantes/mentores en Excel</li>
-        <li>Enviar correos desde la cuenta u alias de Outlook designado para recordatorios a mentores</li>
-        <li>Publicar o actualizar el dataset/reporte de Power BI del PMI</li>
-      </ul>
+      <h3 class="sub">6.1 Acceso necesario</h3>
+      <p>Se requerirá una cuenta dentro del tenant de Microsoft 365 de UTP para el equipo de desarrollo, con permisos para crear y publicar flujos en Power Automate, y para acceder a Microsoft Forms, SharePoint, Excel, Outlook y Power BI del PMI. La forma de otorgarla (usuario interno, invitado u otra) queda a criterio de UTP; basta con que el acceso quede solicitado de forma explícita antes de iniciar el desarrollo.</p>
 
-      <h3 class="sub">6.2 Licencias y herramientas</h3>
-      <p>La automatización se construye con <b>Power Automate</b>, ya incluido dentro de la mayoría de planes de Microsoft 365. Queda pendiente validar con el equipo de TI de UTP:</p>
+      <h3 class="sub">6.2 Licencias</h3>
+      <p><b>Power Automate</b> ya suele estar incluido en la mayoría de planes de Microsoft 365. Queda pendiente validar con TI de UTP si el plan contratado alcanza para el volumen del PMI (≈640 estudiantes por ciclo) o si se requiere licencia adicional por usuario o por flujo. <b>Power Apps no es necesario</b> para este alcance — no se contempla una aplicación o interfaz nueva.</p>
+
+      <h3 class="sub">6.3 Supuestos</h3>
       <ul>
-        <li>Si el plan de M365 de UTP incluye Power Automate con los conectores estándar necesarios (Forms, SharePoint, Excel, Outlook, Power BI), o si se requiere una licencia adicional de Power Automate por usuario o por flujo para cubrir el volumen de ejecuciones del PMI (≈640 estudiantes por ciclo)</li>
-        <li><b>Power Apps no es necesario</b> para el alcance de esta automatización — no se contempla una aplicación o interfaz nueva; los mentores siguen usando Microsoft Forms como hoy. Si más adelante UTP quisiera una interfaz propia para el equipo PMI, ahí sí se evaluaría una licencia de Power Apps como alcance adicional</li>
+        <li>Acceso oportuno a Forms, SharePoint, Power Automate y Power BI de UTP, y a los datos reales cuando corresponda</li>
+        <li>Base maestra de estudiantes y mentores actualizada y disponible</li>
+        <li>La inversión de implementación no incluye las licencias o suscripciones de Microsoft 365, que UTP administra directamente</li>
+        <li>Cambios de alcance solicitados durante el proyecto se cotizan por separado</li>
       </ul>
-      <div class="note amber">Ninguna licencia adicional identificada hasta ahora implica salir de Microsoft 365. El único punto a confirmar con TI de UTP es si el Power Automate ya contratado alcanza para este volumen, o si se necesita una licencia adicional por usuario/flujo.</div>
     </section>
 
     <section id="inversion">
       <h2 class="section-title">7. Inversión</h2>
       <div class="cards2">
-        <div class="opt-card" style="border:2px solid var(--sage-600);">
-          <div class="kicker">OPCIÓN 1 · M365 ✅ ACEPTADA</div>
+        <div class="opt-card">
+          <div class="kicker">IMPLEMENTACIÓN · M365</div>
           <div class="price">US$650 <small>sin IGV</small></div>
           <div style="font-size:13px; color:var(--ink-soft); margin-top:2px; font-family:'Poppins',sans-serif; font-variant-numeric:tabular-nums;">≈ S/ 2,187 <small style="font-family:'Lato',sans-serif;">al tipo de cambio referencial</small></div>
         </div>
-        <div class="opt-card" style="opacity:.5;">
-          <div class="kicker">OPCIÓN 2 · No seleccionada</div>
-          <div class="price">US$1,000 <small>sin IGV</small></div>
-          <div style="font-size:13px; color:var(--ink-soft); margin-top:2px; font-family:'Poppins',sans-serif; font-variant-numeric:tabular-nums;">≈ S/ 3,365 <small style="font-family:'Lato',sans-serif;">al tipo de cambio referencial</small></div>
-        </div>
       </div>
-      <div class="note amber">La inversión de US$650 no incluye licencias ni suscripciones de Microsoft 365 — ver sección 6, "Requisitos de acceso y licencias". Conversión a soles referencial al tipo de cambio venta SUNAT del 08/09/2026 (S/ 3.365 por US$1); el monto final en soles se ajusta al tipo de cambio del día de facturación.</div>
+      <div class="note amber">La inversión de US$650 no incluye licencias ni suscripciones de Microsoft 365 — ver sección 6, "Requisitos y supuestos". Conversión a soles referencial al tipo de cambio venta SUNAT del 08/09/2026 (S/ 3.365 por US$1); el monto final en soles se ajusta al tipo de cambio del día de facturación.</div>
     </section>
 
     <section id="cronograma">
@@ -404,27 +359,8 @@
       <div class="note">El tiempo total es referencial y puede variar según la rapidez con que UTP otorgue accesos y datos; el alcance concluye con la confirmación de buena ejecución por parte de UTP.</div>
     </section>
 
-    <section id="operativos">
-      <h2 class="section-title">9. Costos operativos</h2>
-      <p>La inversión de implementación no incluye las suscripciones o servicios recurrentes que UTP deba mantener o contratar directamente:</p>
-      <div class="list-2col">
-        <ul><li>Microsoft 365 / Power Automate — licencias que UTP administra directamente (ver sección 6 sobre validación de conectores y volumen)</li></ul>
-      </div>
-    </section>
-
-    <section id="supuestos">
-      <h2 class="section-title">10. Supuestos y exclusiones</h2>
-      <ul>
-        <li>Acceso oportuno a Forms, SharePoint, Power Automate y Power BI de UTP, y a los datos reales cuando corresponda</li>
-        <li>Base maestra de estudiantes y mentores actualizada y disponible</li>
-        <li>Creación de la cuenta y permisos descritos en la sección 6 para el desarrollador a cargo</li>
-        <li>Confirmación de UTP sobre si el Power Automate contratado alcanza para el volumen del PMI o si requiere licencia adicional</li>
-        <li>Cambios de alcance solicitados durante el proyecto se cotizan por separado</li>
-      </ul>
-    </section>
-
     <section id="comerciales">
-      <h2 class="section-title">11. Condiciones comerciales</h2>
+      <h2 class="section-title">9. Condiciones comerciales</h2>
       <h3 class="sub">Forma de pago propuesta</h3>
       <div class="pay-split">
         <div class="pay-block a"><div class="pct">35%</div><div class="desc">Al aceptar el contrato</div></div>
@@ -433,10 +369,10 @@
     </section>
 
     <section id="pasos">
-      <h2 class="section-title">12. Próximos pasos</h2>
+      <h2 class="section-title">10. Próximos pasos</h2>
       <div class="steps">
         <div class="step"><div class="num"></div><p>Confirmación del alcance definitivo</p></div>
-        <div class="step"><div class="num"></div><p>Creación de la cuenta del desarrollador en el tenant de M365 de UTP y validación de licencia de Power Automate (sección 6)</p></div>
+        <div class="step"><div class="num"></div><p>Otorgamiento de accesos y validación de licencia de Power Automate en el tenant de M365 de UTP (sección 6)</p></div>
         <div class="step"><div class="num"></div><p>Diseño detallado</p></div>
         <div class="step"><div class="num"></div><p>Desarrollo / configuración en espacios de desarrollo (datos de prueba)</p></div>
         <div class="step"><div class="num"></div><p>Pruebas</p></div>
