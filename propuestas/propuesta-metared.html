@@ -131,21 +131,19 @@
     <a href="#resumen">Resumen ejecutivo</a>
     <a href="#actual">Situación actual</a>
     <a href="#propuesta">Situación propuesta</a>
-    <a href="#enfoque">Enfoque propuesto</a>
+    <a href="#enfoque">Cómo se hace</a>
     <a href="#alcance">Alcance</a>
+    <a href="#requisitos">Requisitos y supuestos</a>
     <a href="#inversion">Inversión</a>
     <a href="#cronograma">Cronograma</a>
-    <a href="#operativos">Costos operativos</a>
-    <a href="#supuestos">Supuestos</a>
-    <a href="#comerciales">Condiciones comerciales</a>
     <a href="#pasos">Próximos pasos</a>
   </nav>
 
   <main>
     <div class="hero">
-      <span class="tag">Propuesta comercial · Recolección y análisis de datos con IA</span>
+      <span class="tag">Propuesta comercial · Investigación, extracción y análisis de datos</span>
       <h1>Estudio Internacional de Empleo Sostenible</h1>
-      <p class="lead">Automatización de la recolección y filtrado de ofertas laborales para el estudio conjunto de la Red MetaRed sobre demanda de empleo sostenible.</p>
+      <p class="lead">Investigación y construcción de una estrategia de extracción de ofertas laborales (web scraping o API, según la plataforma) desde los principales portales de empleo del Perú, y análisis de los empleos sostenibles resultantes en un informe — transformando los datos en conocimiento para el estudio conjunto de la Red MetaRed.</p>
       <div class="meta">
         <div><b>Inés Evaristo</b>Cliente / contacto</div>
         <div><b>UTP · Red MetaRed</b>Institución / red</div>
@@ -159,8 +157,8 @@
 
     <section id="resumen">
       <h2 class="section-title">1. Resumen ejecutivo</h2>
-      <p>UTP participa junto a otras universidades de la Red MetaRed en un estudio internacional sobre la demanda de empleo sostenible, a partir del análisis de ofertas laborales publicadas en los principales portales de empleo. Hoy, la recolección se hace con Octoparse (manual y laboriosa) o con un script artesanal que pierde datos —como el salario— si se corre con demasiada frecuencia. Además, buena parte de lo descargado no está realmente vinculado a sostenibilidad y debe filtrarse a mano.</p>
-      <div class="callout"><b>Nota sobre esta propuesta:</b> a diferencia de otros proyectos, aquí todavía hay poca información técnica definida (portales exactos, volumen, tecnología final). Por eso proponemos avanzar en dos etapas: un <b>diagnóstico técnico</b> de bajo costo, y una <b>implementación cuyo presupuesto se ajustará</b> con más contexto.</div>
+      <p>UTP participa junto a otras universidades de la Red MetaRed en un estudio internacional sobre la demanda de empleo sostenible, a partir del análisis de ofertas laborales publicadas en los principales portales de empleo del Perú (por ejemplo Bumeran, LinkedIn, Trabajando/Teletrabajo, entre otros). Hoy, la recolección se hace con Octoparse (manual y laboriosa) o con un script artesanal que pierde datos —como el salario— si se corre con demasiada frecuencia. Además, buena parte de lo descargado no está realmente vinculado a sostenibilidad y debe filtrarse a mano.</p>
+      <p>Esta propuesta cubre la investigación y construcción de la estrategia de extracción (web scraping o API, según lo que permita cada plataforma), el análisis de los empleos sostenibles resultantes, y su entrega en un informe — es decir, transformar los datos recolectados en conocimiento útil para el estudio. El trabajo se realiza en coordinación constante con UTP para entender la necesidad y afinar el análisis presentado en los informes.</p>
     </section>
 
     <section id="actual">
@@ -190,33 +188,26 @@
       <h3 class="sub">Beneficios esperados</h3>
       <div class="list-2col">
         <ul>
-          <li>Recolección confiable, sin pérdida de campos</li>
+          <li>Recolección confiable desde varias plataformas (Bumeran, LinkedIn, Teletrabajo, entre otras), sin pérdida de campos</li>
           <li>Menor esfuerzo manual en la descarga</li>
           <li>Filtrado de falsos positivos más rápido</li>
         </ul>
         <ul>
-          <li>Resultado estandarizado para toda la Red MetaRed</li>
-          <li>Base tecnológica clara y documentada</li>
+          <li>Datos convertidos en informes con hallazgos, listos como insumo del estudio de la Red MetaRed</li>
+          <li>Coordinación constante con UTP para ajustar el análisis a su necesidad</li>
         </ul>
       </div>
     </section>
 
     <section id="enfoque">
-      <h2 class="section-title">4. Enfoque propuesto</h2>
-      <p class="section-sub">Con poca información aún definida, avanzamos en dos etapas en vez de cerrar un alcance rígido.</p>
-      <div class="cards2">
-        <div class="opt-card">
-          <div class="kicker">ETAPA 0</div>
-          <h4>Diagnóstico técnico</h4>
-          <p style="font-size:14px; margin-top:8px;">Revisión del script/piloto existente, definición de portales objetivo, validación de viabilidad técnica y legal, y decisión informada de tecnología (mantener el enfoque actual vs. migrar a Java u otra alternativa).</p>
-        </div>
-        <div class="opt-card">
-          <div class="kicker">ETAPA 1</div>
-          <h4>Implementación</h4>
-          <p style="font-size:14px; margin-top:8px;">Construcción o ajuste de la solución de recolección, sin pérdida de datos, más apoyo de IA para el filtrado de falsos positivos. El presupuesto se afina con lo que arroje el diagnóstico.</p>
-        </div>
-      </div>
-      <div class="note gold">Al tener más contexto técnico (portales, volumen, decisión de lenguaje), esta propuesta y su presupuesto se ajustarán con mayor precisión.</div>
+      <h2 class="section-title">4. Cómo se hace</h2>
+      <p>El trabajo parte de una investigación de la estrategia de extracción más adecuada para cada plataforma de empleo considerada (web scraping o API, según lo que permita cada una), para luego construir la solución de recolección de ofertas laborales. Sobre los datos recolectados se aplica un filtrado por sostenibilidad y un análisis, cuyos hallazgos se entregan en un informe — transformando los datos en conocimiento útil para el estudio de la Red MetaRed.</p>
+      <ul>
+        <li>Investigación de la vía de extracción más viable por plataforma (scraping o API)</li>
+        <li>Filtrado de ofertas realmente vinculadas a sostenibilidad</li>
+        <li>Análisis de los datos y entrega de hallazgos en informes</li>
+        <li>Coordinación constante con UTP para entender la necesidad y ajustar el análisis</li>
+      </ul>
     </section>
 
     <section id="alcance">
@@ -225,81 +216,74 @@
         <div>
           <h4>Incluido</h4>
           <ul>
-            <li>Diagnóstico del proceso actual y recomendación tecnológica</li>
-            <li>Solución de recolección sin pérdida de campos</li>
-            <li>Apoyo de IA para reducir el filtrado manual</li>
-            <li>Entrega en formato reutilizable para el informe MetaRed</li>
+            <li>Investigación de la estrategia de extracción (scraping o API) por plataforma de empleo</li>
+            <li>Solución de recolección de ofertas, sin pérdida de campos</li>
+            <li>Filtrado de ofertas vinculadas a sostenibilidad</li>
+            <li>Análisis de los datos recolectados</li>
+            <li>Informes con los hallazgos del análisis, como insumo para el estudio de la Red MetaRed</li>
+            <li>Coordinación constante con UTP para entender la necesidad y ajustar el análisis</li>
           </ul>
         </div>
         <div>
-          <h4>No incluido (por ahora)</h4>
+          <h4>No incluido</h4>
           <ul>
-            <li>Migración completa de tecnología si el diagnóstico recomienda mantener el enfoque actual</li>
-            <li>Coordinación con las demás universidades de la red</li>
-            <li>Análisis o redacción del informe final del estudio</li>
+            <li>Coordinación con las demás universidades de la Red MetaRed</li>
+            <li>Redacción del informe final e internacional del estudio</li>
+            <li>Desarrollo adicional fuera de lo definido</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <section id="inversion">
-      <h2 class="section-title">6. Inversión</h2>
-      <div class="cards2">
-        <div class="opt-card">
-          <div class="kicker">ETAPA 0 · DIAGNÓSTICO</div>
-          <div class="price">US$300–400 <small>sin IGV</small></div>
-        </div>
-        <div class="opt-card">
-          <div class="kicker">ETAPA 1 · IMPLEMENTACIÓN (preliminar)</div>
-          <div class="price">US$1,200–2,500 <small>sin IGV</small></div>
-        </div>
-      </div>
-      <div class="note gold">El monto de la Etapa 0 puede descontarse del precio final de la Etapa 1 si el proyecto continúa. El rango de la Etapa 1 es preliminar y se confirma tras el diagnóstico.</div>
-    </section>
+    <section id="requisitos">
+      <h2 class="section-title">6. Requisitos y supuestos</h2>
+      <p class="section-sub">Todo lo necesario para esta investigación se resuelve con acceso a las plataformas de empleo objetivo y, de ser el caso, almacenamiento ligero para los datos recolectados.</p>
 
-    <section id="cronograma">
-      <h2 class="section-title">7. Cronograma</h2>
-      <p>La Red MetaRed ya definió fechas externas: la búsqueda de ofertas se realiza la última semana de agosto y la primera de septiembre, y el informe se elabora durante septiembre y la primera semana de octubre. Nuestro trabajo debe encajar dentro de ese calendario:</p>
-      <div class="timeline">
-        <div class="tl-item"><div class="phase">Etapa 0 — Diagnóstico</div><div class="dur">3–5 días</div></div>
-        <div class="tl-item"><div class="phase">Etapa 1 — Implementación</div><div class="dur">1.5–3 semanas, según lo que defina el diagnóstico</div></div>
-      </div>
-    </section>
+      <h3 class="sub">6.1 Acceso necesario</h3>
+      <p>Acceso al script/piloto existente, si se decide partir de él, y a cualquier credencial o API oficial que alguna plataforma de empleo requiera para la extracción. La forma de otorgarlo queda a criterio de UTP; basta con que el acceso quede solicitado de forma explícita antes de iniciar el desarrollo.</p>
 
-    <section id="operativos">
-      <h2 class="section-title">8. Costos operativos</h2>
-      <p>No se anticipan costos recurrentes significativos; de requerirse almacenamiento en la nube para los datos descargados, el plan gratuito de las plataformas consideradas sería suficiente para este volumen de uso.</p>
-    </section>
+      <h3 class="sub">6.2 Licencias y herramientas</h3>
+      <p>No se anticipan costos recurrentes significativos. Si alguna plataforma solo permite extracción vía API oficial con costo, o si se requiere almacenamiento en la nube para los datos, el plan gratuito o de menor costo suele ser suficiente para este volumen — se valida como parte de la investigación inicial.</p>
 
-    <section id="supuestos">
-      <h2 class="section-title">9. Supuestos y exclusiones</h2>
+      <h3 class="sub">6.3 Supuestos</h3>
       <ul>
-        <li>El presupuesto de la Etapa 1 es preliminar y se ajusta con el resultado del diagnóstico</li>
-        <li>Acceso al script/piloto existente de la colega en España, si se decide partir de él</li>
         <li>Los portales de empleo objetivo permiten la recolección automatizada dentro de sus términos de uso</li>
         <li>Cambios de alcance solicitados durante el proyecto se cotizan por separado</li>
       </ul>
     </section>
 
-    <section id="comerciales">
-      <h2 class="section-title">10. Condiciones comerciales</h2>
-      <h3 class="sub">Forma de pago propuesta</h3>
-      <div class="pay-split">
-        <div class="pay-block a"><div class="pct">35%</div><div class="desc">Al aceptar el contrato</div></div>
-        <div class="pay-block b"><div class="pct">65%</div><div class="desc">Al delivery completo y firma del documento de buena ejecución</div></div>
+    <section id="inversion">
+      <h2 class="section-title">7. Inversión</h2>
+      <div class="cards2">
+        <div class="opt-card">
+          <div class="kicker">INVESTIGACIÓN Y ANÁLISIS</div>
+          <div class="price">US$350 <small>sin IGV</small></div>
+          <div style="font-size:13px; color:var(--ink-soft); margin-top:2px; font-family:'Poppins',sans-serif; font-variant-numeric:tabular-nums;">≈ S/ 1,178 <small style="font-family:'Lato',sans-serif;">al tipo de cambio referencial</small></div>
+        </div>
       </div>
+      <div class="note gold">Conversión a soles referencial al tipo de cambio venta SUNAT del 08/09/2026 (S/ 3.365 por US$1); el monto final en soles se ajusta al tipo de cambio del día de facturación.</div>
+    </section>
+
+    <section id="cronograma">
+      <h2 class="section-title">8. Cronograma</h2>
+      <p>La Red MetaRed ya definió fechas externas: la búsqueda de ofertas se realiza la última semana de agosto y la primera de septiembre, y el informe se elabora durante septiembre y la primera semana de octubre. Nuestro trabajo debe encajar dentro de ese calendario:</p>
+      <div class="timeline">
+        <div class="tl-item"><div class="phase">Investigación de la estrategia de extracción por plataforma</div><div class="dur">3–5 días</div></div>
+        <div class="tl-item"><div class="phase">Construcción de la solución de recolección y filtrado</div><div class="dur">1–2 semanas</div></div>
+        <div class="tl-item"><div class="phase">Análisis de datos e informe</div><div class="dur">3–5 días</div></div>
+      </div>
+      <div class="note">El tiempo total es referencial y puede variar según la rapidez con que UTP otorgue accesos y datos.</div>
     </section>
 
     <section id="pasos">
-      <h2 class="section-title">11. Próximos pasos</h2>
+      <h2 class="section-title">9. Próximos pasos</h2>
       <div class="steps">
-        <div class="step"><div class="num">1</div><p>Aprobación de la Etapa 0 (diagnóstico)</p></div>
-        <div class="step"><div class="num">2</div><p>Revisión del script/piloto existente y definición de portales objetivo</p></div>
-        <div class="step"><div class="num">3</div><p>Recomendación tecnológica y presupuesto ajustado de la Etapa 1</p></div>
-        <div class="step"><div class="num">4</div><p>Aprobación de la Etapa 1</p></div>
-        <div class="step"><div class="num">5</div><p>Desarrollo / configuración</p></div>
-        <div class="step"><div class="num">6</div><p>Pruebas con datos reales</p></div>
-        <div class="step"><div class="num">7</div><p>Entrega y documentación</p></div>
+        <div class="step"><div class="num">1</div><p>Confirmación del alcance definitivo</p></div>
+        <div class="step"><div class="num">2</div><p>Revisión del script/piloto existente y definición de plataformas objetivo</p></div>
+        <div class="step"><div class="num">3</div><p>Investigación de la estrategia de extracción por plataforma</p></div>
+        <div class="step"><div class="num">4</div><p>Desarrollo / configuración de la solución de recolección y filtrado</p></div>
+        <div class="step"><div class="num">5</div><p>Análisis de datos y elaboración de informes</p></div>
+        <div class="step"><div class="num">6</div><p>Entrega y documentación</p></div>
       </div>
     </section>
 
