@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Constancias de Voluntariado · Propuesta de Automatización · UTP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --wine-900:#4B1E3D;
+    --wine-700:#7A3465;
+    --rose-600:#B9668A;
+    --rose-300:#E3B9CE;
+    --paper:#FAF7F8;
+    --card:#FFFFFF;
+    --line:#ECE1E6;
+    --ink:#2E2630;
+    --ink-soft:#6E6270;
+    --amber:#D98E36;
+    --red:#C4523F;
+    --red-bg:#FBEBE7;
+    --green-bg:#EAF3EC;
+    --pink-bg:#F5EAF0;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Lato',sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{font-family:'Poppins',sans-serif; margin:0; color:var(--wine-900);}
+  .layout{display:flex; max-width:1280px; margin:0 auto;}
+  nav.toc{
+    width:230px; flex-shrink:0; position:sticky; top:0; height:100vh;
+    padding:40px 18px 40px 32px; display:flex; flex-direction:column; gap:2px;
+  }
+  nav.toc a{
+    color:var(--ink-soft); text-decoration:none; font-size:13.5px; padding:8px 10px;
+    border-radius:8px; border-left:2px solid transparent; transition:all .15s ease;
+  }
+  nav.toc a:hover{ color:var(--wine-700); background:rgba(185,102,138,0.08); }
+  nav.toc a.active{ color:var(--wine-700); font-weight:700; border-left:2px solid var(--wine-700); background:rgba(122,52,101,0.07); }
+  main{flex:1; min-width:0; padding:0 48px 80px;}
+  section{padding-top:64px; scroll-margin-top:24px;}
+
+  /* HERO */
+  .hero{
+    padding:72px 0 40px; border-bottom:1px solid var(--line);
+  }
+  .hero .tag{
+    display:inline-block; font-size:12.5px; color:var(--rose-600); font-weight:700;
+    background:var(--pink-bg); padding:5px 12px; border-radius:20px; margin-bottom:18px;
+  }
+  .hero h1{font-size:clamp(28px,4.2vw,40px); font-weight:800; line-height:1.15; max-width:900px;}
+  .hero p.lead{font-size:16.5px; color:var(--ink-soft); max-width:none; margin-top:14px;}
+  .hero .meta{display:flex; gap:32px; margin-top:32px; flex-wrap:wrap;}
+  .hero .meta div{font-size:13px; color:var(--ink-soft);}
+  .hero .meta b{display:block; color:var(--ink); font-size:14.5px; font-family:'Poppins',sans-serif; font-weight:600;}
+
+  h2.section-title{font-size:26px; font-weight:700; margin-bottom:6px;}
+  p.section-sub{color:var(--ink-soft); font-size:14.5px; margin:0 0 28px;}
+  h3.sub{font-size:16px; font-weight:600; color:var(--rose-600); margin:28px 0 10px;}
+
+  p{margin:0 0 14px; max-width:none;}
+
+  /* DIAGRAM */
+  .diagram-wrap{
+    background:var(--card); border:1px solid var(--line); border-radius:16px;
+    padding:18px; margin:18px 0 8px; cursor:zoom-in; position:relative;
+    overflow-x:auto; -webkit-overflow-scrolling:touch;
+  }
+  .diagram-wrap .hint{
+    position:absolute; top:14px; right:14px; background:rgba(75,30,61,0.85); color:#fff;
+    font-size:11.5px; padding:5px 10px; border-radius:20px; font-family:'Poppins',sans-serif;
+    z-index:2;
+  }
+  .diagram-wrap svg{width:100%; min-width:640px; height:auto; display:block;}
+
+  /* TABLE */
+  table{width:100%; border-collapse:collapse; margin:18px 0; font-size:14px;}
+  th{
+    background:var(--pink-bg); color:var(--wine-700); font-family:'Poppins',sans-serif;
+    font-weight:600; font-size:13px; text-align:left; padding:12px 14px; border:1px solid var(--line);
+  }
+  td{padding:12px 14px; border:1px solid var(--line); vertical-align:top;}
+  td.n{color:var(--red); font-weight:700; width:28px;}
+
+  /* CARDS */
+  .cards2{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:20px;}
+  @media(max-width:760px){.cards2{grid-template-columns:1fr;}}
+  .opt-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px;}
+  .opt-card .kicker{font-size:12px; color:var(--rose-600); font-weight:700; letter-spacing:.02em;}
+  .opt-card h4{font-size:19px; margin-top:6px;}
+  .opt-card .price{font-family:'Poppins',sans-serif; font-size:32px; font-weight:800; color:var(--wine-700); margin:14px 0 2px;}
+  .opt-card .price small{font-size:13px; color:var(--ink-soft); font-weight:500;}
+  .opt-card ul{margin:14px 0 0; padding-left:18px; font-size:14px;}
+  .opt-card li{margin-bottom:6px;}
+
+  .list-2col{display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:16px;}
+  @media(max-width:760px){.list-2col{grid-template-columns:1fr;}}
+  .list-2col h4{font-size:14px; color:var(--rose-600); margin-bottom:8px;}
+  .list-2col ul{margin:0; padding-left:18px; font-size:14px;}
+  .list-2col li{margin-bottom:7px;}
+
+  /* TIMELINE */
+  .timeline{display:flex; flex-direction:column; gap:0; margin-top:24px; border-left:2px solid var(--line); padding-left:26px;}
+  .tl-item{position:relative; padding-bottom:26px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:''; position:absolute; left:-33.5px; top:2px; width:14px; height:14px; border-radius:50%;
+    background:var(--card); border:3px solid var(--rose-600);
+  }
+  .tl-item .phase{font-family:'Poppins',sans-serif; font-weight:600; font-size:15px;}
+  .tl-item .dur{font-size:13px; color:var(--ink-soft);}
+
+  .steps{counter-reset:step; margin-top:20px; display:flex; flex-direction:column; gap:0;}
+  .step{display:flex; gap:16px; padding:14px 0; border-bottom:1px solid var(--line);}
+  .step:last-child{border-bottom:none;}
+  .step .num{
+    counter-increment:step; font-family:'Poppins',sans-serif; font-weight:700; color:var(--wine-700);
+    background:var(--pink-bg); width:30px; height:30px; border-radius:50%; display:flex; align-items:center;
+    justify-content:center; flex-shrink:0; font-size:13.5px;
+  }
+  .step .num::before{content:counter(step);}
+  .step p{margin:0; font-size:14.5px; padding-top:4px;}
+
+  .note{
+    background:var(--green-bg); border-left:3px solid var(--rose-600); padding:12px 16px;
+    border-radius:8px; font-size:13.5px; color:var(--ink-soft); margin-top:14px;
+  }
+  .note.amber{background:#FBF3E6; border-left-color:var(--amber);}
+
+  footer{padding:40px 0 20px; color:var(--ink-soft); font-size:13px; border-top:1px solid var(--line); margin-top:40px;}
+
+  /* LIGHTBOX */
+  .lightbox{
+    position:fixed; inset:0; background:rgba(30,20,28,0.92); display:none; align-items:center;
+    justify-content:center; z-index:999; flex-direction:column;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox .stage{width:92vw; height:80vh; overflow:hidden; position:relative; cursor:grab;}
+  .lightbox .stage.grabbing{cursor:grabbing;}
+  .lightbox .stage svg{position:absolute; top:0; left:0; transform-origin:0 0;}
+  .lightbox .bar{display:flex; gap:10px; margin-top:18px;}
+  .lightbox .bar button{
+    background:#fff; border:none; border-radius:10px; padding:10px 16px; font-family:'Poppins',sans-serif;
+    font-weight:600; font-size:13px; cursor:pointer; color:var(--wine-900);
+  }
+  .lightbox .bar button.close{background:var(--red);color:#fff;}
+
+  @media(max-width:900px){
+    nav.toc{display:none;}
+    main{padding:0 20px 60px;}
+    .hero h1{font-size:30px;}
+  }
+  @media(max-width:600px){
+    .hero{padding:44px 0 28px;}
+    table{display:block; overflow-x:auto; white-space:nowrap; -webkit-overflow-scrolling:touch;}
+    .opt-card{padding:20px;}
+    .opt-card .price{font-size:26px;}
+    .diagram-wrap svg{min-width:560px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+  <nav class="toc" id="toc">
+    <a href="#resumen">Resumen ejecutivo</a>
+    <a href="#actual">Situación actual</a>
+    <a href="#propuesta">Situación propuesta</a>
+    <a href="#solucion">Cómo se automatiza</a>
+    <a href="#alcance">Alcance</a>
+    <a href="#requisitos">Requisitos y supuestos</a>
+    <a href="#inversion">Inversión</a>
+    <a href="#cronograma">Cronograma</a>
+    <a href="#pasos">Próximos pasos</a>
+  </nav>
+
+  <main>
+    <div class="hero">
+      <span class="tag">Propuesta comercial · Automatización sobre Microsoft 365</span>
+      <h1>Emisión de Constancias de Voluntariado</h1>
+      <p class="lead">Automatización de la validación de asistencia y de la generación y envío de constancias de voluntariado, construida dentro de la suite Microsoft 365 que UTP ya utiliza, sin salir de ese ecosistema ni incorporar plataformas externas.</p>
+      <div class="meta">
+        <div><b>Inés Evaristo</b>Cliente / contacto</div>
+        <div><b>UTP · Sostenibilidad y RSU</b>Institución / equipo</div>
+      </div>
+    </div>
+
+    <section id="resumen">
+      <h2 class="section-title">1. Resumen ejecutivo</h2>
+      <p>El proceso de emisión de constancias de voluntariado conecta a los campus de UTP, el equipo central de Sostenibilidad y RSU, y a los estudiantes voluntarios. Hoy, por cada actividad, el equipo central descarga manualmente el Excel de asistencia adjunto en el formulario, revisa fila por fila quién asistió, y digita una constancia personalizada por cada estudiante validado, antes de compartir una carpeta general para que cada uno ubique su archivo.</p>
+      <p>Esta propuesta plantea automatizar la validación de asistencia, la generación de constancias y su envío individual, aprovechando la suite Microsoft 365 que UTP ya utiliza, sin salir de ese ecosistema ni incorporar plataformas externas, con cambio mínimo para campus y estudiantes.</p>
+    </section>
+
+    <section id="actual">
+      <h2 class="section-title">2. Situación actual</h2>
+
+      <h3 class="sub">2.1 Proceso actual</h3>
+      <p>Cada campus registra la actividad de voluntariado en el formulario institucional (Microsoft Forms), con datos que varían por iniciativa: tipo de voluntariado, fechas y horas. Cuando hay voluntarios, el campus consolida su participación en el Excel de asistencia definido, lo adjunta al formulario, y avisa por correo al equipo central que la información ya fue cargada.</p>
+      <p>El equipo central de Sostenibilidad y RSU ingresa al registro, descarga manualmente el Excel de cada actividad, y revisa fila por fila qué estudiantes indican "ASISTIO" para determinar quién recibe constancia. Luego digita a mano una constancia personalizada por cada estudiante validado (nombre, tipo de voluntariado, horas y fecha(s), variables según la actividad), envía una encuesta de satisfacción a los participantes, y aproximadamente tres o cuatro días después publica las constancias compartiendo una carpeta general, sin un envío individual a cada estudiante.</p>
+
+      <h3 class="sub">2.2 Diagrama AS-IS</h3>
+      <div class="diagram-wrap" onclick="openLightbox('svg-asis')">
+        <span class="hint">🔍 Clic para ampliar</span>
+        <div id="svg-asis-holder"></div>
+      </div>
+      <p style="font-size:12.5px; color:var(--ink-soft); margin-top:6px;">Los números en rojo señalan el punto exacto donde ocurre cada problema; coinciden con la numeración de la tabla siguiente.</p>
+
+      <h3 class="sub">2.3 Principales problemas</h3>
+      <table>
+        <tr><th></th><th>Problema</th><th>Causa</th><th>Impacto</th></tr>
+        <tr><td class="n">1</td><td>Descarga manual del Excel de cada actividad</td><td>Forms y la validación de asistencia no están integrados</td><td>Tiempo del equipo central por cada actividad registrada</td></tr>
+        <tr><td class="n">2</td><td>Validación manual de asistencia</td><td>Se revisa fila por fila para identificar "ASISTIO"</td><td>Más lento cuanto mayor el volumen; riesgo de omisiones</td></tr>
+        <tr><td class="n">3</td><td>Elaboración manual de constancias</td><td>Nombre, tipo de voluntariado, horas y fecha(s) se digitan uno por uno</td><td>Tiempo alto y riesgo de errores de tipeo por estudiante</td></tr>
+        <tr><td class="n">4</td><td>Datos variables entre actividades</td><td>Cada campus registra libremente tipo de voluntariado, fechas y horas</td><td>Dificulta estandarizar la validación y la generación automática</td></tr>
+        <tr><td class="n">5</td><td>Entrega sin envío individual</td><td>Se comparte una carpeta general en vez de enviar cada constancia</td><td>El estudiante debe ubicar su archivo; demora de 3 a 4 días tras la encuesta</td></tr>
+      </table>
+    </section>
+
+    <section id="propuesta">
+      <h2 class="section-title">3. Situación propuesta</h2>
+      <h3 class="sub">3.1 Diagrama TO-BE</h3>
+      <div class="diagram-wrap" onclick="openLightbox('svg-tobe')">
+        <span class="hint">🔍 Clic para ampliar</span>
+        <div id="svg-tobe-holder"></div>
+      </div>
+
+      <h3 class="sub">3.2 Beneficios esperados</h3>
+      <div class="list-2col">
+        <ul>
+          <li>Elimina la descarga y revisión manual del Excel por actividad</li>
+          <li>Validación automática de asistencia, sin revisar fila por fila</li>
+          <li>Constancias generadas automáticamente, sin digitación manual</li>
+          <li>Menor riesgo de errores en nombre, horas o fechas</li>
+        </ul>
+        <ul>
+          <li>Envío individual a cada estudiante, sin carpeta compartida</li>
+          <li>Entrega más rápida tras el cierre de la actividad</li>
+          <li>Proceso estandarizado, sin depender del volumen de voluntarios</li>
+          <li>Cambio mínimo para campus y estudiantes</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="solucion">
+      <h2 class="section-title">4. Cómo se automatiza</h2>
+      <p>La automatización se construye con <b>Power Automate</b>, integrando Forms, SharePoint/Excel, una plantilla de Word para la constancia y Outlook, sin reemplazar ninguna herramienta que UTP ya usa. La solución permanece dentro del ecosistema Microsoft 365 de UTP; no se incorpora ninguna plataforma o servicio externo.</p>
+      <ul>
+        <li>Menor inversión, implementación más rápida</li>
+        <li>Cambio mínimo para campus y estudiantes</li>
+        <li>Aprovecha licencias que UTP ya tiene</li>
+      </ul>
+    </section>
+
+    <section id="alcance">
+      <h2 class="section-title">5. Alcance y entregables</h2>
+      <div class="list-2col">
+        <div>
+          <h4>Incluido</h4>
+          <ul>
+            <li>Lectura y validación automática de asistencia desde el Excel adjunto en Forms</li>
+            <li>Generación automática de la constancia personalizada por estudiante validado (plantilla en Word/PDF)</li>
+            <li>Envío automático e individual de la constancia a cada estudiante por correo</li>
+            <li>Construcción con datos de prueba + implementación posterior con datos reales</li>
+            <li>Documentación y capacitación al equipo de Sostenibilidad y RSU</li>
+          </ul>
+        </div>
+        <div>
+          <h4>No incluido</h4>
+          <ul>
+            <li>Cambios en el proceso de registro del campus (formulario y Excel), más allá de la automatización interna</li>
+            <li>Integración con Microsoft Entra ID más allá de lo que ya usa UTP</li>
+            <li>Desarrollo adicional fuera de lo definido</li>
+            <li>Cualquier plataforma o servicio fuera de Microsoft 365</li>
+          </ul>
+        </div>
+      </div>
+      <div class="note">El alcance se considera completo cuando Inés Evaristo, como contacto de UTP, confirme por escrito la buena ejecución del proyecto.</div>
+    </section>
+
+    <section id="requisitos">
+      <h2 class="section-title">6. Requisitos y supuestos</h2>
+      <p class="section-sub">Todo lo necesario para construir y operar la automatización vive dentro de Microsoft 365; no se requiere ninguna herramienta ni plataforma externa a UTP.</p>
+
+      <h3 class="sub">6.1 Acceso necesario</h3>
+      <p>Se requerirá una cuenta dentro del tenant de Microsoft 365 de UTP para el equipo de desarrollo, con permisos para crear y publicar flujos en Power Automate, y para acceder a Microsoft Forms, SharePoint/Excel, la plantilla de Word de la constancia y Outlook. La forma de otorgarla (usuario interno, invitado u otra) queda a criterio de UTP; basta con que el acceso quede solicitado de forma explícita antes de iniciar el desarrollo.</p>
+
+      <h3 class="sub">6.2 Licencias</h3>
+      <p><b>Power Automate</b> ya suele estar incluido en la mayoría de planes de Microsoft 365. Queda pendiente validar con TI de UTP si el plan contratado alcanza para el volumen de actividades y estudiantes del programa de voluntariado, o si se requiere licencia adicional por usuario o por flujo. Algunas acciones para generar el documento final (de plantilla de Word a PDF) pueden requerir un conector premium; esto se valida al inicio del desarrollo.</p>
+
+      <h3 class="sub">6.3 Supuestos</h3>
+      <ul>
+        <li>Acceso oportuno a Forms, SharePoint, Power Automate y Outlook de UTP, y a los datos reales cuando corresponda</li>
+        <li>El formato del Excel de asistencia se mantiene consistente entre actividades</li>
+        <li>La plantilla de la constancia (diseño y campos) está definida y aprobada por UTP antes del desarrollo</li>
+        <li>La inversión de implementación no incluye las licencias o suscripciones de Microsoft 365, que UTP administra directamente</li>
+        <li>Cambios de alcance solicitados durante el proyecto se cotizan por separado</li>
+      </ul>
+    </section>
+
+    <section id="inversion">
+      <h2 class="section-title">7. Inversión</h2>
+      <div class="cards2">
+        <div class="opt-card">
+          <div class="kicker">IMPLEMENTACIÓN · M365</div>
+          <div class="price">US$600 <small>sin IGV</small></div>
+          <div style="font-size:13px; color:var(--ink-soft); margin-top:2px; font-family:'Poppins',sans-serif; font-variant-numeric:tabular-nums;">≈ S/ 2,019 <small style="font-family:'Lato',sans-serif;">al tipo de cambio referencial</small></div>
+        </div>
+      </div>
+      <div class="note amber">La inversión de US$600 no incluye licencias ni suscripciones de Microsoft 365; ver sección 6, "Requisitos y supuestos". Conversión a soles referencial al tipo de cambio venta SUNAT del 10/09/2026 (S/ 3.365 por US$1); el monto final en soles se ajusta al tipo de cambio del día de facturación.</div>
+    </section>
+
+    <section id="cronograma">
+      <h2 class="section-title">8. Cronograma</h2>
+      <div class="timeline">
+        <div class="tl-item"><div class="phase">Diseño y mapeo</div><div class="dur">3–4 días</div></div>
+        <div class="tl-item"><div class="phase">Desarrollo / configuración (datos de prueba)</div><div class="dur">1.5–3 semanas</div></div>
+        <div class="tl-item"><div class="phase">Pruebas (QA)</div><div class="dur">3–4 días</div></div>
+        <div class="tl-item"><div class="phase">Implementación con datos reales en plataformas de UTP</div><div class="dur">Variable, según accesos y disponibilidad</div></div>
+        <div class="tl-item"><div class="phase">Entrega y documentación</div><div class="dur">2–3 días</div></div>
+      </div>
+      <div class="cards2" style="margin-top:24px;">
+        <div class="opt-card">
+          <div class="kicker">DURACIÓN TOTAL</div>
+          <div class="price">3–4 <small>semanas</small></div>
+        </div>
+      </div>
+      <div class="note">El tiempo total es referencial y puede variar según la rapidez con que UTP otorgue accesos y datos; el alcance concluye con la confirmación de buena ejecución por parte de UTP.</div>
+    </section>
+
+    <section id="pasos">
+      <h2 class="section-title">9. Próximos pasos</h2>
+      <div class="steps">
+        <div class="step"><div class="num"></div><p>Confirmación del alcance definitivo</p></div>
+        <div class="step"><div class="num"></div><p>Otorgamiento de accesos y validación de licencia de Power Automate en el tenant de M365 de UTP (sección 6)</p></div>
+        <div class="step"><div class="num"></div><p>Diseño detallado y definición final de la plantilla de constancia</p></div>
+        <div class="step"><div class="num"></div><p>Desarrollo / configuración en espacios de desarrollo (datos de prueba)</p></div>
+        <div class="step"><div class="num"></div><p>Pruebas</p></div>
+        <div class="step"><div class="num"></div><p>Acceso a datos reales e implementación en producción</p></div>
+        <div class="step"><div class="num"></div><p>Puesta en producción</p></div>
+        <div class="step"><div class="num"></div><p>Entrega y documentación</p></div>
+      </div>
+    </section>
+
+    <footer>Proceso de Emisión de Constancias de Voluntariado. Propuesta de automatización preparada para la Universidad Tecnológica del Perú.</footer>
+  </main>
+</div>
+
+<div class="lightbox" id="lightbox">
+  <div class="stage" id="stage"></div>
+  <div class="bar">
+    <button onclick="zoomBy(1.25)">➕ Zoom</button>
+    <button onclick="zoomBy(0.8)">➖ Zoom</button>
+    <button onclick="resetZoom()">↺ Reset</button>
+    <button class="close" onclick="closeLightbox()">✕ Cerrar</button>
+  </div>
+</div>
+
+<script>
+/* ---------- SVG DIAGRAMS ---------- */
+const asisSVG = `
+<svg viewBox="0 0 1180 560" xmlns="http://www.w3.org/2000/svg" font-family="Lato, sans-serif">
+  <rect x="0" y="0" width="1180" height="560" fill="#FDFEFE"/>
+  <text x="30" y="34" font-family="Poppins, sans-serif" font-weight="700" font-size="15" fill="#4B1E3D">AS-IS: validación de asistencia y emisión de constancias</text>
+
+  <!-- Campus lane -->
+  <rect x="20" y="60" width="230" height="170" rx="12" fill="#EEF7EE" stroke="#BFE0BF"/>
+  <text x="35" y="82" font-size="12.5" font-weight="700" fill="#3E6B3E">🏫 CAMPUS</text>
+  <text x="35" y="104" font-size="11.5" fill="#33403A">1. Registra actividad en Forms</text>
+  <text x="35" y="122" font-size="11.5" fill="#33403A">(tipo, fechas y horas variables)</text>
+  <text x="35" y="144" font-size="11.5" fill="#33403A">2. Consolida participantes</text>
+  <text x="35" y="162" font-size="11.5" fill="#33403A">en el Excel de asistencia</text>
+  <text x="35" y="184" font-size="11.5" fill="#33403A">3. Adjunta Excel y envía</text>
+  <text x="35" y="202" font-size="11.5" fill="#33403A">4. Avisa por correo</text>
+
+  <!-- Forms/SharePoint -->
+  <rect x="290" y="80" width="180" height="90" rx="12" fill="#E8F0FE" stroke="#BFD3F5"/>
+  <text x="305" y="102" font-size="12.5" font-weight="700" fill="#2E4E8F">📋 FORMS</text>
+  <text x="305" y="124" font-size="11.5" fill="#33403A">Recibe formulario</text>
+  <text x="305" y="142" font-size="11.5" fill="#33403A">y Excel adjunto</text>
+
+  <!-- Equipo central RSU -->
+  <rect x="510" y="50" width="320" height="280" rx="12" fill="#FFF4E5" stroke="#F0CB94"/>
+  <text x="525" y="72" font-size="12.5" font-weight="700" fill="#9A6A1E">👥 EQUIPO CENTRAL RSU: gestión manual</text>
+  <text x="525" y="98" font-size="11.5" fill="#33403A">5. Descarga el Excel de cada actividad</text>
+  <text x="525" y="122" font-size="11.5" fill="#33403A">6. Valida asistencia fila por fila</text>
+  <text x="525" y="140" font-size="11.5" fill="#33403A">("ASISTIO")</text>
+  <text x="525" y="164" font-size="11.5" fill="#33403A">7. Digita una constancia por</text>
+  <text x="525" y="182" font-size="11.5" fill="#33403A">estudiante validado</text>
+  <text x="525" y="206" font-size="11.5" fill="#33403A">8. Envía encuesta de satisfacción</text>
+  <text x="525" y="230" font-size="11.5" fill="#33403A">9. Publica y comparte carpeta</text>
+  <text x="525" y="248" font-size="11.5" fill="#33403A">general de constancias</text>
+
+  <!-- Systems -->
+  <rect x="870" y="40" width="150" height="55" rx="10" fill="#F5F5F5" stroke="#DADADA"/>
+  <text x="882" y="65" font-size="11.5" font-weight="700" fill="#555">📊 Excel de</text>
+  <text x="882" y="81" font-size="11.5" font-weight="700" fill="#555">asistencia</text>
+
+  <rect x="870" y="110" width="150" height="55" rx="10" fill="#F0F7FF" stroke="#C9E0F5"/>
+  <text x="882" y="135" font-size="11.5" font-weight="700" fill="#2E6E9E">📄 Constancias</text>
+  <text x="882" y="151" font-size="10.5" fill="#33403A">digitadas a mano</text>
+
+  <rect x="870" y="180" width="150" height="55" rx="10" fill="#F0F7FF" stroke="#C9E0F5"/>
+  <text x="882" y="205" font-size="11.5" font-weight="700" fill="#2E6E9E">📁 Carpeta</text>
+  <text x="882" y="221" font-size="10.5" fill="#33403A">compartida</text>
+
+  <rect x="870" y="250" width="150" height="55" rx="10" fill="#F5F0FF" stroke="#DACCF5"/>
+  <text x="882" y="275" font-size="11.5" font-weight="700" fill="#6E4E9E">📧 Outlook</text>
+  <text x="882" y="291" font-size="10.5" fill="#33403A">Encuesta y avisos</text>
+
+  <!-- arrows -->
+  <line x1="250" y1="145" x2="288" y2="125" stroke="#8FA39E" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="470" y1="125" x2="508" y2="150" stroke="#8FA39E" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="830" y1="100" x2="868" y2="68"  stroke="#8FA39E" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="830" y1="170" x2="868" y2="140" stroke="#8FA39E" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="830" y1="230" x2="868" y2="208" stroke="#8FA39E" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="830" y1="255" x2="868" y2="278" stroke="#8FA39E" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#8FA39E"/></marker>
+  </defs>
+
+  <!-- dolores -->
+  <g font-family="Lato, sans-serif">
+    <rect x="20" y="345" width="270" height="55" rx="10" fill="#FBEBE7" stroke="#E3A794"/>
+    <text x="32" y="366" font-size="11" font-weight="700" fill="#A8402C">🔴 1 · Descarga manual por actividad</text>
+    <text x="32" y="382" font-size="10" fill="#A8402C">Forms y validación no integrados</text>
+
+    <rect x="300" y="345" width="270" height="55" rx="10" fill="#FBEBE7" stroke="#E3A794"/>
+    <text x="312" y="366" font-size="11" font-weight="700" fill="#A8402C">🔴 2 · Validación fila por fila</text>
+    <text x="312" y="382" font-size="10" fill="#A8402C">Se revisa "ASISTIO" manualmente</text>
+
+    <rect x="580" y="345" width="270" height="55" rx="10" fill="#FBEBE7" stroke="#E3A794"/>
+    <text x="592" y="366" font-size="11" font-weight="700" fill="#A8402C">🔴 3 · Constancias digitadas a mano</text>
+    <text x="592" y="382" font-size="10" fill="#A8402C">Un registro por estudiante validado</text>
+
+    <rect x="860" y="345" width="290" height="55" rx="10" fill="#FBEBE7" stroke="#E3A794"/>
+    <text x="872" y="366" font-size="11" font-weight="700" fill="#A8402C">🔴 4 · Datos variables por actividad</text>
+    <text x="872" y="382" font-size="10" fill="#A8402C">Cada campus registra libremente</text>
+
+    <rect x="20" y="415" width="270" height="55" rx="10" fill="#FBEBE7" stroke="#E3A794"/>
+    <text x="32" y="436" font-size="11" font-weight="700" fill="#A8402C">🔴 5 · Sin envío individual</text>
+    <text x="32" y="452" font-size="10" fill="#A8402C">Carpeta general, 3-4 días de demora</text>
+  </g>
+
+  <!-- numbered badges linking each pain point to its exact source step -->
+  <g font-family="Poppins, sans-serif" font-weight="700" font-size="10.5" fill="#fff">
+    <circle cx="796" cy="98" r="9" fill="#C4523F"/><text x="796" y="101.5" text-anchor="middle">1</text>
+    <circle cx="796" cy="122" r="9" fill="#C4523F"/><text x="796" y="125.5" text-anchor="middle">2</text>
+    <circle cx="772" cy="164" r="9" fill="#C4523F"/><text x="772" y="167.5" text-anchor="middle">3</text>
+    <circle cx="600" cy="104" r="9" fill="#C4523F"/><text x="600" y="107.5" text-anchor="middle">4</text>
+    <circle cx="796" cy="230" r="9" fill="#C4523F"/><text x="796" y="233.5" text-anchor="middle">5</text>
+  </g>
+</svg>`;
+
+const tobeSVG = `
+<svg viewBox="0 0 1180 320" xmlns="http://www.w3.org/2000/svg" font-family="Lato, sans-serif">
+  <rect x="0" y="0" width="1180" height="320" fill="#FDFEFE"/>
+  <text x="30" y="34" font-family="Poppins, sans-serif" font-weight="700" font-size="15" fill="#4B1E3D">TO-BE: flujo esperado tras la automatización</text>
+
+  <rect x="20" y="70" width="230" height="90" rx="12" fill="#EEF7EE" stroke="#BFE0BF"/>
+  <text x="34" y="95" font-size="12" font-weight="700" fill="#3E6B3E">🏫 Campus</text>
+  <text x="34" y="116" font-size="11" fill="#33403A">Completa Forms y adjunta</text>
+  <text x="34" y="132" font-size="11" fill="#33403A">Excel, como hoy</text>
+
+  <rect x="290" y="70" width="230" height="90" rx="12" fill="#F5EAF0" stroke="#D9BBD0"/>
+  <text x="304" y="95" font-size="12" font-weight="700" fill="#7A3465">⚙️ Validación automática</text>
+  <text x="304" y="116" font-size="11" fill="#33403A">Lee el Excel adjunto y</text>
+  <text x="304" y="132" font-size="11" fill="#33403A">valida asistencia</text>
+
+  <rect x="560" y="70" width="260" height="90" rx="12" fill="#F5EAF0" stroke="#D9BBD0"/>
+  <text x="574" y="95" font-size="12" font-weight="700" fill="#7A3465">⚙️ Generación automática</text>
+  <text x="574" y="116" font-size="11" fill="#33403A">Constancia personalizada</text>
+  <text x="574" y="132" font-size="11" fill="#33403A">por estudiante validado</text>
+
+  <rect x="860" y="70" width="230" height="90" rx="12" fill="#F5EAF0" stroke="#D9BBD0"/>
+  <text x="874" y="95" font-size="12" font-weight="700" fill="#7A3465">⚙️ Envío automático</text>
+  <text x="874" y="116" font-size="11" fill="#33403A">Constancia enviada por</text>
+  <text x="874" y="132" font-size="11" fill="#33403A">correo a cada estudiante</text>
+
+  <line x1="250" y1="115" x2="288" y2="115" stroke="#8FA39E" stroke-width="1.5" marker-end="url(#arrow2)"/>
+  <line x1="520" y1="115" x2="558" y2="115" stroke="#8FA39E" stroke-width="1.5" marker-end="url(#arrow2)"/>
+  <line x1="820" y1="115" x2="858" y2="115" stroke="#8FA39E" stroke-width="1.5" marker-end="url(#arrow2)"/>
+  <defs><marker id="arrow2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#8FA39E"/></marker></defs>
+
+  <rect x="20" y="200" width="270" height="60" rx="10" fill="#EAF3EC" stroke="#B9DCC1"/>
+  <text x="34" y="225" font-size="11.5" font-weight="700" fill="#2E6B3E">🟢 Sin descarga manual</text>
+  <text x="34" y="242" font-size="10.5" fill="#2E6B3E">Lectura automática del Excel</text>
+
+  <rect x="310" y="200" width="270" height="60" rx="10" fill="#EAF3EC" stroke="#B9DCC1"/>
+  <text x="324" y="225" font-size="11.5" font-weight="700" fill="#2E6B3E">🟢 Validación automática</text>
+  <text x="324" y="242" font-size="10.5" fill="#2E6B3E">Sin revisar fila por fila</text>
+
+  <rect x="600" y="200" width="270" height="60" rx="10" fill="#EAF3EC" stroke="#B9DCC1"/>
+  <text x="614" y="225" font-size="11.5" font-weight="700" fill="#2E6B3E">🟢 Constancias sin digitar</text>
+  <text x="614" y="242" font-size="10.5" fill="#2E6B3E">Generadas desde plantilla</text>
+
+  <rect x="890" y="200" width="270" height="60" rx="10" fill="#EAF3EC" stroke="#B9DCC1"/>
+  <text x="904" y="225" font-size="11.5" font-weight="700" fill="#2E6B3E">🟢 Envío individual</text>
+  <text x="904" y="242" font-size="10.5" fill="#2E6B3E">Sin carpeta compartida</text>
+
+  <line x1="150" y1="160" x2="150" y2="198" stroke="#B9DCC1" stroke-width="1.5" stroke-dasharray="2,3"/>
+  <line x1="440" y1="160" x2="440" y2="198" stroke="#B9DCC1" stroke-width="1.5" stroke-dasharray="2,3"/>
+  <line x1="720" y1="160" x2="720" y2="198" stroke="#B9DCC1" stroke-width="1.5" stroke-dasharray="2,3"/>
+  <line x1="990" y1="160" x2="990" y2="198" stroke="#B9DCC1" stroke-width="1.5" stroke-dasharray="2,3"/>
+</svg>`;
+
+document.getElementById('svg-asis-holder').innerHTML = asisSVG;
+document.getElementById('svg-tobe-holder').innerHTML = tobeSVG;
+
+/* ---------- LIGHTBOX ---------- */
+const lightbox = document.getElementById('lightbox');
+const stage = document.getElementById('stage');
+let currentScale = 1, panX = 0, panY = 0, isDragging = false, startX, startY;
+
+function openLightbox(which){
+  const svg = which === 'svg-asis' ? asisSVG : tobeSVG;
+  stage.innerHTML = svg;
+  currentScale = 1; panX = 0; panY = 0;
+  applyTransform();
+  lightbox.classList.add('open');
+}
+function closeLightbox(){ lightbox.classList.remove('open'); }
+function zoomBy(factor){ currentScale = Math.min(Math.max(currentScale*factor, 0.4), 6); applyTransform(); }
+function resetZoom(){ currentScale = 1; panX=0; panY=0; applyTransform(); }
+function applyTransform(){
+  const svgEl = stage.querySelector('svg');
+  if(svgEl){ svgEl.style.transform = `translate(${panX}px,${panY}px) scale(${currentScale})`; }
+}
+stage.addEventListener('wheel', (e)=>{ e.preventDefault(); zoomBy(e.deltaY < 0 ? 1.1 : 0.9); });
+stage.addEventListener('mousedown', (e)=>{ isDragging = true; stage.classList.add('grabbing'); startX = e.clientX - panX; startY = e.clientY - panY; });
+window.addEventListener('mouseup', ()=>{ isDragging = false; stage.classList.remove('grabbing'); });
+window.addEventListener('mousemove', (e)=>{ if(!isDragging) return; panX = e.clientX - startX; panY = e.clientY - startY; applyTransform(); });
+lightbox.addEventListener('click', (e)=>{ if(e.target === lightbox) closeLightbox(); });
+
+/* touch support: 1-finger pan, 2-finger pinch zoom, double-tap to zoom */
+let lastTouchDist = null, lastTapTime = 0;
+function touchDist(t){ return Math.hypot(t[0].clientX-t[1].clientX, t[0].clientY-t[1].clientY); }
+stage.addEventListener('touchstart', (e)=>{
+  if(e.touches.length === 1){
+    const now = Date.now();
+    if(now - lastTapTime < 300){ zoomBy(currentScale < 2 ? 1.8 : 0.55); }
+    lastTapTime = now;
+    isDragging = true; startX = e.touches[0].clientX - panX; startY = e.touches[0].clientY - panY;
+  } else if(e.touches.length === 2){
+    isDragging = false; lastTouchDist = touchDist(e.touches);
+  }
+}, {passive:true});
+stage.addEventListener('touchmove', (e)=>{
+  if(e.touches.length === 1 && isDragging){
+    panX = e.touches[0].clientX - startX; panY = e.touches[0].clientY - startY; applyTransform();
+  } else if(e.touches.length === 2 && lastTouchDist){
+    const d = touchDist(e.touches);
+    zoomBy(d / lastTouchDist); lastTouchDist = d;
+  }
+}, {passive:true});
+stage.addEventListener('touchend', (e)=>{ isDragging = false; lastTouchDist = null; });
+
+/* ---------- SCROLLSPY ---------- */
+const links = document.querySelectorAll('nav.toc a');
+const sections = [...links].map(l => document.querySelector(l.getAttribute('href')));
+window.addEventListener('scroll', ()=>{
+  let idx = 0;
+  sections.forEach((s,i)=>{ if(s && window.scrollY >= s.offsetTop - 100) idx = i; });
+  links.forEach(l=>l.classList.remove('active'));
+  links[idx].classList.add('active');
+});
+</script>
+</body>
+</html>
