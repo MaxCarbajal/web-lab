@@ -322,7 +322,8 @@
           <div style="font-size:13px; color:var(--ink-soft); margin-top:2px; font-family:'Poppins',sans-serif; font-variant-numeric:tabular-nums;">≈ S/ 2,187 <small style="font-family:'Lato',sans-serif;">al tipo de cambio referencial</small></div>
         </div>
       </div>
-      <div class="note amber">La inversión de US$650 no incluye licencias ni suscripciones de Microsoft 365 — ver sección 6, "Requisitos y supuestos". Conversión a soles referencial al tipo de cambio venta SUNAT del 08/09/2026 (S/ 3.365 por US$1); el monto final en soles se ajusta al tipo de cambio del día de facturación.</div>
+      <div class="note amber">La inversión de US$650 no incluye licencias ni suscripciones de Microsoft 365; ver sección 6, "Requisitos y supuestos". Conversión a soles referencial al tipo de cambio venta SUNAT del 08/09/2026 (S/ 3.365 por US$1); el monto final en soles se ajusta al tipo de cambio del día de facturación.</div>
+      <button onclick="generateQuotePDF(QUOTE_DATA)" style="margin-top:18px; background:var(--teal-700); color:#fff; border:none; border-radius:10px; padding:12px 20px; font-family:'Poppins',sans-serif; font-weight:600; font-size:14px; cursor:pointer;">📄 Descargar resumen de cotización (PDF)</button>
     </section>
 
     <section id="cronograma">
@@ -371,7 +372,37 @@
   </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="../scripts/quote-pdf.js"></script>
 <script>
+const QUOTE_DATA = {
+  title: 'Programa de Mentoría Inclusiva (PMI)',
+  client: 'Inés Evaristo',
+  institution: 'Universidad Tecnológica del Perú',
+  amountLabel: 'US$ 650 (sin IGV)',
+  amountNote: 'Aprox. S/ 2,187 al tipo de cambio referencial (S/ 3.365 por US$1, SUNAT venta del 08/09/2026). No incluye licencias ni suscripciones de Microsoft 365 (ver Requisitos y supuestos). El monto final en soles se ajusta al tipo de cambio del día de facturación.',
+  serviceSummary: 'Automatización del registro, validación y seguimiento de reuniones entre estudiantes y mentores del Programa de Mentoría Inclusiva, construida con Power Automate dentro de la suite Microsoft 365 que UTP ya utiliza (Forms, SharePoint, Excel, Outlook y Power BI), sin incorporar plataformas externas.',
+  deliverables: [
+    'Validación de código de estudiante y mentor asignado',
+    'Control de duplicados y secuencia entre reuniones',
+    'Contexto y seguimiento de acuerdos entre reuniones',
+    'Consolidación automática para Power BI',
+    'Automatización de recordatorios',
+    'Construcción con datos de prueba + implementación posterior con datos reales',
+    'Documentación y capacitación al equipo PMI',
+  ],
+  schedule: [
+    { phase: 'Diseño y mapeo', dur: '3-4 días' },
+    { phase: 'Desarrollo / configuración (datos de prueba)', dur: '1.5-3 semanas' },
+    { phase: 'Pruebas (QA)', dur: '3-4 días' },
+    { phase: 'Implementación con datos reales en plataformas de UTP', dur: 'Variable, según accesos y disponibilidad' },
+    { phase: 'Entrega y documentación', dur: '2-3 días' },
+  ],
+  totalDuration: '3-4 semanas (referencial; el alcance concluye con la confirmación de buena ejecución por parte de UTP).',
+  color: [44, 110, 127],
+  filename: 'cotizacion-pmi-utp.pdf',
+};
+
 /* ---------- SVG DIAGRAMS ---------- */
 const asisSVG = `
 <svg viewBox="0 0 1180 560" xmlns="http://www.w3.org/2000/svg" font-family="Lato, sans-serif">

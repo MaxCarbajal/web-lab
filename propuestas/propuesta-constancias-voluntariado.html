@@ -300,6 +300,7 @@
         </div>
       </div>
       <div class="note amber">La inversión de US$500 no incluye licencias ni suscripciones de Microsoft 365; ver sección 6, "Requisitos y supuestos". Conversión a soles referencial al tipo de cambio venta SUNAT del 10/09/2026 (S/ 3.365 por US$1); el monto final en soles se ajusta al tipo de cambio del día de facturación.</div>
+      <button onclick="generateQuotePDF(QUOTE_DATA)" style="margin-top:18px; background:var(--wine-700); color:#fff; border:none; border-radius:10px; padding:12px 20px; font-family:'Poppins',sans-serif; font-weight:600; font-size:14px; cursor:pointer;">📄 Descargar resumen de cotización (PDF)</button>
     </section>
 
     <section id="cronograma">
@@ -348,7 +349,35 @@
   </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="../scripts/quote-pdf.js"></script>
 <script>
+const QUOTE_DATA = {
+  title: 'Emisión de Constancias de Voluntariado',
+  client: 'Inés Evaristo',
+  institution: 'UTP · Sostenibilidad y RSU',
+  amountLabel: 'US$ 500 (sin IGV)',
+  amountNote: 'Aprox. S/ 1,683 al tipo de cambio referencial (S/ 3.365 por US$1, SUNAT venta del 10/09/2026). No incluye licencias ni suscripciones de Microsoft 365 (ver Requisitos y supuestos). El monto final en soles se ajusta al tipo de cambio del día de facturación.',
+  serviceSummary: 'Automatización de la validación de asistencia y de la generación y envío de constancias de voluntariado, construida con Power Automate dentro de la suite Microsoft 365 que UTP ya utiliza (Forms, SharePoint/Excel, plantilla de Word y Outlook), sin incorporar plataformas externas.',
+  deliverables: [
+    'Lectura y validación automática de asistencia desde el Excel adjunto en Forms',
+    'Generación automática de la constancia personalizada por estudiante validado (plantilla en Word/PDF)',
+    'Envío automático e individual de la constancia a cada estudiante por correo',
+    'Construcción con datos de prueba + implementación posterior con datos reales',
+    'Documentación y capacitación al equipo de Sostenibilidad y RSU',
+  ],
+  schedule: [
+    { phase: 'Diseño y mapeo', dur: '3-4 días' },
+    { phase: 'Desarrollo / configuración (datos de prueba)', dur: '1.5-3 semanas' },
+    { phase: 'Pruebas (QA)', dur: '3-4 días' },
+    { phase: 'Implementación con datos reales en plataformas de UTP', dur: 'Variable, según accesos y disponibilidad' },
+    { phase: 'Entrega y documentación', dur: '2-3 días' },
+  ],
+  totalDuration: '3-4 semanas (referencial; el alcance concluye con la confirmación de buena ejecución por parte de UTP).',
+  color: [122, 52, 101],
+  filename: 'cotizacion-constancias-voluntariado-utp.pdf',
+};
+
 /* ---------- SVG DIAGRAMS ---------- */
 const asisSVG = `
 <svg viewBox="0 0 1180 560" xmlns="http://www.w3.org/2000/svg" font-family="Lato, sans-serif">
