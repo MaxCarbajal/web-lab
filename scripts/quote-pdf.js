@@ -114,7 +114,7 @@ function generateQuotePDF(quote) {
 
   /* ---- helpers ---- */
   function ensureSpace(h) {
-    if (y + h > pageH - 20) {
+    if (y + h > pageH - 24) {
       doc.addPage();
       y = 18;
     }
@@ -173,7 +173,7 @@ function generateQuotePDF(quote) {
   label('Entregables');
   doc.autoTable({
     startY: y,
-    margin: { left: marginX, right: marginX, bottom: 22 },
+    margin: { left: marginX, right: marginX, bottom: 26 },
     rowPageBreak: 'avoid',
     theme: 'plain',
     styles: { font: 'helvetica', fontSize: 9.5, textColor: [45, 48, 51], cellPadding: { top: 1.5, bottom: 1.5, left: 0, right: 2 } },
@@ -188,7 +188,7 @@ function generateQuotePDF(quote) {
   const totalRowIndex = quote.schedule.length;
   doc.autoTable({
     startY: y,
-    margin: { left: marginX, right: marginX, bottom: 22 },
+    margin: { left: marginX, right: marginX, bottom: 26 },
     rowPageBreak: 'avoid',
     theme: 'grid',
     styles: { font: 'helvetica', fontSize: 9.5, textColor: [45, 48, 51], cellPadding: 2.5, lineColor: faint, lineWidth: 0.3 },
@@ -217,12 +217,16 @@ function generateQuotePDF(quote) {
     doc.setPage(i);
     doc.setDrawColor(...faint);
     doc.setLineWidth(0.3);
-    doc.line(marginX, pageH - 16, pageW - marginX, pageH - 16);
-    doc.setFont('helvetica', 'normal');
+    doc.line(marginX, pageH - 18, pageW - marginX, pageH - 18);
+    doc.setFont('helvetica', 'bold');
     doc.setFontSize(8);
     doc.setTextColor(...soft);
-    doc.text('Cotización referencial; no constituye comprobante de pago.', marginX, pageH - 10);
-    doc.text(String(i) + ' / ' + pageCount, pageW - marginX, pageH - 10, { align: 'right' });
+    doc.text('Max Carbajal', marginX, pageH - 13);
+    const nameW = doc.getTextWidth('Max Carbajal');
+    doc.setFont('helvetica', 'normal');
+    doc.text('  ·  maxcarbajalh@gmail.com', marginX + nameW, pageH - 13);
+    doc.text('Cotización referencial; no constituye comprobante de pago.', marginX, pageH - 8);
+    doc.text(String(i) + ' / ' + pageCount, pageW - marginX, pageH - 8, { align: 'right' });
   }
 
   doc.save(quote.filename);
