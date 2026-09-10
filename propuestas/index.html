@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuestas comerciales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink-900:#23262B;
+    --slate-600:#6B7178;
+    --paper:#F7F7F6;
+    --card:#FFFFFF;
+    --line:#E5E5E3;
+    --ink:#2B2E33;
+    --ink-soft:#6B6F76;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:'Lato',sans-serif; color:var(--ink); background:var(--paper); line-height:1.6;}
+  h1,h2,h3,h4{font-family:'Poppins',sans-serif; margin:0; color:var(--ink-900);}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 32px 80px;}
+
+  header.top{padding:56px 0 36px; border-bottom:1px solid var(--line); margin-bottom:40px;}
+  header.top h1{font-size:clamp(26px,4vw,34px); font-weight:800;}
+  header.top p{font-size:15.5px; color:var(--ink-soft); margin:12px 0 0; max-width:640px;}
+
+  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:22px;}
+
+  .card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px; display:flex; flex-direction:column; gap:8px; transition:box-shadow .15s ease, transform .15s ease;}
+  .card:hover{box-shadow:0 6px 20px rgba(35,38,43,0.08); transform:translateY(-2px);}
+  .card .kicker{font-size:11.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; color:var(--slate-600);}
+  .card h3{font-size:20px; font-weight:700; margin-top:2px;}
+  .card p.desc{font-size:13.5px; color:var(--ink-soft); margin:6px 0 0;}
+  .card .count{font-size:12.5px; color:var(--ink-soft); margin-top:14px; font-family:'Poppins',sans-serif;}
+
+  footer{padding:30px 0; color:var(--ink-soft); font-size:13px; text-align:center;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <h1>Propuestas comerciales</h1>
+    <p>Selecciona una empresa o institución para ver sus propuestas.</p>
+  </header>
+
+  <div class="grid">
+    <a class="card" href="utp/index.html">
+      <div class="kicker">Institución</div>
+      <h3>UTP</h3>
+      <p class="desc">Universidad Tecnológica del Perú</p>
+      <div class="count">3 propuestas</div>
+    </a>
+  </div>
+
+  <footer>Propuestas comerciales · web-lab</footer>
+</div>
+</body>
+</html>

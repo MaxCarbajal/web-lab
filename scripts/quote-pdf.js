@@ -1,7 +1,8 @@
 /*
  * Generador de PDF de resumen de cotización, compartido por las propuestas en /propuestas.
- * Requiere que la página haya cargado jsPDF (UMD) antes de este script:
+ * Requiere que la página haya cargado jsPDF + jsPDF-AutoTable (UMD) antes de este script:
  *   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+ *   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
  *
  * Uso desde una propuesta:
  *   generateQuotePDF({
@@ -16,108 +17,161 @@
  *   });
  */
 function generateQuotePDF(quote) {
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+  const doc = new window.jspdf.jsPDF({ unit: 'mm', format: 'a4' });
 
-  const marginX = 20;
-  const maxW = 170;
-  const pageBottom = 282;
-  let y = 22;
+  const pageW = doc.internal.pageSize.getWidth();
+  const pageH = doc.internal.pageSize.getHeight();
+  const marginX = 18;
+  const contentW = pageW - marginX * 2;
+  const [r, g, b] = quote.color;
+  const soft = [90, 96, 102];
+  const faint = [235, 236, 238];
 
+  let y = 0;
+
+  /* ---- header band ---- */
+  const bandH = 34;
+  doc.setFillColor(r, g, b);
+  doc.rect(0, 0, pageW, bandH, 'F');
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(17);
+  doc.setTextColor(255, 255, 255);
+  const titleLines = doc.splitTextToSize(quote.title, contentW - 55);
+  doc.text(titleLines, marginX, 15);
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9);
+  doc.setTextColor(255, 255, 255);
+  doc.text('RESUMEN DE COTIZACIÓN', marginX, bandH - 6);
+
+  const MONTHS = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+  const now = new Date();
+  const today = now.getDate() + ' de ' + MONTHS[now.getMonth()] + ' de ' + now.getFullYear();
+  doc.setFontSize(9);
+  doc.text(today, pageW - marginX, bandH - 6, { align: 'right' });
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(10);
+  doc.setTextColor(45, 48, 51);
+  doc.text(quote.client, marginX, bandH + 8);
+  const clientW = doc.getTextWidth(quote.client);
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(...soft);
+  doc.text('   |   ' + quote.institution, marginX + clientW, bandH + 8);
+
+  y = bandH + 15;
+
+  /* ---- helpers ---- */
   function ensureSpace(h) {
-    if (y + h > pageBottom) {
+    if (y + h > pageH - 20) {
       doc.addPage();
-      y = 22;
+      y = 18;
     }
   }
 
-  function heading1(text) {
-    ensureSpace(12);
+  function label(text) {
+    ensureSpace(6);
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(16);
-    doc.setTextColor(...quote.color);
-    const lines = doc.splitTextToSize(text, maxW);
-    doc.text(lines, marginX, y);
-    y += lines.length * 7 + 3;
-  }
-
-  function heading2(text) {
-    ensureSpace(10);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(12);
-    doc.setTextColor(...quote.color);
-    doc.text(text, marginX, y);
-    y += 7;
+    doc.setFontSize(9);
+    doc.setTextColor(r, g, b);
+    doc.text(text.toUpperCase(), marginX, y);
+    y += 5;
   }
 
   function paragraph(text, opts) {
-    const color = (opts && opts.color) || [40, 40, 40];
-    const size = (opts && opts.size) || 10.5;
+    const color = (opts && opts.color) || [45, 48, 51];
+    const size = (opts && opts.size) || 10;
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(size);
     doc.setTextColor(...color);
-    const lines = doc.splitTextToSize(text, maxW);
+    const lines = doc.splitTextToSize(text, contentW);
     ensureSpace(lines.length * 5 + 2);
     doc.text(lines, marginX, y);
     y += lines.length * 5 + 4;
   }
 
-  function bulletList(items) {
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(10.5);
-    doc.setTextColor(40, 40, 40);
-    items.forEach((item) => {
-      const lines = doc.splitTextToSize('- ' + item, maxW - 4);
-      ensureSpace(lines.length * 5 + 1);
-      doc.text(lines, marginX + 2, y);
-      y += lines.length * 5 + 2;
-    });
-    y += 2;
+  function divider() {
+    ensureSpace(5);
+    doc.setDrawColor(...faint);
+    doc.setLineWidth(0.3);
+    doc.line(marginX, y, pageW - marginX, y);
+    y += 6;
   }
 
-  function scheduleList(items) {
-    items.forEach((item) => {
-      const lines = doc.splitTextToSize(item.phase + ': ' + item.dur, maxW);
-      ensureSpace(lines.length * 5 + 2);
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(10.5);
-      doc.setTextColor(40, 40, 40);
-      doc.text(lines, marginX, y);
-      y += lines.length * 5 + 3;
-    });
-    y += 1;
-  }
-
-  heading1(quote.title);
-
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(9.5);
-  doc.setTextColor(110, 110, 110);
-  const today = new Date().toLocaleDateString('es-PE', { year: 'numeric', month: 'long', day: 'numeric' });
-  doc.text('Resumen de cotizacion - generado el ' + today, marginX, y);
-  y += 10;
-
-  heading2('Cliente e institucion');
-  paragraph(quote.client + ' - ' + quote.institution);
-
-  heading2('Monto de la inversion');
+  /* ---- monto ---- */
+  label('Monto de la inversión');
+  const boxH = 18;
+  ensureSpace(boxH + 4);
+  doc.setDrawColor(r, g, b);
+  doc.setLineWidth(0.4);
+  doc.roundedRect(marginX, y, contentW, boxH, 2.5, 2.5, 'S');
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(15);
-  doc.setTextColor(...quote.color);
-  ensureSpace(8);
-  doc.text(quote.amountLabel, marginX, y);
-  y += 7;
-  paragraph(quote.amountNote, { color: [90, 90, 90], size: 9.5 });
+  doc.setFontSize(16);
+  doc.setTextColor(r, g, b);
+  doc.text(quote.amountLabel, marginX + 6, y + 11.5);
+  y += boxH + 4;
+  paragraph(quote.amountNote, { color: soft, size: 8.5 });
 
-  heading2('Servicio');
-  paragraph(quote.serviceSummary);
+  divider();
 
-  heading2('Entregables');
-  bulletList(quote.deliverables);
+  /* ---- servicio ---- */
+  label('Servicio');
+  paragraph(quote.serviceSummary, { size: 10 });
 
-  heading2('Cronograma');
-  scheduleList(quote.schedule);
-  paragraph('Duracion total estimada: ' + quote.totalDuration, { color: [90, 90, 90], size: 9.5 });
+  /* ---- entregables ---- */
+  label('Entregables');
+  doc.autoTable({
+    startY: y,
+    margin: { left: marginX, right: marginX, bottom: 22 },
+    rowPageBreak: 'avoid',
+    theme: 'plain',
+    styles: { font: 'helvetica', fontSize: 9.5, textColor: [45, 48, 51], cellPadding: { top: 1.5, bottom: 1.5, left: 0, right: 2 } },
+    columnStyles: { 0: { cellWidth: 6, textColor: [r, g, b], fontStyle: 'bold' } },
+    body: quote.deliverables.map((item, i) => [String(i + 1) + '.', item]),
+  });
+  y = doc.lastAutoTable.finalY + 6;
+
+  /* ---- cronograma ---- */
+  ensureSpace(14);
+  label('Cronograma');
+  const totalRowIndex = quote.schedule.length;
+  doc.autoTable({
+    startY: y,
+    margin: { left: marginX, right: marginX, bottom: 22 },
+    rowPageBreak: 'avoid',
+    theme: 'grid',
+    styles: { font: 'helvetica', fontSize: 9.5, textColor: [45, 48, 51], cellPadding: 2.5, lineColor: faint, lineWidth: 0.3 },
+    headStyles: { fillColor: [r, g, b], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 9 },
+    columnStyles: { 1: { cellWidth: 45 } },
+    head: [['Fase', 'Duración']],
+    body: [
+      ...quote.schedule.map((item) => [item.phase, item.dur]),
+      [{ content: 'Total estimado: ' + quote.totalDuration, colSpan: 2 }],
+    ],
+    didParseCell(data) {
+      if (data.section === 'body' && data.row.index === totalRowIndex) {
+        data.cell.styles.fontStyle = 'bold';
+        data.cell.styles.fillColor = [248, 247, 245];
+        data.cell.styles.textColor = [r, g, b];
+      }
+    },
+  });
+  y = doc.lastAutoTable.finalY + 5;
+
+  /* ---- footer on every page ---- */
+  const pageCount = doc.internal.getNumberOfPages();
+  for (let i = 1; i <= pageCount; i++) {
+    doc.setPage(i);
+    doc.setDrawColor(...faint);
+    doc.setLineWidth(0.3);
+    doc.line(marginX, pageH - 16, pageW - marginX, pageH - 16);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8);
+    doc.setTextColor(...soft);
+    doc.text('Cotización referencial; no constituye comprobante de pago. El monto en soles se ajusta al tipo de cambio del día de facturación.', marginX, pageH - 10);
+    doc.text(String(i) + ' / ' + pageCount, pageW - marginX, pageH - 10, { align: 'right' });
+  }
 
   doc.save(quote.filename);
 }
