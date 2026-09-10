@@ -218,8 +218,8 @@
           <div style="font-size:13px; color:var(--ink-soft); margin-top:2px; font-family:'Poppins',sans-serif; font-variant-numeric:tabular-nums;">≈ S/ 1,010 <small style="font-family:'Lato',sans-serif;">al tipo de cambio referencial</small></div>
         </div>
       </div>
-      <div class="note gold">Conversión a soles referencial al tipo de cambio venta SUNAT del 08/09/2026 (S/ 3.365 por US$1); el monto final en soles se ajusta al tipo de cambio del día de facturación.</div>
-      <button onclick="generateQuotePDF(QUOTE_DATA)" style="margin-top:18px; background:var(--navy-700); color:#fff; border:none; border-radius:10px; padding:12px 20px; font-family:'Poppins',sans-serif; font-weight:600; font-size:14px; cursor:pointer;">📄 Descargar resumen de cotización (PDF)</button>
+      <div class="note gold">El monto de la inversión se cotiza en dólares estadounidenses (US$); la conversión a soles mostrada es referencial, al tipo de cambio venta SUNAT del 08/09/2026 (S/ 3.365 por US$1), y se ajusta al tipo de cambio del día de facturación.</div>
+      <button data-filename="cotizacion-metared-utp.pdf" onclick="downloadQuotePDF(this)" style="margin-top:18px; background:var(--navy-700); color:#fff; border:none; border-radius:10px; padding:12px 20px; font-family:'Poppins',sans-serif; font-weight:600; font-size:14px; cursor:pointer;">📄 Descargar resumen de cotización (PDF)</button>
     </section>
 
     <section id="cronograma">
@@ -231,7 +231,13 @@
         <div class="tl-item"><div class="phase">Análisis y elaboración del informe</div><div class="dur">3–5 días</div></div>
         <div class="tl-item"><div class="phase">Reuniones de validación y mejoras sobre los entregables</div><div class="dur">2–3 días, distribuidos a lo largo del proyecto</div></div>
       </div>
-      <div class="note"><b>Tiempo total estimado: 2–4 semanas.</b> Es referencial y puede variar según la rapidez con que UTP otorgue accesos y datos.</div>
+      <div class="cards2" style="margin-top:24px;">
+        <div class="opt-card">
+          <div class="kicker">DURACIÓN TOTAL</div>
+          <div class="price">2–4 <small>semanas</small></div>
+        </div>
+      </div>
+      <div class="note">El tiempo total es referencial y puede variar según la rapidez con que UTP otorgue accesos y datos.</div>
     </section>
 
     <section id="pasos">
@@ -264,32 +270,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 <script src="../../scripts/quote-pdf.js"></script>
 <script>
-const QUOTE_DATA = {
-  title: 'Estudio Internacional de Empleo Sostenible (Red MetaRed)',
-  client: 'Inés Evaristo',
-  institution: 'UTP · Red MetaRed',
-  amountLabel: 'US$ 300 (sin IGV)',
-  amountNote: 'Aprox. S/ 1,010 al tipo de cambio referencial (S/ 3.365 por US$1, SUNAT venta del 08/09/2026).',
-  serviceSummary: 'Investigación y construcción de una estrategia de extracción de ofertas laborales (web scraping o API, según la plataforma) desde los principales portales de empleo del Perú, limpieza y análisis de los empleos sostenibles resultantes, y entrega de los hallazgos en un informe (Excel o Power BI), como insumo para el estudio conjunto de la Red MetaRed.',
-  deliverables: [
-    'Investigación de la estrategia de extracción (scraping o API) por plataforma de empleo',
-    'Solución de recolección de ofertas laborales',
-    'Limpieza y filtrado de ofertas vinculadas a sostenibilidad',
-    'Análisis de los datos recolectados',
-    'Informe de hallazgos en Excel o Power BI, según lo que amerite el análisis',
-    'Coordinación constante con UTP para entender la necesidad y ajustar el análisis',
-  ],
-  schedule: [
-    { phase: 'Extracción: investigación de la estrategia y construcción de la recolección', dur: '1-2 semanas' },
-    { phase: 'Limpieza de datos: filtrado por sostenibilidad y estandarización', dur: '3-5 días' },
-    { phase: 'Análisis y elaboración del informe', dur: '3-5 días' },
-    { phase: 'Reuniones de validación y mejoras sobre los entregables', dur: '2-3 días, distribuidos a lo largo del proyecto' },
-  ],
-  totalDuration: '2-4 semanas (referencial; puede variar según la rapidez con que UTP otorgue accesos y datos).',
-  color: [46, 67, 116],
-  filename: 'cotizacion-metared-utp.pdf',
-};
-
 const flowSVG = `
 <svg viewBox="0 0 1180 220" xmlns="http://www.w3.org/2000/svg" font-family="Lato, sans-serif">
   <rect x="0" y="0" width="1180" height="220" fill="#FDFEFE"/>

@@ -1,21 +1,71 @@
 /*
  * Generador de PDF de resumen de cotización, compartido por las propuestas en /propuestas.
+ * El PDF se arma leyendo el HTML de la propuesta en el momento de la descarga (no hay datos
+ * duplicados a mano) para que nunca quede desincronizado de lo que se ve en la página.
+ *
  * Requiere que la página haya cargado jsPDF + jsPDF-AutoTable (UMD) antes de este script:
  *   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
  *   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
  *
- * Uso desde una propuesta:
- *   generateQuotePDF({
- *     title, client, institution,
- *     amountLabel, amountNote,
- *     serviceSummary,
- *     deliverables: [...],
- *     schedule: [{ phase, dur }, ...],
- *     totalDuration,
- *     color: [r, g, b],
- *     filename,
- *   });
+ * Uso desde una propuesta (botón dentro de la sección de Inversión):
+ *   <button data-filename="cotizacion-....pdf" onclick="downloadQuotePDF(this)">Descargar cotización (PDF)</button>
+ *
+ * Uso desde una página índice, sin abrir la propuesta (lee el HTML por fetch):
+ *   <button onclick="downloadQuotePDFFromURL('archivo-propuesta.html', 'cotizacion-....pdf')">Descargar cotización (PDF)</button>
  */
+
+/* ---------- extracción de datos desde el HTML de la propuesta ---------- */
+function extractQuoteData(doc) {
+  const metaBold = doc.querySelectorAll('.hero .meta b');
+  const timelineItems = [...doc.querySelectorAll('#cronograma .timeline .tl-item')];
+  return {
+    title: doc.querySelector('.hero h1').textContent.trim(),
+    client: metaBold[0].textContent.trim(),
+    institution: metaBold[1].textContent.trim(),
+    amountLabel: doc.querySelector('#inversion .opt-card .price').textContent.replace(/\s+/g, ' ').trim(),
+    amountNote: doc.querySelector('#inversion .note').textContent.replace(/\s+/g, ' ').trim(),
+    serviceSummary: doc.querySelector('#resumen p').textContent.trim(),
+    deliverables: [...doc.querySelectorAll('#alcance ul li')].map((li) => li.textContent.trim()),
+    schedule: timelineItems.map((item) => ({
+      phase: item.querySelector('.phase').textContent.trim(),
+      dur: item.querySelector('.dur').textContent.trim(),
+    })),
+    totalDuration: doc.querySelector('#cronograma .opt-card .price').textContent.replace(/\s+/g, ' ').trim(),
+    totalDurationNote: doc.querySelectorAll('#cronograma .note')[0].textContent.trim(),
+  };
+}
+
+/* ---------- color de acento: leído del propio botón + la variable CSS que usa ---------- */
+function extractAccentColor(doc, buttonEl) {
+  const styleAttr = buttonEl.getAttribute('style') || '';
+  const varMatch = styleAttr.match(/background:\s*var\((--[a-z0-9-]+)\)/i);
+  const varName = varMatch ? varMatch[1] : null;
+  const cssText = [...doc.querySelectorAll('style')].map((s) => s.textContent).join('\n');
+  const hexMatch = varName && new RegExp(varName.replace(/[-]/g, '\\-') + ':\\s*#([0-9a-fA-F]{6})').exec(cssText);
+  const hex = hexMatch ? hexMatch[1] : '333333';
+  return [parseInt(hex.slice(0, 2), 16), parseInt(hex.slice(2, 4), 16), parseInt(hex.slice(4, 6), 16)];
+}
+
+/* ---------- descarga desde la propia página de la propuesta ---------- */
+function downloadQuotePDF(buttonEl) {
+  const data = extractQuoteData(document);
+  const color = extractAccentColor(document, buttonEl);
+  const filename = buttonEl.dataset.filename || 'cotizacion.pdf';
+  generateQuotePDF({ ...data, color, filename });
+}
+
+/* ---------- descarga desde una página índice, sin abrir la propuesta ---------- */
+async function downloadQuotePDFFromURL(url, filename) {
+  const res = await fetch(url);
+  const html = await res.text();
+  const parsed = new DOMParser().parseFromString(html, 'text/html');
+  const button = parsed.querySelector('#inversion button');
+  const data = extractQuoteData(parsed);
+  const color = extractAccentColor(parsed, button);
+  generateQuotePDF({ ...data, color, filename });
+}
+
+/* ---------- construcción del PDF ---------- */
 function generateQuotePDF(quote) {
   const doc = new window.jspdf.jsPDF({ unit: 'mm', format: 'a4' });
 
@@ -147,7 +197,7 @@ function generateQuotePDF(quote) {
     head: [['Fase', 'Duración']],
     body: [
       ...quote.schedule.map((item) => [item.phase, item.dur]),
-      [{ content: 'Total estimado: ' + quote.totalDuration, colSpan: 2 }],
+      ['Total estimado', quote.totalDuration],
     ],
     didParseCell(data) {
       if (data.section === 'body' && data.row.index === totalRowIndex) {
@@ -159,6 +209,8 @@ function generateQuotePDF(quote) {
   });
   y = doc.lastAutoTable.finalY + 5;
 
+  paragraph(quote.totalDurationNote, { color: soft, size: 8.5 });
+
   /* ---- footer on every page ---- */
   const pageCount = doc.internal.getNumberOfPages();
   for (let i = 1; i <= pageCount; i++) {
@@ -169,7 +221,7 @@ function generateQuotePDF(quote) {
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(8);
     doc.setTextColor(...soft);
-    doc.text('Cotización referencial; no constituye comprobante de pago. El monto en soles se ajusta al tipo de cambio del día de facturación.', marginX, pageH - 10);
+    doc.text('Cotización referencial; no constituye comprobante de pago.', marginX, pageH - 10);
     doc.text(String(i) + ' / ' + pageCount, pageW - marginX, pageH - 10, { align: 'right' });
   }
 

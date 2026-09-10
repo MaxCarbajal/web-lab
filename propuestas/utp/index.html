@@ -71,7 +71,7 @@
         <div class="meta"><span><b>US$650</b> sin IGV</span><span>3-4 semanas</span></div>
         <div class="actions">
           <a class="btn-primary" style="background:#2C6E7F;" href="automatizacion-mentoria-inclusiva.html">Ver propuesta completa</a>
-          <button class="btn-secondary" onclick="generateQuotePDF(QUOTE_PMI)">📄 Descargar cotización (PDF)</button>
+          <button class="btn-secondary" onclick="downloadQuotePDFFromURL('automatizacion-mentoria-inclusiva.html', 'cotizacion-pmi-utp.pdf')">📄 Descargar cotización (PDF)</button>
         </div>
       </div>
     </div>
@@ -85,7 +85,7 @@
         <div class="meta"><span><b>US$300</b> sin IGV</span><span>2-4 semanas</span></div>
         <div class="actions">
           <a class="btn-primary" style="background:#2E4374;" href="empleo-sostenible-metared.html">Ver propuesta completa</a>
-          <button class="btn-secondary" onclick="generateQuotePDF(QUOTE_METARED)">📄 Descargar cotización (PDF)</button>
+          <button class="btn-secondary" onclick="downloadQuotePDFFromURL('empleo-sostenible-metared.html', 'cotizacion-metared-utp.pdf')">📄 Descargar cotización (PDF)</button>
         </div>
       </div>
     </div>
@@ -99,7 +99,7 @@
         <div class="meta"><span><b>US$500</b> sin IGV</span><span>3-4 semanas</span></div>
         <div class="actions">
           <a class="btn-primary" style="background:#7A3465;" href="automatizacion-constancias-voluntariado.html">Ver propuesta completa</a>
-          <button class="btn-secondary" onclick="generateQuotePDF(QUOTE_CONSTANCIAS)">📄 Descargar cotización (PDF)</button>
+          <button class="btn-secondary" onclick="downloadQuotePDFFromURL('automatizacion-constancias-voluntariado.html', 'cotizacion-constancias-voluntariado-utp.pdf')">📄 Descargar cotización (PDF)</button>
         </div>
       </div>
     </div>
@@ -111,86 +111,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 <script src="../../scripts/quote-pdf.js"></script>
-<script>
-const QUOTE_PMI = {
-  title: 'Programa de Mentoría Inclusiva (PMI)',
-  client: 'Inés Evaristo',
-  institution: 'Universidad Tecnológica del Perú',
-  amountLabel: 'US$ 650 (sin IGV)',
-  amountNote: 'Aprox. S/ 2,187 al tipo de cambio referencial (S/ 3.365 por US$1, SUNAT venta del 08/09/2026). No incluye licencias ni suscripciones de Microsoft 365 (ver Requisitos y supuestos).',
-  serviceSummary: 'Automatización del registro, validación y seguimiento de reuniones entre estudiantes y mentores del Programa de Mentoría Inclusiva, construida con Power Automate dentro de la suite Microsoft 365 que UTP ya utiliza (Forms, SharePoint, Excel, Outlook y Power BI), sin incorporar plataformas externas.',
-  deliverables: [
-    'Validación de código de estudiante y mentor asignado',
-    'Control de duplicados y secuencia entre reuniones',
-    'Contexto y seguimiento de acuerdos entre reuniones',
-    'Consolidación automática para Power BI',
-    'Automatización de recordatorios',
-    'Construcción con datos de prueba + implementación posterior con datos reales',
-    'Documentación y capacitación al equipo PMI',
-  ],
-  schedule: [
-    { phase: 'Diseño y mapeo', dur: '3-4 días' },
-    { phase: 'Desarrollo / configuración (datos de prueba)', dur: '1.5-3 semanas' },
-    { phase: 'Pruebas (QA)', dur: '3-4 días' },
-    { phase: 'Implementación con datos reales en plataformas de UTP', dur: 'Variable, según accesos y disponibilidad' },
-    { phase: 'Entrega y documentación', dur: '2-3 días' },
-  ],
-  totalDuration: '3-4 semanas (referencial; el alcance concluye con la confirmación de buena ejecución por parte de UTP).',
-  color: [44, 110, 127],
-  filename: 'cotizacion-pmi-utp.pdf',
-};
-
-const QUOTE_METARED = {
-  title: 'Estudio Internacional de Empleo Sostenible (Red MetaRed)',
-  client: 'Inés Evaristo',
-  institution: 'UTP · Red MetaRed',
-  amountLabel: 'US$ 300 (sin IGV)',
-  amountNote: 'Aprox. S/ 1,010 al tipo de cambio referencial (S/ 3.365 por US$1, SUNAT venta del 08/09/2026).',
-  serviceSummary: 'Investigación y construcción de una estrategia de extracción de ofertas laborales (web scraping o API, según la plataforma) desde los principales portales de empleo del Perú, limpieza y análisis de los empleos sostenibles resultantes, y entrega de los hallazgos en un informe (Excel o Power BI), como insumo para el estudio conjunto de la Red MetaRed.',
-  deliverables: [
-    'Investigación de la estrategia de extracción (scraping o API) por plataforma de empleo',
-    'Solución de recolección de ofertas laborales',
-    'Limpieza y filtrado de ofertas vinculadas a sostenibilidad',
-    'Análisis de los datos recolectados',
-    'Informe de hallazgos en Excel o Power BI, según lo que amerite el análisis',
-    'Coordinación constante con UTP para entender la necesidad y ajustar el análisis',
-  ],
-  schedule: [
-    { phase: 'Extracción: investigación de la estrategia y construcción de la recolección', dur: '1-2 semanas' },
-    { phase: 'Limpieza de datos: filtrado por sostenibilidad y estandarización', dur: '3-5 días' },
-    { phase: 'Análisis y elaboración del informe', dur: '3-5 días' },
-    { phase: 'Reuniones de validación y mejoras sobre los entregables', dur: '2-3 días, distribuidos a lo largo del proyecto' },
-  ],
-  totalDuration: '2-4 semanas (referencial; puede variar según la rapidez con que UTP otorgue accesos y datos).',
-  color: [46, 67, 116],
-  filename: 'cotizacion-metared-utp.pdf',
-};
-
-const QUOTE_CONSTANCIAS = {
-  title: 'Emisión de Constancias de Voluntariado',
-  client: 'Inés Evaristo',
-  institution: 'UTP · Sostenibilidad y RSU',
-  amountLabel: 'US$ 500 (sin IGV)',
-  amountNote: 'Aprox. S/ 1,683 al tipo de cambio referencial (S/ 3.365 por US$1, SUNAT venta del 10/09/2026). No incluye licencias ni suscripciones de Microsoft 365 (ver Requisitos y supuestos).',
-  serviceSummary: 'Automatización de la validación de asistencia y de la generación y envío de constancias de voluntariado, construida con Power Automate dentro de la suite Microsoft 365 que UTP ya utiliza (Forms, SharePoint/Excel, plantilla de Word y Outlook), sin incorporar plataformas externas.',
-  deliverables: [
-    'Lectura y validación automática de asistencia desde el Excel adjunto en Forms',
-    'Generación automática de la constancia personalizada por estudiante validado (plantilla en Word/PDF)',
-    'Envío automático e individual de la constancia a cada estudiante por correo',
-    'Construcción con datos de prueba + implementación posterior con datos reales',
-    'Documentación y capacitación al equipo de Sostenibilidad y RSU',
-  ],
-  schedule: [
-    { phase: 'Diseño y mapeo', dur: '3-4 días' },
-    { phase: 'Desarrollo / configuración (datos de prueba)', dur: '1.5-3 semanas' },
-    { phase: 'Pruebas (QA)', dur: '3-4 días' },
-    { phase: 'Implementación con datos reales en plataformas de UTP', dur: 'Variable, según accesos y disponibilidad' },
-    { phase: 'Entrega y documentación', dur: '2-3 días' },
-  ],
-  totalDuration: '3-4 semanas (referencial; el alcance concluye con la confirmación de buena ejecución por parte de UTP).',
-  color: [122, 52, 101],
-  filename: 'cotizacion-constancias-voluntariado-utp.pdf',
-};
-</script>
 </body>
 </html>
