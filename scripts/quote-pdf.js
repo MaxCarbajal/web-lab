@@ -87,7 +87,7 @@ function generateQuotePDF(quote) {
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(17);
   doc.setTextColor(255, 255, 255);
-  const titleLines = doc.splitTextToSize(quote.title, contentW - 55);
+  const titleLines = doc.splitTextToSize(quote.title, contentW);
   doc.text(titleLines, marginX, 15);
 
   doc.setFont('helvetica', 'normal');
