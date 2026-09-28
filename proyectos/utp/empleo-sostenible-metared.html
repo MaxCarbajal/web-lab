@@ -148,18 +148,11 @@ ol.recs li{color:var(--fg2)} ol.recs b{color:var(--fg)}
   <h2>3. Calidad de los datos</h2>
   <p>Porcentaje de ofertas con dato disponible, por portal. Cada portal expone campos distintos.</p>
   <div class="panel scroll"><table id="t-fields"></table></div>
-  <div class="issues">
-    <div class="issue"><span class="chip crit">Alta</span><div><h3>Clasificación por sector sobreestimada</h3><p>El filtro detecta frases estándar de las empresas (“diversidad e inclusión”, “medio ambiente”). 128 de las 424 ofertas relevantes coinciden solo con estos términos genéricos.</p></div></div>
-    <div class="issue"><span class="chip crit">Alta</span><div><h3>Duplicados por ubicación</h3><p>28 ofertas se repiten con distinto ID por ciudad. Por ejemplo, una vacante de FullStack aparece 12 veces.</p></div></div>
-    <div class="issue"><span class="chip warn">Media</span><div><h3>Campos derivados poco fiables</h3><p><b>Candidatos:</b> 259 ofertas registran 25 cuando el portal indica “menos de 25”. <b>Salario:</b> se extraen montos sueltos, como bonos o tarifas por hora. <b>Modalidad:</b> 110 ofertas copian el filtro de búsqueda en lugar del dato real.</p></div></div>
-    <div class="issue"><span class="chip info">Baja</span><div><h3>Normalización pendiente</h3><p>Hay valores equivalentes con nombres distintos (“Full-time” y “Tiempo completo”). 19 ofertas no tienen país. Los campos “Fecha límite” y “URL de postulación” están vacíos en todas las ofertas.</p></div></div>
-  </div>
 </section>
 
 <section>
   <h2>4. Próximos pasos</h2>
   <ol class="recs">
-    <li><b>Reclasificar la relevancia en dos niveles:</b> alta, si el término aparece en el título o en las funciones; baja, si solo aparece en la descripción.</li>
     <li><b>Agrupar duplicados</b> por empresa, título y descripción, y conservar la lista de ciudades.</li>
     <li><b>Corregir campos derivados:</b> candidatos como rango y salario solo desde campos estructurados.</li>
     <li><b>Ajustar las palabras clave:</b> reemplazar las de baja precisión e incluir “reporte de sostenibilidad”.</li>
