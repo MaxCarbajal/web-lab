@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Informe de extracción de empleo sostenible · UTP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Lato:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: una columna de lectura (~72ch) con gráficos a ancho completo; informe técnico de auditoría de datos */
+:root{
+  --bg:#F8F7F4; --panel:#ffffff; --fg:#2B2E33; --fg2:#2B2E33; --muted:#6B6F76; --line:#E6E4DD;
+  --heading:#232B45; --ok:#6FA084; --no:#D6D2C7; --accent:#4C6FA5; --warn:#C79A3D; --crit:#C4523F; --warnbg:#FBF3E2; --critbg:#FBEBE7; --infobg:#EEF1FA;
+  --display:"Poppins",sans-serif; --body:"Lato",sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+body{background:var(--bg);color:var(--fg);font:15px/1.6 var(--body)}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:20px;padding-block:40px 64px;display:flex;flex-direction:column;gap:44px}
+header{display:flex;flex-direction:column;gap:10px}
+.eyebrow{font:700 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h1{font:800 clamp(28px,5vw,40px)/1.18 var(--display);margin:0;text-wrap:balance;color:var(--heading)}
+h2{font:700 24px/1.25 var(--display);margin:0;text-wrap:balance;color:var(--heading)}
+h3{font:600 15px/1.3 var(--body);margin:0;color:var(--heading)}
+p{margin:0;color:var(--fg2)}
+.lead{font-size:17px;color:var(--fg)}
+section{display:flex;flex-direction:column;gap:16px;min-width:0}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.kpi{background:var(--panel);padding:16px;display:flex;flex-direction:column;gap:4px}
+.kpi b{font:500 28px/1 var(--mono);font-variant-numeric:tabular-nums}
+.kpi span{font-size:13px;color:var(--muted)}
+@media (max-width:640px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--fg2)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart text{fill:var(--fg2);font:12px var(--body)}
+.chart .num{font-family:var(--mono);font-variant-numeric:tabular-nums;fill:var(--fg)}
+.chart .axis{stroke:var(--line)}
+.tip{position:fixed;pointer-events:none;background:var(--fg);color:var(--bg);font:12px/1.4 var(--body);padding:6px 9px;border-radius:4px;z-index:9;max-width:260px}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13.5px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 12px var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+td.c{text-align:center;font-family:var(--mono)}
+.heat{border-radius:3px;display:inline-block;min-width:44px;padding:2px 6px}
+.issues{display:flex;flex-direction:column;gap:10px}
+.issue{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;padding:14px 16px;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+.issue > div{min-width:0}
+.issue p{font-size:14px}
+.chip{font:500 11px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;padding:5px 7px;border-radius:3px;white-space:nowrap;align-self:start}
+.chip.crit{background:var(--critbg);color:var(--crit)}
+.chip.warn{background:var(--warnbg);color:var(--warn)}
+.chip.info{background:var(--infobg);color:var(--accent)}
+code{font:13px var(--mono);background:var(--bg);border:1px solid var(--line);padding:1px 5px;border-radius:3px}
+ol.recs{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:10px}
+ol.recs li{color:var(--fg2)} ol.recs b{color:var(--fg)}
+.note{font-size:13px;color:var(--muted)}
+.compare{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.compare .panel{gap:6px}
+.compare b{font:500 22px/1 var(--mono)}
+@media (max-width:640px){.compare{grid-template-columns:1fr}}
+.cmp td,.cmp th{font-size:13px}
+.cmp td:not(:first-child),.cmp th:not(:first-child){text-align:center}
+.cmp .sel{background:color-mix(in srgb,var(--ok) 10%,transparent)}
+.cmp th.sel{color:var(--accent)}
+.cmp{min-width:640px}
+.src{font-size:13px;color:var(--muted)}
+.src a,.res a{color:var(--accent);font-weight:500}
+.res{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.res .panel{gap:6px}
+.res h3 a{text-decoration:none}
+.res h3 a:hover{text-decoration:underline}
+@media (max-width:640px){.res{grid-template-columns:1fr}}
+
+</style>
+<style>*,*::before,*::after{box-sizing:border-box}body{margin:0}</style>
+</head>
+<body>
+
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">UTP · Estudio de Empleo Sostenible · Red MetaRed</div>
+  <h1>Extracción de ofertas laborales sostenibles: resultados y calidad de datos</h1>
+  <p class="lead">Informe de avance. Periodo analizado: <b>1 al 22 de septiembre de 2026</b>. Fecha de extracción: 28 de septiembre de 2026.</p>
+</header>
+
+<section>
+  <h2>Resumen ejecutivo</h2>
+  <div class="kpis">
+    <div class="kpi"><b>688</b><span>ofertas válidas en el periodo</span></div>
+    <div class="kpi"><b>3</b><span>portales: LinkedIn, Bumeran, Computrabajo</span></div>
+    <div class="kpi"><b>424</b><span>clasificadas como sector sostenible</span></div>
+    <div class="kpi"><b>157</b><span>con término sostenible en el título</span></div>
+  </div>
+  <p>Se evaluaron tres herramientas de extracción y se seleccionó la opción C, un script en Python. La extracción cumple su objetivo: todas las ofertas tienen fecha exacta y descripción completa. Antes de usar los datos en el estudio hay que ajustar la clasificación por sector y la deduplicación.</p>
+</section>
+
+<section>
+  <h2>1. Selección de la herramienta</h2>
+  <p>Se probaron tres alternativas con las mismas palabras clave y el mismo periodo.</p>
+  <p class="src">Fuente: <a href="https://docs.google.com/spreadsheets/d/1ihU-CmHjM0dHuiRmgjkKjLvV1xWOPW5OiNMY0nEccRA/edit?usp=sharing" target="_blank" rel="noopener">Pruebas de comparación de herramientas</a></p>
+  <div class="panel scroll">
+    <table class="cmp">
+      <thead><tr><th>Criterio</th><th>A. Claude</th><th>B. Octoparse</th><th class="sel">C. Script Python <span class="chip info">Elegida</span></th></tr></thead>
+      <tbody>
+        <tr><td>Portales</td><td>LinkedIn, Hiring Room, Computrabajo, Bumeran</td><td>LinkedIn</td><td class="sel">LinkedIn, Computrabajo, Bumeran</td></tr>
+        <tr><td>Campos por oferta</td><td class="c">9</td><td class="c">7</td><td class="c sel">50</td></tr>
+        <tr><td>Resultados brutos</td><td class="c">64</td><td class="c">2.675</td><td class="c sel">2.353</td></tr>
+        <tr><td>Deduplicación</td><td>Manual</td><td>No tiene (1.854 duplicados)</td><td class="sel">Automática (1.047 eliminados)</td></tr>
+        <tr><td>Ofertas válidas en el periodo</td><td class="c">32 (50%)</td><td class="c">739 (40%)</td><td class="c sel"><b>688 (66%)</b></td></tr>
+        <tr><td>Fechas verificadas</td><td class="c">0</td><td class="c">48</td><td class="c sel"><b>688</b></td></tr>
+        <tr><td>Descripción completa</td><td>No</td><td>No</td><td class="sel">Sí (688 de 688)</td></tr>
+        <tr><td>Tiempo por portal</td><td class="c">6 min</td><td class="c">10 min</td><td class="c sel">10 min</td></tr>
+        <tr><td>Costo</td><td>Incluido en el plan de Claude (USD 20)</td><td class="c">USD 0</td><td class="c sel">USD 0</td></tr>
+        <tr><td>Limitación principal</td><td>No verifica fechas ni lee las ofertas</td><td>Tope de ~60 ofertas por búsqueda, sin descripción</td><td class="sel">Requiere mantenimiento si un portal cambia su estructura</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><b style="color:var(--fg)">Criterio de decisión:</b> C es la única opción que verifica la fecha de todas las ofertas y obtiene la descripción completa, sin costo adicional. La opción A no pudo acceder al detalle de las ofertas: Computrabajo lo bloqueó y Bumeran no carga sin JavaScript. La opción B solo cubre LinkedIn y no deduplica.</p>
+</section>
+
+<section>
+  <h2>2. Resultados de pruebas con la opción ganadora</h2>
+  <p class="src">Fuente: <a href="https://docs.google.com/spreadsheets/d/1AjmrKBUVJG4PxxbNAfCILR7BGggwk3h1TYKdM2wX-HM/edit?usp=sharing" target="_blank" rel="noopener">Resultados con scripts de Python</a> (688 ofertas, 59 campos)</p>
+  <h3>Volumen y precisión por portal</h3>
+  <p>LinkedIn aporta el 96% del volumen y concentra el ruido. Bumeran tiene 100% de precisión, pero su volumen es bajo (19 ofertas).</p>
+  <div class="panel">
+    <div class="legend"><span><i style="background:var(--ok)"></i>Relevante, con término en el título</span><span><i style="background:var(--ok);opacity:.45"></i>Relevante solo por la descripción</span><span><i style="background:var(--no)"></i>No relevante</span></div>
+    <div class="chart" id="c-portal"></div>
+  </div>
+
+  <h3>Rendimiento por palabra clave (LinkedIn)</h3>
+  <p>Las consultas de mayor volumen son la combinada, “climate change” y “ética”. “valor compartido” (1 de 12) y “territorios y comunidad” (7 de 26) tienen baja precisión. “Reporte de sostenibilidad” no se incluyó en las consultas.</p>
+  <div class="panel">
+    <div class="legend"><span><i style="background:var(--ok)"></i>Relevante</span><span><i style="background:var(--no)"></i>No relevante</span></div>
+    <div class="chart" id="c-q"></div>
+  </div>
+
+  <h3>Publicaciones por día</h3>
+  <p>El volumen cae los fines de semana y alcanza su máximo el 22 de septiembre (77 ofertas).</p>
+  <div class="panel">
+    <div class="legend"><span><i style="background:var(--ok)"></i>Lunes a viernes</span><span><i style="background:var(--no)"></i>Sábado y domingo</span></div>
+    <div class="chart" id="c-days"></div>
+  </div>
+</section>
+
+<section>
+  <h2>3. Calidad de los datos</h2>
+  <p>Porcentaje de ofertas con dato disponible, por portal. Cada portal expone campos distintos.</p>
+  <div class="panel scroll"><table id="t-fields"></table></div>
+  <div class="issues">
+    <div class="issue"><span class="chip crit">Alta</span><div><h3>Clasificación por sector sobreestimada</h3><p>El filtro detecta frases estándar de las empresas (“diversidad e inclusión”, “medio ambiente”). 128 de las 424 ofertas relevantes coinciden solo con estos términos genéricos.</p></div></div>
+    <div class="issue"><span class="chip crit">Alta</span><div><h3>Duplicados por ubicación</h3><p>28 ofertas se repiten con distinto ID por ciudad. Por ejemplo, una vacante de FullStack aparece 12 veces.</p></div></div>
+    <div class="issue"><span class="chip warn">Media</span><div><h3>Campos derivados poco fiables</h3><p><b>Candidatos:</b> 259 ofertas registran 25 cuando el portal indica “menos de 25”. <b>Salario:</b> se extraen montos sueltos, como bonos o tarifas por hora. <b>Modalidad:</b> 110 ofertas copian el filtro de búsqueda en lugar del dato real.</p></div></div>
+    <div class="issue"><span class="chip info">Baja</span><div><h3>Normalización pendiente</h3><p>Hay valores equivalentes con nombres distintos (“Full-time” y “Tiempo completo”). 19 ofertas no tienen país. Los campos “Fecha límite” y “URL de postulación” están vacíos en todas las ofertas.</p></div></div>
+  </div>
+</section>
+
+<section>
+  <h2>4. Próximos pasos</h2>
+  <ol class="recs">
+    <li><b>Reclasificar la relevancia en dos niveles:</b> alta, si el término aparece en el título o en las funciones; baja, si solo aparece en la descripción.</li>
+    <li><b>Agrupar duplicados</b> por empresa, título y descripción, y conservar la lista de ciudades.</li>
+    <li><b>Corregir campos derivados:</b> candidatos como rango y salario solo desde campos estructurados.</li>
+    <li><b>Ajustar las palabras clave:</b> reemplazar las de baja precisión e incluir “reporte de sostenibilidad”.</li>
+    <li><b>Revisar la cobertura</b> de Bumeran y Computrabajo (19 y 10 ofertas).</li>
+    <li><b>Validar manualmente una muestra</b> de 50 ofertas antes de publicar cifras.</li>
+  </ol>
+  <p class="note">La presencia de un término en el título es una verificación complementaria y no reemplaza la validación manual.</p>
+</section>
+<section>
+  <h2>Recursos</h2>
+  <div class="res">
+    <div class="panel"><span class="note">Hoja de cálculo · Google Sheets</span><h3><a href="https://docs.google.com/spreadsheets/d/1ihU-CmHjM0dHuiRmgjkKjLvV1xWOPW5OiNMY0nEccRA/edit?usp=sharing" target="_blank" rel="noopener">Pruebas de comparación de herramientas</a></h3><p>Pruebas de las opciones A (Claude), B (Octoparse) y C (script Python), con la tabla comparativa y las pruebas de capacidad en Computrabajo y Bumeran.</p></div>
+    <div class="panel"><span class="note">Hoja de cálculo · Google Sheets</span><h3><a href="https://docs.google.com/spreadsheets/d/1AjmrKBUVJG4PxxbNAfCILR7BGggwk3h1TYKdM2wX-HM/edit?usp=sharing" target="_blank" rel="noopener">Resultados con scripts de Python</a></h3><p>Base completa extraída con la opción C: 688 ofertas publicadas entre el 1 y el 22 de septiembre de 2026, con descripción y criterios.</p></div>
+  </div>
+</section>
+</div>
+
+<div class="tip" id="tip" hidden></div>
+
+<script>
+const D={"portal":[{"p":"LinkedIn","n":659,"si":396,"kwt":136},{"p":"Bumeran","n":19,"si":19,"kwt":19},{"p":"Computrabajo","n":10,"si":9,"kwt":2}],
+"queries":[{"q":"Consulta combinada (OR)","n":209,"si":156},{"q":"climate change","n":173,"si":126},{"q":"ética","n":129,"si":75},{"q":"liderazgo consciente","n":101,"si":75},{"q":"cambio climático","n":98,"si":50},{"q":"compliance","n":86,"si":67},{"q":"sostenibilidad","n":63,"si":54},{"q":"diversidad, equidad e inclusión","n":53,"si":36},{"q":"relaciones comunitarias","n":49,"si":35},{"q":"territorios y comunidad","n":26,"si":7},{"q":"DEI","n":21,"si":13},{"q":"conscious leadership","n":17,"si":5},{"q":"shared value","n":14,"si":8},{"q":"diversity, equity and inclusion","n":14,"si":12},{"q":"ecología intercultural","n":14,"si":12},{"q":"ethics","n":14,"si":14},{"q":"sustainability","n":13,"si":12},{"q":"community relations","n":12,"si":11},{"q":"valor compartido","n":12,"si":1}],
+"days":[[1,16],[2,11],[3,30],[4,28],[5,10],[6,14],[7,14],[8,42],[9,42],[10,46],[11,35],[12,16],[13,10],[14,15],[15,35],[16,49],[17,57],[18,55],[19,30],[20,9],[21,47],[22,77]],
+"fields":[{"f":"Modalidad","Bumeran":100,"Computrabajo":30,"LinkedIn":38},{"f":"Tipo contrato","Bumeran":0,"Computrabajo":100,"LinkedIn":2},{"f":"Salario","Bumeran":0,"Computrabajo":100,"LinkedIn":6},{"f":"Nivel experiencia","Bumeran":0,"Computrabajo":0,"LinkedIn":100},{"f":"Estudios / formación","Bumeran":89,"Computrabajo":100,"LinkedIn":81},{"f":"Conocimientos / herramientas","Bumeran":84,"Computrabajo":30,"LinkedIn":38},{"f":"Idiomas","Bumeran":47,"Computrabajo":10,"LinkedIn":25},{"f":"Funciones","Bumeran":0,"Computrabajo":0,"LinkedIn":55},{"f":"Beneficios","Bumeran":0,"Computrabajo":30,"LinkedIn":38},{"f":"Región","Bumeran":100,"Computrabajo":100,"LinkedIn":36},{"f":"Fecha límite","Bumeran":0,"Computrabajo":0,"LinkedIn":0},{"f":"URL postulación externa","Bumeran":0,"Computrabajo":0,"LinkedIn":0}]};
+const NS="http://www.w3.org/2000/svg",tip=document.getElementById('tip');
+const el=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p&&p.appendChild(e);return e};
+function hover(node,html){node.style.cursor='default';node.addEventListener('mousemove',e=>{tip.innerHTML=html;tip.hidden=false;tip.style.left=Math.min(e.clientX+12,innerWidth-270)+'px';tip.style.top=(e.clientY+12)+'px'});node.addEventListener('mouseleave',()=>tip.hidden=true)}
+function hbars(id,rows,labelW,W){ // rows:{label,segs:[{v,fill,op}],total,tip}
+  const rowH=26,H=rows.length*rowH+6,host=document.getElementById(id);
+  const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,role:'img'},host);
+  const max=Math.max(...rows.map(r=>r.total)),bw=W-labelW-60;
+  rows.forEach((r,i)=>{const y=i*rowH+4,g=el('g',{},svg);
+    el('rect',{x:0,y:y-2,width:W,height:rowH,fill:'transparent'},g);
+    const t=el('text',{x:labelW-10,y:y+13,'text-anchor':'end'},g);t.textContent=r.label;
+    let x=labelW;r.segs.forEach((s,j)=>{const w=s.v/max*bw;if(w>0){el('rect',{x:x,y:y+3,width:Math.max(w-(j<r.segs.length-1?2:0),1),height:14,rx:j===r.segs.length-1?3:0,fill:s.fill,'fill-opacity':s.op||1},g)}x+=w});
+    const n=el('text',{x:x+6,y:y+14,class:'num'},g);n.textContent=r.total;hover(g,r.tip)});
+}
+const ok='var(--ok)',no='var(--no)';
+function draw(){
+  ['c-portal','c-q','c-days'].forEach(i=>document.getElementById(i).innerHTML='');
+  const narrow=innerWidth<560;
+  hbars('c-portal',D.portal.map(p=>({label:p.p,total:p.n,segs:[{v:p.kwt,fill:ok},{v:p.si-p.kwt,fill:ok,op:.45},{v:p.n-p.si,fill:no}],tip:`<b>${p.p}</b><br>${p.n} ofertas · ${p.si} marcadas relevantes (${Math.round(p.si/p.n*100)}%)<br>${p.kwt} relevantes con término en el título`})),narrow?100:130,document.getElementById('c-portal').clientWidth);
+  hbars('c-q',D.queries.map(q=>({label:q.q,total:q.n,segs:[{v:q.si,fill:ok},{v:q.n-q.si,fill:no}],tip:`<b>${q.q}</b><br>${q.n} ofertas · ${q.si} relevantes (${Math.round(q.si/q.n*100)}%)`})),narrow?190:240,document.getElementById('c-q').clientWidth);
+  // columns
+  const host=document.getElementById('c-days'),W=host.clientWidth,H=240,L=30,B=24;const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,role:'img'},host);
+  const max=80,cw=(W-L)/D.days.length,sy=v=>H-B-(v/max)*(H-B-10);
+  [0,20,40,60,80].forEach(v=>{el('line',{x1:L,x2:W,y1:sy(v),y2:sy(v),class:'axis','stroke-dasharray':v?'2 3':''},svg);const t=el('text',{x:L-6,y:sy(v)+4,'text-anchor':'end'},svg);t.textContent=v});
+  const dn=['dom','lun','mar','mié','jue','vie','sáb'];
+  D.days.forEach(([d,v],i)=>{const wd=new Date(2026,8,d).getDay(),we=wd===0||wd===6,x=L+i*cw,g=el('g',{},svg);
+    el('rect',{x:x,y:0,width:cw,height:H,fill:'transparent'},g);
+    el('rect',{x:x+cw*.18,y:sy(v),width:cw*.64,height:H-B-sy(v),rx:3,fill:we?no:ok},g);
+    if(!narrow||i%3===0){const t=el('text',{x:x+cw/2,y:H-6,'text-anchor':'middle'},g);t.textContent=d}
+    if(d===22){const t=el('text',{x:x+cw/2,y:sy(v)-6,'text-anchor':'middle',class:'num'},g);t.textContent=v}
+    hover(g,`<b>${dn[wd]} ${d} sept.</b><br>${v} ofertas publicadas`)});
+}
+draw();addEventListener('resize',()=>{clearTimeout(window._r);window._r=setTimeout(draw,150)});
+// table
+const t=document.getElementById('t-fields'),P=['LinkedIn','Bumeran','Computrabajo'];
+t.innerHTML='<thead><tr><th>Campo</th>'+P.map(p=>`<th style="text-align:center">${p}</th>`).join('')+'</tr></thead><tbody>'+D.fields.map(f=>'<tr><td>'+f.f+'</td>'+P.map(p=>{const v=f[p];return `<td class="c"><span class="heat" style="background:color-mix(in srgb,var(--ok) ${Math.round(v*.55)}%,transparent)">${v}%</span></td>`}).join('')+'</tr>').join('')+'</tbody>';
+</script>
+
+</body>
+</html>
