@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mentoría en IA Aplicada · Propuesta económica · UTP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green-900:#1F3D2E;
+    --green-700:#2F6B4F;
+    --sage-600:#5E9479;
+    --sage-300:#BCD8C8;
+    --paper:#F7F9F7;
+    --card:#FFFFFF;
+    --line:#E0E8E3;
+    --ink:#26302B;
+    --ink-soft:#64706A;
+    --amber:#D98E36;
+    --green-bg:#EAF3EE;
+    --mint-bg:#EEF5F1;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Lato',sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{font-family:'Poppins',sans-serif; margin:0; color:var(--green-900);}
+  .layout{display:flex; max-width:1280px; margin:0 auto;}
+  nav.toc{
+    width:230px; flex-shrink:0; position:sticky; top:0; height:100vh;
+    padding:40px 18px 40px 32px; display:flex; flex-direction:column; gap:2px;
+  }
+  nav.toc a{
+    color:var(--ink-soft); text-decoration:none; font-size:13.5px; padding:8px 10px;
+    border-radius:8px; border-left:2px solid transparent; transition:all .15s ease;
+  }
+  nav.toc a:hover{ color:var(--green-700); background:rgba(94,148,121,0.08); }
+  nav.toc a.active{ color:var(--green-700); font-weight:700; border-left:2px solid var(--green-700); background:rgba(47,107,79,0.07); }
+  main{flex:1; min-width:0; padding:0 48px 80px;}
+  section{padding-top:64px; scroll-margin-top:24px;}
+
+  /* HERO */
+  .hero{
+    padding:72px 0 40px; border-bottom:1px solid var(--line);
+  }
+  .hero .tag{
+    display:inline-block; font-size:12.5px; color:var(--sage-600); font-weight:700;
+    background:var(--mint-bg); padding:5px 12px; border-radius:20px; margin-bottom:18px;
+  }
+  .hero h1{font-size:clamp(28px,4.2vw,40px); font-weight:800; line-height:1.15; max-width:900px;}
+  .hero p.lead{font-size:16.5px; color:var(--ink-soft); max-width:none; margin-top:14px;}
+  .hero .meta{display:flex; gap:32px; margin-top:32px; flex-wrap:wrap;}
+  .hero .meta div{font-size:13px; color:var(--ink-soft);}
+  .hero .meta b{display:block; color:var(--ink); font-size:14.5px; font-family:'Poppins',sans-serif; font-weight:600;}
+
+  h2.section-title{font-size:26px; font-weight:700; margin-bottom:6px;}
+  p.section-sub{color:var(--ink-soft); font-size:14.5px; margin:0 0 28px;}
+  h3.sub{font-size:16px; font-weight:600; color:var(--sage-600); margin:28px 0 10px;}
+
+  p{margin:0 0 14px; max-width:none;}
+
+  /* TABLE */
+  table{width:100%; border-collapse:collapse; margin:18px 0; font-size:14px;}
+  th{
+    background:var(--mint-bg); color:var(--green-700); font-family:'Poppins',sans-serif;
+    font-weight:600; font-size:13px; text-align:left; padding:12px 14px; border:1px solid var(--line);
+  }
+  td{padding:12px 14px; border:1px solid var(--line); vertical-align:top;}
+  td.num{text-align:right; white-space:nowrap; font-family:'Poppins',sans-serif; font-variant-numeric:tabular-nums;}
+  tr.total td{font-weight:700; background:var(--green-bg); color:var(--green-900);}
+  .pill{display:inline-block; font-size:11.5px; font-weight:700; padding:2px 9px; border-radius:20px; white-space:nowrap;}
+  .pill.free{background:var(--green-bg); color:var(--green-700);}
+  .pill.paid{background:#FBF3E6; color:#9A6A1E;}
+
+  /* CARDS */
+  .cards2{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:20px;}
+  .cards3{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:20px;}
+  @media(max-width:760px){.cards2,.cards3{grid-template-columns:1fr;}}
+  .opt-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px;}
+  .opt-card .kicker{font-size:12px; color:var(--sage-600); font-weight:700; letter-spacing:.02em;}
+  .opt-card h4{font-size:19px; margin-top:6px;}
+  .opt-card .price{font-family:'Poppins',sans-serif; font-size:32px; font-weight:800; color:var(--green-700); margin:14px 0 2px;}
+  .opt-card .price small{font-size:13px; color:var(--ink-soft); font-weight:500;}
+  .opt-card p{font-size:14px; color:var(--ink-soft); margin:10px 0 0;}
+  .opt-card ul{margin:14px 0 0; padding-left:18px; font-size:14px;}
+  .opt-card li{margin-bottom:6px;}
+
+  .list-2col{display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:16px;}
+  @media(max-width:760px){.list-2col{grid-template-columns:1fr;}}
+  .list-2col h4{font-size:14px; color:var(--sage-600); margin-bottom:8px;}
+  .list-2col ul{margin:0; padding-left:18px; font-size:14px;}
+  .list-2col li{margin-bottom:7px;}
+
+  /* TIMELINE */
+  .timeline{display:flex; flex-direction:column; gap:0; margin-top:24px; border-left:2px solid var(--line); padding-left:26px;}
+  .tl-item{position:relative; padding-bottom:26px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:''; position:absolute; left:-33.5px; top:2px; width:14px; height:14px; border-radius:50%;
+    background:var(--card); border:3px solid var(--sage-600);
+  }
+  .tl-item .phase{font-family:'Poppins',sans-serif; font-weight:600; font-size:15px;}
+  .tl-item .dur{font-size:13px; color:var(--ink-soft);}
+  .tl-item .what{font-size:14px; margin-top:4px;}
+
+  .steps{counter-reset:step; margin-top:20px; display:flex; flex-direction:column; gap:0;}
+  .step{display:flex; gap:16px; padding:14px 0; border-bottom:1px solid var(--line);}
+  .step:last-child{border-bottom:none;}
+  .step .num{
+    counter-increment:step; font-family:'Poppins',sans-serif; font-weight:700; color:var(--green-700);
+    background:var(--mint-bg); width:30px; height:30px; border-radius:50%; display:flex; align-items:center;
+    justify-content:center; flex-shrink:0; font-size:13.5px;
+  }
+  .step .num::before{content:counter(step);}
+  .step p{margin:0; font-size:14.5px; padding-top:4px;}
+
+  .note{
+    background:var(--green-bg); border-left:3px solid var(--sage-600); padding:12px 16px;
+    border-radius:8px; font-size:13.5px; color:var(--ink-soft); margin-top:14px;
+  }
+  .note.amber{background:#FBF3E6; border-left-color:var(--amber);}
+
+  footer{padding:40px 0 20px; color:var(--ink-soft); font-size:13px; border-top:1px solid var(--line); margin-top:40px;}
+
+  @media(max-width:900px){
+    nav.toc{display:none;}
+    main{padding:0 20px 60px;}
+    .hero h1{font-size:30px;}
+  }
+  @media(max-width:600px){
+    .hero{padding:44px 0 28px;}
+    table{display:block; overflow-x:auto; white-space:nowrap; -webkit-overflow-scrolling:touch;}
+    .opt-card{padding:20px;}
+    .opt-card .price{font-size:26px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+  <nav class="toc" id="toc">
+    <a href="#resumen">Resumen ejecutivo</a>
+    <a href="#enfoque">Enfoque</a>
+    <a href="#estructura">Estructura del programa</a>
+    <a href="#horas">Distribución de horas</a>
+    <a href="#herramientas">Herramientas y costos</a>
+    <a href="#alcance">Alcance y entregables</a>
+    <a href="#supuestos">Supuestos y exclusiones</a>
+    <a href="#inversion">Inversión</a>
+    <a href="#cronograma">Cronograma</a>
+    <a href="#pasos">Próximos pasos</a>
+  </nav>
+
+  <main>
+    <div class="hero">
+      <span class="tag">Propuesta económica preliminar · Mentoría en Inteligencia Artificial</span>
+      <h1>Mentoría en IA Aplicada: de la idea al prototipo</h1>
+      <p class="lead">Programa de acompañamiento personalizado para que cinco participantes diseñen y desarrollen un proyecto real con herramientas de inteligencia artificial generativa, con criterio, uso responsable y un resultado presentable al cierre.</p>
+      <div class="meta">
+        <div><b>Inés Evaristo</b>Cliente / contacto</div>
+        <div><b>UTP · Sostenibilidad y RSU</b>Institución / equipo</div>
+        <div><b>5 participantes</b>Grupo</div>
+        <div><b>≈ 8 semanas</b>Duración referencial</div>
+      </div>
+    </div>
+
+    <section id="resumen">
+      <h2 class="section-title">1. Resumen ejecutivo</h2>
+      <p>Programa de mentoría de aproximadamente ocho semanas para un grupo de cinco participantes, orientado a que cada uno lleve un proyecto propio desde la idea hasta un prototipo funcional apoyado en inteligencia artificial generativa. Combina una sesión general de arranque, mentorías individuales de una hora adaptadas al nivel y al proyecto de cada participante, una clínica grupal intermedia y una sesión de cierre para presentar los proyectos finales.</p>
+      <p>La propuesta es preliminar: sirve para proyectar el gasto de los próximos dos meses y se ajustará una vez que se confirmen el número de semanas, la distribución de horas y las herramientas a utilizar.</p>
+    </section>
+
+    <section id="enfoque">
+      <h2 class="section-title">2. Enfoque de la mentoría</h2>
+      <p class="section-sub">Menos clase teórica, más trabajo sobre el proyecto de cada participante.</p>
+      <div class="list-2col">
+        <div>
+          <h4>Cómo trabajamos</h4>
+          <ul>
+            <li><b>Aprender haciendo:</b> cada sesión avanza el proyecto real del participante, no un ejercicio genérico</li>
+            <li><b>Personalizado:</b> el contenido de cada mentoría se adapta al nivel y al objetivo de cada persona</li>
+            <li><b>Hitos claros:</b> cada etapa termina con un avance concreto y verificable</li>
+            <li><b>Cierre con demo:</b> los proyectos se presentan ante el equipo de UTP al final del programa</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Qué se lleva cada participante</h4>
+          <ul>
+            <li>Criterio para elegir la herramienta de IA adecuada según el problema y el presupuesto</li>
+            <li>Técnicas de <i>prompting</i> y flujos de trabajo reutilizables</li>
+            <li>Buenas prácticas de uso responsable: datos personales, verificación de resultados y sesgos</li>
+            <li>Un prototipo o entregable funcional de su proyecto, documentado</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="estructura">
+      <h2 class="section-title">3. Estructura del programa</h2>
+
+      <h3 class="sub">3.1 Rutas según perfil</h3>
+      <p>En la sesión de arranque y la primera mentoría se identifica el punto de partida de cada participante. Las mentorías individuales siguen la ruta que mejor le corresponda, de modo que nadie se quede atrás ni repita lo que ya domina.</p>
+      <div class="cards3">
+        <div class="opt-card">
+          <div class="kicker">RUTA 1 · INICIAL</div>
+          <h4>Explorador</h4>
+          <p>Primer contacto con IA generativa. Foco en asistentes conversacionales, <i>prompting</i> y productividad aplicada al proyecto.</p>
+        </div>
+        <div class="opt-card">
+          <div class="kicker">RUTA 2 · INTERMEDIA</div>
+          <h4>Constructor</h4>
+          <p>Ya usa IA en su día a día. Foco en asistentes personalizados, análisis de documentos y datos, y prototipos sin código.</p>
+        </div>
+        <div class="opt-card">
+          <div class="kicker">RUTA 3 · AVANZADA</div>
+          <h4>Automatizador</h4>
+          <p>Busca integrar IA en procesos. Foco en automatizaciones, conexión entre herramientas y prototipos más completos.</p>
+        </div>
+      </div>
+
+      <h3 class="sub">3.2 Etapas</h3>
+      <table>
+        <tr><th>Etapa</th><th>Objetivo</th><th>Resultado esperado</th></tr>
+        <tr><td><b>1. Arranque y diagnóstico</b></td><td>Explicar conceptos, metodología y mapa de herramientas; identificar el perfil y la idea de cada participante</td><td>Ruta asignada y proyecto preliminar por participante</td></tr>
+        <tr><td><b>2. Diseño del proyecto</b></td><td>Aterrizar el caso de uso, el alcance y las herramientas a usar</td><td>Ficha de proyecto y estimación de herramientas</td></tr>
+        <tr><td><b>3. Construcción guiada</b></td><td>Desarrollar el proyecto con acompañamiento uno a uno</td><td>Primera versión funcional del prototipo</td></tr>
+        <tr><td><b>4. Validación y ajuste</b></td><td>Probar, recibir retroalimentación cruzada y mejorar</td><td>Prototipo ajustado y documentado</td></tr>
+        <tr><td><b>5. Cierre</b></td><td>Presentar los proyectos finales ante el equipo de UTP</td><td>Demo de cada proyecto y recomendaciones de continuidad</td></tr>
+      </table>
+    </section>
+
+    <section id="horas">
+      <h2 class="section-title">4. Distribución estimada de horas</h2>
+      <p class="section-sub">Basada en un modelo de seis mentorías individuales de una hora por participante, complementadas con sesiones grupales puntuales.</p>
+      <table>
+        <tr><th>Componente</th><th>Modalidad</th><th>Detalle</th><th style="text-align:right;">Horas</th></tr>
+        <tr><td>Asesoría general de arranque</td><td>Grupal</td><td>Conceptos de IA generativa, metodología, uso responsable y mapa de herramientas</td><td class="num">2 h</td></tr>
+        <tr><td>Mentorías personalizadas</td><td>Individual</td><td>6 sesiones de 1 h por participante × 5 participantes</td><td class="num">30 h</td></tr>
+        <tr><td>Clínica grupal intermedia</td><td>Grupal</td><td>Revisión cruzada de avances y solución de bloqueos comunes</td><td class="num">2 h</td></tr>
+        <tr><td>Sesión de cierre</td><td>Grupal</td><td>Presentación de proyectos finales y retroalimentación</td><td class="num">2 h</td></tr>
+        <tr><td>Acompañamiento asíncrono</td><td>Remoto</td><td>Revisión de avances entre sesiones, consultas puntuales, materiales y estimación de herramientas</td><td class="num">6 h</td></tr>
+        <tr class="total"><td colspan="3">Total estimado</td><td class="num">≈ 42 h</td></tr>
+      </table>
+      <div class="note">Equivale a aproximadamente <b>5–6 horas semanales</b> durante ocho semanas. La distribución por semana y el número total de semanas se confirman con UTP antes de iniciar; si cambian, las horas se reajustan manteniendo la misma lógica.</div>
+    </section>
+
+    <section id="herramientas">
+      <h2 class="section-title">5. Herramientas previstas y costos aproximados</h2>
+      <p class="section-sub">El programa puede desarrollarse íntegramente con versiones gratuitas y con la cuenta Microsoft 365 de UTP. Las licencias de pago son opcionales y dependen del tipo de proyecto.</p>
+      <table>
+        <tr><th>Uso</th><th>Herramienta</th><th>Versión gratuita</th><th>Versión de pago (por persona)</th></tr>
+        <tr><td>Asistente de IA conversacional</td><td>ChatGPT, Claude o Gemini</td><td><span class="pill free">Sí</span> con límites de uso</td><td>≈ US$20 / mes cada uno</td></tr>
+        <tr><td>Asistente dentro de Microsoft 365</td><td>Microsoft 365 Copilot Chat</td><td><span class="pill free">Incluido</span> con la cuenta institucional</td><td>Licencia completa M365 Copilot (educación): ≈ US$18 / mes, a validar con TI</td></tr>
+        <tr><td>Investigación sobre documentos propios</td><td>NotebookLM</td><td><span class="pill free">Sí</span></td><td>Incluido en Google AI Pro (≈ US$20 / mes)</td></tr>
+        <tr><td>Presentaciones y contenido visual</td><td>Canva, Gamma</td><td><span class="pill free">Sí</span> con límites</td><td>≈ US$10–15 / mes</td></tr>
+        <tr><td>Automatización de procesos</td><td>Power Automate, n8n</td><td><span class="pill free">Sí</span> Power Automate estándar en M365; n8n autoalojado</td><td>Conectores premium o n8n en la nube: ≈ US$20–25 / mes</td></tr>
+        <tr><td>Prototipos de aplicaciones sin código</td><td>Lovable, Bolt u otras similares</td><td><span class="pill free">Sí</span> con créditos limitados</td><td>≈ US$25 / mes</td></tr>
+      </table>
+
+      <h3 class="sub">5.1 Escenarios de gasto en herramientas (2 meses, 5 personas)</h3>
+      <div class="cards3">
+        <div class="opt-card">
+          <div class="kicker">ESCENARIO A · BÁSICO</div>
+          <div class="price">US$0</div>
+          <p>Solo versiones gratuitas y Microsoft 365 de UTP. Suficiente para las rutas Explorador y Constructor.</p>
+        </div>
+        <div class="opt-card">
+          <div class="kicker">ESCENARIO B · RECOMENDADO</div>
+          <div class="price">≈ US$200</div>
+          <p>Un asistente de IA de pago por participante (≈ US$20 × 5 personas × 2 meses).</p>
+        </div>
+        <div class="opt-card">
+          <div class="kicker">ESCENARIO C · AVANZADO</div>
+          <div class="price">≈ US$450</div>
+          <p>Asistente de pago más una herramienta de prototipado o automatización (≈ US$45 × 5 × 2).</p>
+        </div>
+      </div>
+      <div class="note amber">Precios de lista referenciales en dólares a octubre de 2026, sin impuestos; pueden variar según el proveedor, el tipo de cambio y los convenios institucionales de UTP. Las licencias no están incluidas en los honorarios de mentoría y las contrata directamente UTP o cada participante. La herramienta definitiva por proyecto se recomienda en la etapa 2.</div>
+    </section>
+
+    <section id="alcance">
+      <h2 class="section-title">6. Alcance y entregables</h2>
+      <ul>
+        <li>Sesión general de arranque (2 h) con material de apoyo</li>
+        <li>Diagnóstico de perfil y ruta personalizada para cada participante</li>
+        <li>Seis mentorías individuales de 1 h por participante (30 h en total)</li>
+        <li>Clínica grupal intermedia de revisión de avances</li>
+        <li>Estimación de herramientas y costos recomendada por proyecto</li>
+        <li>Acompañamiento asíncrono entre sesiones</li>
+        <li>Sesión de cierre con presentación de los proyectos finales</li>
+        <li>Informe breve de cierre con el avance de cada proyecto y recomendaciones de continuidad</li>
+      </ul>
+      <div class="note">El alcance se considera completo al realizarse la sesión de cierre y entregarse el informe final, con la confirmación de Inés Evaristo como contacto de UTP.</div>
+    </section>
+
+    <section id="supuestos">
+      <h2 class="section-title">7. Supuestos y exclusiones</h2>
+      <div class="list-2col">
+        <div>
+          <h4>Supuestos</h4>
+          <ul>
+            <li>Grupo de 5 participantes, cada uno con un proyecto propio o un proyecto común dividido en partes</li>
+            <li>Sesiones virtuales por Microsoft Teams u otra plataforma acordada</li>
+            <li>Duración referencial de 8 semanas, a confirmar con UTP</li>
+            <li>Los participantes disponen de computadora, conexión y cuenta institucional de Microsoft 365</li>
+            <li>Las sesiones se agendan con anticipación; una sesión no asistida sin aviso previo de 24 h se considera realizada</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Exclusiones</h4>
+          <ul>
+            <li>Licencias, suscripciones o créditos de herramientas de IA (ver sección 5)</li>
+            <li>Desarrollo del proyecto por parte del mentor: el mentor guía, el participante construye</li>
+            <li>Puesta en producción en sistemas institucionales de UTP</li>
+            <li>Sesiones presenciales y sus traslados, salvo acuerdo previo</li>
+            <li>Horas adicionales a las estimadas, que se cotizan por separado</li>
+          </ul>
+        </div>
+      </div>
+      <div class="note amber">El presupuesto es preliminar y puede ajustarse según el alcance definitivo: número de semanas, horas por participante, sesiones grupales adicionales o presencialidad.</div>
+    </section>
+
+    <section id="inversion">
+      <h2 class="section-title">8. Inversión</h2>
+      <div class="cards2">
+        <div class="opt-card">
+          <div class="kicker">MENTORÍA · 5 PARTICIPANTES</div>
+          <div class="price">S/ 7,500 <small>sin IGV</small></div>
+          <div style="font-size:13px; color:var(--ink-soft); margin-top:2px; font-family:'Poppins',sans-serif; font-variant-numeric:tabular-nums;">S/ 1,500 por participante</div>
+        </div>
+      </div>
+      <table style="max-width:560px;">
+        <tr><th>Concepto</th><th style="text-align:right;">Monto</th></tr>
+        <tr><td>Costo por participante</td><td class="num">S/ 1,500.00</td></tr>
+        <tr><td>Participantes</td><td class="num">× 5</td></tr>
+        <tr><td>Subtotal</td><td class="num">S/ 7,500.00</td></tr>
+        <tr><td>IGV (18%)</td><td class="num">S/ 1,350.00</td></tr>
+        <tr class="total"><td>Total</td><td class="num">S/ 8,850.00</td></tr>
+      </table>
+      <div class="note amber">Monto preliminar en soles, más IGV, por el programa de mentoría descrito (≈ 42 h). No incluye licencias de herramientas, cuyo gasto estimado se detalla aparte en la sección 5. Monto negociable y sujeto a la confirmación del alcance final.</div>
+      <button data-filename="cotizacion-mentoria-ia-utp.pdf" onclick="downloadQuotePDF(this)" style="margin-top:18px; background:var(--green-700); color:#fff; border:none; border-radius:10px; padding:12px 20px; font-family:'Poppins',sans-serif; font-weight:600; font-size:14px; cursor:pointer;">📄 Descargar resumen de cotización (PDF)</button>
+    </section>
+
+    <section id="cronograma">
+      <h2 class="section-title">9. Cronograma</h2>
+      <div class="timeline">
+        <div class="tl-item"><div class="phase">Arranque y diagnóstico</div><div class="dur">Semana 1</div><div class="what">Sesión general de 2 h y primera mentoría individual</div></div>
+        <div class="tl-item"><div class="phase">Diseño del proyecto</div><div class="dur">Semanas 2–3</div><div class="what">Mentorías 2 y 3: caso de uso, alcance y herramientas</div></div>
+        <div class="tl-item"><div class="phase">Construcción guiada</div><div class="dur">Semanas 4–6</div><div class="what">Mentorías 4 y 5, y clínica grupal intermedia</div></div>
+        <div class="tl-item"><div class="phase">Validación y ajuste</div><div class="dur">Semana 7</div><div class="what">Mentoría 6: pruebas, mejoras y preparación de la demo</div></div>
+        <div class="tl-item"><div class="phase">Cierre y presentación de proyectos</div><div class="dur">Semana 8</div><div class="what">Sesión de cierre e informe final</div></div>
+      </div>
+      <div class="cards2" style="margin-top:24px;">
+        <div class="opt-card">
+          <div class="kicker">DURACIÓN TOTAL</div>
+          <div class="price">≈ 8 <small>semanas</small></div>
+        </div>
+      </div>
+      <div class="note">Cronograma referencial; el número de semanas y el calendario de sesiones se confirman con UTP y pueden ajustarse a la disponibilidad de los participantes.</div>
+    </section>
+
+    <section id="pasos">
+      <h2 class="section-title">10. Próximos pasos</h2>
+      <div class="steps">
+        <div class="step"><div class="num"></div><p>Confirmación del alcance: número de semanas, distribución de horas y modalidad</p></div>
+        <div class="step"><div class="num"></div><p>Confirmación de la lista de participantes y de sus proyectos o ideas iniciales</p></div>
+        <div class="step"><div class="num"></div><p>Definición del escenario de herramientas (sección 5) y validación con TI de UTP</p></div>
+        <div class="step"><div class="num"></div><p>Aprobación del presupuesto definitivo</p></div>
+        <div class="step"><div class="num"></div><p>Calendarización de sesiones e inicio del programa</p></div>
+      </div>
+    </section>
+
+    <footer>Mentoría en IA Aplicada. Propuesta económica preliminar preparada para la Universidad Tecnológica del Perú.</footer>
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+<script src="../../scripts/quote-pdf.js"></script>
+<script>
+/* ---------- SCROLLSPY ---------- */
+const links = document.querySelectorAll('nav.toc a');
+const sections = [...links].map(l => document.querySelector(l.getAttribute('href')));
+window.addEventListener('scroll', ()=>{
+  let idx = 0;
+  sections.forEach((s,i)=>{ if(s && window.scrollY >= s.offsetTop - 100) idx = i; });
+  links.forEach(l=>l.classList.remove('active'));
+  links[idx].classList.add('active');
+});
+</script>
+</body>
+</html>
