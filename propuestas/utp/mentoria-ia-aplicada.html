@@ -202,6 +202,9 @@
     align-items:center; justify-content:center; padding:20px;
   }
   .zoom.open{display:flex;}
+  /* con la ampliación abierta, la página de fondo no se desplaza */
+  html.zoom-lock, html.zoom-lock body{overflow:hidden;}
+  .zoom, .zoom-box{overscroll-behavior:contain;}
   .zoom-box{
     width:min(560px, 100%); max-height:88vh; overflow:auto; border-radius:20px; color:#fff;
     background:var(--c-dark); border:8px solid var(--c-dark); box-shadow:0 20px 50px rgba(0,0,0,0.4);
@@ -718,9 +721,13 @@ function openZoom(card){
     '<div class="body">' + card.querySelector('.back .body').innerHTML + '</div>';
   zoomBox.querySelector('button').addEventListener('click', closeZoom);
   zoom.classList.add('open');
+  document.documentElement.classList.add('zoom-lock');
   zoomBox.querySelector('button').focus();
 }
-function closeZoom(){ zoom.classList.remove('open'); }
+function closeZoom(){
+  zoom.classList.remove('open');
+  document.documentElement.classList.remove('zoom-lock');
+}
 zoom.addEventListener('click', (e)=>{ if(e.target === zoom) closeZoom(); });
 document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeZoom(); });
 
