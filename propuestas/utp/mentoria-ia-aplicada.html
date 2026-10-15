@@ -188,6 +188,38 @@
     .cap-inner{transition:none;}
   }
 
+  /* NIVELES DE USO: escalera de menor a mayor complejidad */
+  .levels{display:flex; flex-direction:column; gap:12px; margin-top:24px;}
+  .lvl{
+    --tone:color-mix(in srgb, var(--green-700) calc(28% + var(--n) * 11%), #CFE5D8);
+    display:grid; grid-template-columns:76px 1fr 120px; gap:18px; align-items:center;
+    background:var(--card); border:1px solid var(--line); border-left:6px solid var(--tone);
+    border-radius:14px; padding:16px 18px;
+    margin-left:calc((var(--n) - 1) * 18px);
+  }
+  .lvl .badge{
+    background:var(--tone); color:#fff; border-radius:12px; height:64px; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; font-family:'Poppins',sans-serif; font-weight:800; font-size:24px; line-height:1;
+  }
+  .lvl .badge small{font-size:9.5px; font-weight:700; letter-spacing:.08em; margin-bottom:4px; opacity:.9;}
+  .lvl .top{display:flex; flex-wrap:wrap; align-items:center; gap:8px 10px;}
+  .lvl h4{font-size:16.5px; font-weight:700;}
+  .lvl .term{font-size:11px; font-weight:700; color:var(--green-700); background:var(--mint-bg); padding:2px 9px; border-radius:20px; font-family:'Poppins',sans-serif;}
+  .lvl p{margin:6px 0 0; font-size:14px;}
+  .lvl p.eg{font-size:13px; color:var(--ink-soft);}
+  .lvl .meter{display:flex; gap:4px;}
+  .lvl .meter i{flex:1; height:8px; border-radius:4px; background:var(--line);}
+  .lvl[style*="--n:1"] .meter i:nth-child(-n+1),
+  .lvl[style*="--n:2"] .meter i:nth-child(-n+2),
+  .lvl[style*="--n:3"] .meter i:nth-child(-n+3),
+  .lvl[style*="--n:4"] .meter i:nth-child(-n+4),
+  .lvl[style*="--n:5"] .meter i:nth-child(-n+5),
+  .lvl[style*="--n:6"] .meter i{background:var(--tone);}
+  @media(max-width:900px){
+    .lvl{margin-left:0; grid-template-columns:64px 1fr;}
+    .lvl .meter{grid-column:2;}
+  }
+
   footer{padding:40px 0 20px; color:var(--ink-soft); font-size:13px; border-top:1px solid var(--line); margin-top:40px;}
 
   @media(max-width:900px){
@@ -210,6 +242,7 @@
     <a href="#resumen">Resumen ejecutivo</a>
     <a href="#enfoque">Enfoque</a>
     <a href="#capacidades">Capacidades de la IA</a>
+    <a href="#niveles">Niveles de uso</a>
     <a href="#estructura">Estructura del programa</a>
     <a href="#horas">Distribución de horas</a>
     <a href="#herramientas">Herramientas y costo</a>
@@ -423,30 +456,92 @@
       <div class="note">En el mapeo de tareas, cada tarea operativa se asocia a una o más de estas capacidades. Por ejemplo, el correo personalizado a cada gerente combina <b>Estructurar</b> (ordenar los datos en Excel) y <b>Expandir</b> (redactar cada correo).</div>
     </section>
 
-    <section id="estructura">
-      <h2 class="section-title">4. Estructura del programa</h2>
+    <section id="niveles">
+      <h2 class="section-title">4. Niveles de uso de la IA generativa hoy</h2>
+      <p class="section-sub">La IA generativa ya no es solo un chat. Estos son los usos más comunes hoy, ordenados de menor a mayor complejidad; cada nivel suma sobre el anterior.</p>
+      <div class="levels">
+        <div class="lvl" style="--n:1;">
+          <div class="badge"><small>NIVEL</small>1</div>
+          <div class="txt">
+            <div class="top"><h4>Chat conversacional</h4><span class="term">Prompting</span></div>
+            <p>Conversar con la IA generativa para preguntar, redactar, resumir o traducir. Cada conversación empieza desde cero.</p>
+            <p class="eg"><b>Ejemplo:</b> “Redacta un correo para confirmar la reunión del viernes con los coordinadores de campus.”</p>
+          </div>
+          <div class="meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="lvl" style="--n:2;">
+          <div class="badge"><small>NIVEL</small>2</div>
+          <div class="txt">
+            <div class="top"><h4>Proyectos con contexto</h4><span class="term">Asistentes personalizados</span></div>
+            <p>Espacios de trabajo con instrucciones y archivos fijos (manuales, plantillas, reglamentos) que la IA generativa tiene presentes en cada conversación, sin repetirlos.</p>
+            <p class="eg"><b>Ejemplo:</b> un proyecto “Voluntariado RSU” con el reglamento, el tono institucional y las plantillas de correo.</p>
+          </div>
+          <div class="meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="lvl" style="--n:3;">
+          <div class="badge"><small>NIVEL</small>3</div>
+          <div class="txt">
+            <div class="top"><h4>Creación multimodal</h4><span class="term">Multimodal</span></div>
+            <p>Generar y entender mucho más que texto: imágenes, audio, voz, video, presentaciones y hojas de cálculo.</p>
+            <p class="eg"><b>Ejemplo:</b> crear la pieza gráfica de una convocatoria, o transcribir y resumir el audio de una reunión.</p>
+          </div>
+          <div class="meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="lvl" style="--n:4;">
+          <div class="badge"><small>NIVEL</small>4</div>
+          <div class="txt">
+            <div class="top"><h4>Tareas programadas y automatizaciones</h4><span class="term">Automatización</span></div>
+            <p>La IA generativa ejecuta una tarea sola, en un horario fijo o cuando ocurre algo, conectada al correo, al calendario o a los archivos.</p>
+            <p class="eg"><b>Ejemplo:</b> cada lunes a las 8:00, un resumen de los correos pendientes de los campus con lo que requiere respuesta.</p>
+          </div>
+          <div class="meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="lvl" style="--n:5;">
+          <div class="badge"><small>NIVEL</small>5</div>
+          <div class="txt">
+            <div class="top"><h4>Agentes de IA</h4><span class="term">IA agéntica</span></div>
+            <p>La IA generativa recibe un objetivo y lo cumple en varios pasos por su cuenta: busca, navega, usa herramientas, revisa su trabajo y entrega el resultado.</p>
+            <p class="eg"><b>Ejemplo:</b> “Revisa las inscripciones de esta semana, detecta datos incompletos y prepara los correos de seguimiento.”</p>
+          </div>
+          <div class="meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="lvl" style="--n:6;">
+          <div class="badge"><small>NIVEL</small>6</div>
+          <div class="txt">
+            <div class="top"><h4>RAG avanzado y conocimiento conectado</h4><span class="term">Investigación profunda</span></div>
+            <p>La IA generativa consulta, cruza y cita muchas fuentes a la vez (documentos, bases de datos y sistemas de la institución, o la web) y responde con evidencia verificable.</p>
+            <p class="eg"><b>Ejemplo:</b> un asistente que responde dudas de voluntarios con base en todos los reglamentos y registros de UTP, citando la fuente de cada respuesta.</p>
+          </div>
+          <div class="meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+      <div class="note">Cada ruta del programa avanza hasta un nivel distinto: <b>Explorador</b> trabaja los niveles 1 y 2, <b>Constructor</b> los niveles 3 y 4, y <b>Automatizador</b> llega hasta el 5. El nivel 6 se presenta como visión de hacia dónde puede crecer el uso de la IA generativa en el equipo.</div>
+    </section>
 
-      <h3 class="sub">4.1 Rutas según perfil</h3>
+    <section id="estructura">
+      <h2 class="section-title">5. Estructura del programa</h2>
+
+      <h3 class="sub">5.1 Rutas según perfil</h3>
       <p>En la sesión de arranque y la primera mentoría se identifica el punto de partida de cada participante. Las mentorías individuales siguen la ruta que mejor le corresponda, de modo que nadie se quede atrás ni repita lo que ya domina.</p>
       <div class="cards3">
         <div class="opt-card">
-          <div class="kicker">RUTA 1 · INICIAL</div>
+          <div class="kicker">RUTA 1 · INICIAL · NIVELES 1–2</div>
           <h4>Explorador</h4>
-          <p>Primer contacto con IA generativa. Foco en usar la IA generativa para redactar, resumir y organizar información de su trabajo.</p>
+          <p>Primer contacto con IA generativa. Foco en el chat para redactar, resumir y organizar información, y en crear proyectos con el contexto de su trabajo.</p>
         </div>
         <div class="opt-card">
-          <div class="kicker">RUTA 2 · INTERMEDIA</div>
+          <div class="kicker">RUTA 2 · INTERMEDIA · NIVELES 3–4</div>
           <h4>Constructor</h4>
-          <p>Ya usa IA en su día a día. Foco en combinar la IA con Excel y documentos: fórmulas, limpieza de datos y plantillas reutilizables.</p>
+          <p>Ya usa IA en su día a día. Foco en creación multimodal, en combinar la IA con Excel y documentos, y en programar tareas que se ejecuten solas.</p>
         </div>
         <div class="opt-card">
-          <div class="kicker">RUTA 3 · AVANZADA</div>
+          <div class="kicker">RUTA 3 · AVANZADA · HASTA NIVEL 5</div>
           <h4>Automatizador</h4>
-          <p>Busca resolver tareas repetitivas de punta a punta. Foco en correos personalizados masivos, reportes y tableros, y flujos repetibles.</p>
+          <p>Busca resolver tareas repetitivas de punta a punta. Foco en agentes de IA, correos personalizados masivos, reportes y tableros.</p>
         </div>
       </div>
 
-      <h3 class="sub">4.2 Etapas</h3>
+      <h3 class="sub">5.2 Etapas</h3>
       <table>
         <tr><th>Etapa</th><th>Objetivo</th><th>Resultado esperado</th></tr>
         <tr><td><b>1. Arranque y diagnóstico</b></td><td>Explicar conceptos generales, capacidades y beneficios de la IA generativa; conocer el perfil de cada participante</td><td>Ruta asignada por participante</td></tr>
@@ -458,7 +553,7 @@
     </section>
 
     <section id="horas">
-      <h2 class="section-title">5. Distribución estimada de horas</h2>
+      <h2 class="section-title">6. Distribución estimada de horas</h2>
       <p class="section-sub">Basada en un modelo de seis mentorías individuales de una hora por participante, complementadas con sesiones grupales puntuales.</p>
       <table>
         <tr><th>Componente</th><th>Modalidad</th><th>Detalle</th><th style="text-align:right;">Horas</th></tr>
@@ -473,7 +568,7 @@
     </section>
 
     <section id="herramientas">
-      <h2 class="section-title">6. Herramientas y costo aproximado</h2>
+      <h2 class="section-title">7. Herramientas y costo aproximado</h2>
       <p class="section-sub">El programa se trabaja con una herramienta de IA generativa de uso general, junto con las herramientas que los participantes ya usan (Excel, Outlook y, si aplica, Looker Studio).</p>
       <table>
         <tr><th>Herramienta</th><th>Plan gratuito</th><th>Plan de pago (por persona)</th></tr>
@@ -484,7 +579,7 @@
     </section>
 
     <section id="alcance">
-      <h2 class="section-title">7. Alcance y entregables</h2>
+      <h2 class="section-title">8. Alcance y entregables</h2>
       <div class="list-2col">
         <div>
           <h4>Para el grupo (5 participantes)</h4>
@@ -511,7 +606,7 @@
     </section>
 
     <section id="inversion">
-      <h2 class="section-title">8. Inversión</h2>
+      <h2 class="section-title">9. Inversión</h2>
       <div class="cards2">
         <div class="opt-card">
           <div class="kicker">MENTORÍA · 5 PARTICIPANTES</div>
@@ -527,12 +622,12 @@
         <tr><td>IGV (18%)</td><td class="num">S/ 1,350.00</td></tr>
         <tr class="total"><td>Total</td><td class="num">S/ 8,850.00</td></tr>
       </table>
-      <div class="note amber">Monto preliminar en soles, más IGV, por el programa de mentoría descrito (≈ 42 h). No incluye las licencias de IA generativa, cuyo costo se detalla aparte en la sección 6. Monto negociable y sujeto a la confirmación del alcance final.</div>
+      <div class="note amber">Monto preliminar en soles, más IGV, por el programa de mentoría descrito (≈ 42 h). No incluye las licencias de IA generativa, cuyo costo se detalla aparte en la sección 7. Monto negociable y sujeto a la confirmación del alcance final.</div>
       <button data-filename="cotizacion-mentoria-ia-utp.pdf" onclick="downloadQuotePDF(this)" style="margin-top:18px; background:var(--green-700); color:#fff; border:none; border-radius:10px; padding:12px 20px; font-family:'Poppins',sans-serif; font-weight:600; font-size:14px; cursor:pointer;">📄 Descargar resumen de cotización (PDF)</button>
     </section>
 
     <section id="cronograma">
-      <h2 class="section-title">9. Cronograma</h2>
+      <h2 class="section-title">10. Cronograma</h2>
       <div class="timeline">
         <div class="tl-item"><div class="phase">Arranque y diagnóstico</div><div class="dur">Semana 1</div><div class="what">Sesión general de 2 h (IA generativa) y mentoría 1: perfil y ruta</div></div>
         <div class="tl-item"><div class="phase">Mapeo de tareas operativas</div><div class="dur">Semana 2</div><div class="what">Mentoría 2: lista de tareas y elección de la que más tiempo consume</div></div>
@@ -550,11 +645,11 @@
     </section>
 
     <section id="pasos">
-      <h2 class="section-title">10. Próximos pasos</h2>
+      <h2 class="section-title">11. Próximos pasos</h2>
       <div class="steps">
         <div class="step"><div class="num"></div><p>Confirmación del alcance: número de semanas, distribución de horas y modalidad</p></div>
         <div class="step"><div class="num"></div><p>Confirmación de la lista de participantes y de las tareas operativas que quiere resolver cada uno</p></div>
-        <div class="step"><div class="num"></div><p>Definición de la herramienta de IA generativa y el plan a utilizar (gratuitos o de pago, sección 6)</p></div>
+        <div class="step"><div class="num"></div><p>Definición de la herramienta de IA generativa y el plan a utilizar (gratuitos o de pago, sección 7)</p></div>
         <div class="step"><div class="num"></div><p>Aprobación del presupuesto definitivo</p></div>
         <div class="step"><div class="num"></div><p>Calendarización de sesiones e inicio del programa</p></div>
       </div>
