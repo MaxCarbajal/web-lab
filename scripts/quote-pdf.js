@@ -136,9 +136,11 @@ function generateQuotePDF(quote) {
     doc.setFontSize(size);
     doc.setTextColor(...color);
     const lines = doc.splitTextToSize(text, contentW);
-    ensureSpace(lines.length * 5 + 2);
+    const lineH = size * 0.42; // interlineado compacto (~1.2) para que el resumen quepa en una hoja
+    doc.setLineHeightFactor(1.2);
+    ensureSpace(lines.length * lineH + 2);
     doc.text(lines, marginX, y);
-    y += lines.length * 5 + 4;
+    y += lines.length * lineH + 3;
   }
 
   function divider() {
@@ -146,12 +148,12 @@ function generateQuotePDF(quote) {
     doc.setDrawColor(...faint);
     doc.setLineWidth(0.3);
     doc.line(marginX, y, pageW - marginX, y);
-    y += 6;
+    y += 5;
   }
 
   /* ---- monto ---- */
   label('Monto de la inversión');
-  const boxH = 18;
+  const boxH = 14;
   ensureSpace(boxH + 4);
   doc.setDrawColor(r, g, b);
   doc.setLineWidth(0.4);
@@ -159,7 +161,7 @@ function generateQuotePDF(quote) {
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(16);
   doc.setTextColor(r, g, b);
-  doc.text(quote.amountLabel, marginX + 6, y + 11.5);
+  doc.text(quote.amountLabel, marginX + 6, y + 9.5);
   y += boxH + 4;
   paragraph(quote.amountNote, { color: soft, size: 8.5 });
 
@@ -176,11 +178,11 @@ function generateQuotePDF(quote) {
     margin: { left: marginX, right: marginX, bottom: 26 },
     rowPageBreak: 'avoid',
     theme: 'plain',
-    styles: { font: 'helvetica', fontSize: 9.5, textColor: [45, 48, 51], cellPadding: { top: 1.5, bottom: 1.5, left: 0, right: 2 } },
-    columnStyles: { 0: { cellWidth: 6, textColor: [r, g, b], fontStyle: 'bold' } },
+    styles: { font: 'helvetica', fontSize: 9.5, textColor: [45, 48, 51], cellPadding: { top: 0.8, bottom: 0.8, left: 0, right: 2 } },
+    columnStyles: { 0: { cellWidth: 8, textColor: [r, g, b], fontStyle: 'bold' } },
     body: quote.deliverables.map((item, i) => [String(i + 1) + '.', item]),
   });
-  y = doc.lastAutoTable.finalY + 6;
+  y = doc.lastAutoTable.finalY + 5;
 
   /* ---- cronograma ---- */
   ensureSpace(14);
@@ -191,7 +193,7 @@ function generateQuotePDF(quote) {
     margin: { left: marginX, right: marginX, bottom: 26 },
     rowPageBreak: 'avoid',
     theme: 'grid',
-    styles: { font: 'helvetica', fontSize: 9.5, textColor: [45, 48, 51], cellPadding: 2.5, lineColor: faint, lineWidth: 0.3 },
+    styles: { font: 'helvetica', fontSize: 9.5, textColor: [45, 48, 51], cellPadding: { top: 1.5, bottom: 1.5, left: 2.5, right: 2.5 }, lineColor: faint, lineWidth: 0.3 },
     headStyles: { fillColor: [r, g, b], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 9 },
     columnStyles: { 1: { cellWidth: 45 } },
     head: [['Fase', 'Duración']],
@@ -207,7 +209,7 @@ function generateQuotePDF(quote) {
       }
     },
   });
-  y = doc.lastAutoTable.finalY + 5;
+  y = doc.lastAutoTable.finalY + 4;
 
   paragraph(quote.totalDurationNote, { color: soft, size: 8.5 });
 
