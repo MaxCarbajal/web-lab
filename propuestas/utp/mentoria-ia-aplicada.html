@@ -126,6 +126,32 @@
   }
   .note.amber{background:#FBF3E6; border-left-color:var(--amber);}
 
+  /* CAPACIDADES DE LA IA GENERATIVA */
+  .caps{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:18px; margin-top:24px;}
+  .cap{
+    --c:#333; --c-dark:#222;
+    border-radius:18px; overflow:hidden; color:#fff; display:flex; flex-direction:column;
+    background:var(--c-dark); box-shadow:0 6px 18px rgba(20,30,25,0.10);
+  }
+  .cap .head{
+    background:linear-gradient(90deg, var(--c) 0 50%, color-mix(in srgb, var(--c) 85%, #000) 50% 100%);
+    padding:22px 20px 18px; text-align:center;
+  }
+  .cap .icon{font-size:26px; line-height:1;}
+  .cap h4{color:#fff; font-size:19px; font-weight:800; letter-spacing:.04em; margin-top:8px;}
+  .cap .def{font-size:13px; opacity:.92; margin:8px 0 0; line-height:1.45;}
+  .cap .ex{padding:16px 16px 18px; display:flex; flex-direction:column; gap:8px; flex:1;}
+  .cap .role{font-family:'Poppins',sans-serif; font-size:10px; font-weight:700; letter-spacing:.08em; background:rgba(255,255,255,0.14); align-self:flex-start; padding:2px 8px; border-radius:6px;}
+  .cap .msg{background:rgba(0,0,0,0.22); border-radius:10px; padding:10px 12px; font-size:12.5px; line-height:1.45;}
+  .cap .msg.ai{background:rgba(255,255,255,0.10);}
+  .cap.resumir{--c:#2F57B8; --c-dark:#24366E;}
+  .cap.estructurar{--c:#A3804A; --c-dark:#6E5733;}
+  .cap.clasificar{--c:#2E9AAB; --c-dark:#1F6773;}
+  .cap.expandir{--c:#6FA84B; --c-dark:#4A7633;}
+  .cap.transformar{--c:#A0234B; --c-dark:#6B1832;}
+  .cap.qa{--c:#3A3434; --c-dark:#211D1D;}
+  .cap.rag{--c:#E8655A; --c-dark:#B4473F;}
+
   footer{padding:40px 0 20px; color:var(--ink-soft); font-size:13px; border-top:1px solid var(--line); margin-top:40px;}
 
   @media(max-width:900px){
@@ -147,6 +173,7 @@
   <nav class="toc" id="toc">
     <a href="#resumen">Resumen ejecutivo</a>
     <a href="#enfoque">Enfoque</a>
+    <a href="#capacidades">Capacidades de la IA</a>
     <a href="#estructura">Estructura del programa</a>
     <a href="#horas">Distribución de horas</a>
     <a href="#herramientas">Herramientas y costo</a>
@@ -202,10 +229,67 @@
       <div class="note"><b>Ejemplo de tarea operativa:</b> enviar un correo personalizado a cada gerente. Con Claude o ChatGPT se prepara la lista y el contenido en Excel y se generan los correos personalizados de forma automática, en lugar de redactarlos uno por uno. Otros casos frecuentes: resumir documentos o reuniones, ordenar y analizar datos en Excel, o preparar reportes y tableros (por ejemplo, en Looker Studio).</div>
     </section>
 
-    <section id="estructura">
-      <h2 class="section-title">3. Estructura del programa</h2>
+    <section id="capacidades">
+      <h2 class="section-title">3. Las 7 capacidades de la IA generativa</h2>
+      <p class="section-sub">Casi cualquier tarea operativa se resuelve combinando estas siete capacidades. Son el punto de partida de la sesión general y la base para elegir, en cada mentoría, cómo atacar la tarea de cada participante con Claude o ChatGPT.</p>
+      <div class="caps">
+        <div class="cap resumir">
+          <div class="head"><div class="icon">📝</div><h4>RESUMIR</h4><p class="def">Condensar un texto largo en lo esencial.</p></div>
+          <div class="ex">
+            <span class="role">TÚ</span><div class="msg">Resume en 5 puntos el acta de la reunión del comité de voluntariado.</div>
+            <span class="role">IA</span><div class="msg ai">1. Se aprobó la campaña de noviembre. 2. Cada campus envía su lista hasta el viernes…</div>
+          </div>
+        </div>
+        <div class="cap estructurar">
+          <div class="head"><div class="icon">🗂️</div><h4>ESTRUCTURAR</h4><p class="def">Responder siguiendo un formato predefinido.</p></div>
+          <div class="ex">
+            <span class="role">TÚ</span><div class="msg">De este correo del campus extrae: campus, actividad, fecha, horas y n.º de voluntarios.</div>
+            <span class="role">IA</span><div class="msg ai">Campus: Lima Centro · Actividad: Reforestación · Fecha: 12/10 · Horas: 4 · Voluntarios: 18</div>
+          </div>
+        </div>
+        <div class="cap clasificar">
+          <div class="head"><div class="icon">🏷️</div><h4>CLASIFICAR</h4><p class="def">Indicar a qué categoría pertenece un texto.</p></div>
+          <div class="ex">
+            <span class="role">TÚ</span><div class="msg">Clasifica cada comentario de la encuesta: Positivo, Negativo o Neutral, y su tema.</div>
+            <span class="role">IA</span><div class="msg ai">“Muy bien organizado, repetiría” → Positivo · Tema: organización</div>
+          </div>
+        </div>
+        <div class="cap expandir">
+          <div class="head"><div class="icon">✉️</div><h4>EXPANDIR</h4><p class="def">Generar contenido nuevo a partir de pocas ideas.</p></div>
+          <div class="ex">
+            <span class="role">TÚ</span><div class="msg">Redacta un correo a cada gerente con: presentación, invitación a la reunión de cierre y despedida.</div>
+            <span class="role">IA</span><div class="msg ai">Asunto: Reunión de cierre · Estimado/a [Nombre], le invitamos cordialmente…</div>
+          </div>
+        </div>
+        <div class="cap transformar">
+          <div class="head"><div class="icon">🔄</div><h4>TRANSFORMAR</h4><p class="def">Cambiar el estilo, tono o formato de un texto.</p></div>
+          <div class="ex">
+            <span class="role">TÚ</span><div class="msg">Convierte este mensaje de WhatsApp en un comunicado formal: “chicos, mañana no hay voluntariado, se pasa al jueves”.</div>
+            <span class="role">IA</span><div class="msg ai">Estimados voluntarios: les informamos que la actividad programada para mañana se reprograma para el jueves…</div>
+          </div>
+        </div>
+        <div class="cap qa">
+          <div class="head"><div class="icon">💬</div><h4>Q&amp;A</h4><p class="def">Responder preguntas directas con lo que el modelo ya sabe.</p></div>
+          <div class="ex">
+            <span class="role">TÚ</span><div class="msg">¿Qué son los Objetivos de Desarrollo Sostenible?</div>
+            <span class="role">IA</span><div class="msg ai">Son 17 objetivos adoptados por la ONU en 2015 para erradicar la pobreza, proteger el planeta…</div>
+          </div>
+        </div>
+        <div class="cap rag">
+          <div class="head"><div class="icon">📚</div><h4>RAG</h4><p class="def">Responder con base en tus propios documentos, no solo en lo que el modelo aprendió.</p></div>
+          <div class="ex">
+            <span class="role">TÚ</span><div class="msg">Según el reglamento de voluntariado adjunto, ¿qué se necesita para emitir una constancia?</div>
+            <span class="role">IA</span><div class="msg ai">Según la sección 4 del reglamento, se requiere asistencia registrada y…</div>
+          </div>
+        </div>
+      </div>
+      <div class="note">En el mapeo de tareas, cada tarea operativa se asocia a una o más de estas capacidades. Por ejemplo, el correo personalizado a cada gerente combina <b>Estructurar</b> (ordenar los datos en Excel) y <b>Expandir</b> (redactar cada correo).</div>
+    </section>
 
-      <h3 class="sub">3.1 Rutas según perfil</h3>
+    <section id="estructura">
+      <h2 class="section-title">4. Estructura del programa</h2>
+
+      <h3 class="sub">4.1 Rutas según perfil</h3>
       <p>En la sesión de arranque y la primera mentoría se identifica el punto de partida de cada participante. Las mentorías individuales siguen la ruta que mejor le corresponda, de modo que nadie se quede atrás ni repita lo que ya domina.</p>
       <div class="cards3">
         <div class="opt-card">
@@ -225,7 +309,7 @@
         </div>
       </div>
 
-      <h3 class="sub">3.2 Etapas</h3>
+      <h3 class="sub">4.2 Etapas</h3>
       <table>
         <tr><th>Etapa</th><th>Objetivo</th><th>Resultado esperado</th></tr>
         <tr><td><b>1. Arranque y diagnóstico</b></td><td>Explicar conceptos generales, diferencias y beneficios de Claude y ChatGPT; conocer el perfil de cada participante</td><td>Ruta asignada por participante</td></tr>
@@ -237,11 +321,11 @@
     </section>
 
     <section id="horas">
-      <h2 class="section-title">4. Distribución estimada de horas</h2>
+      <h2 class="section-title">5. Distribución estimada de horas</h2>
       <p class="section-sub">Basada en un modelo de seis mentorías individuales de una hora por participante, complementadas con sesiones grupales puntuales.</p>
       <table>
         <tr><th>Componente</th><th>Modalidad</th><th>Detalle</th><th style="text-align:right;">Horas</th></tr>
-        <tr><td>Asesoría general de arranque</td><td>Grupal</td><td>Conceptos de IA generativa, diferencias y beneficios de Claude y ChatGPT, potencialidades de cada uno y uso responsable</td><td class="num">2 h</td></tr>
+        <tr><td>Asesoría general de arranque</td><td>Grupal</td><td>Las 7 capacidades de la IA generativa, diferencias y beneficios de Claude y ChatGPT, potencialidades de cada uno y uso responsable</td><td class="num">2 h</td></tr>
         <tr><td>Mentorías personalizadas</td><td>Individual</td><td>6 sesiones de 1 h por participante × 5 participantes, sobre sus propias tareas operativas</td><td class="num">30 h</td></tr>
         <tr><td>Clínica grupal intermedia</td><td>Grupal</td><td>Intercambio de casos entre participantes y solución de bloqueos comunes</td><td class="num">2 h</td></tr>
         <tr><td>Sesión de cierre</td><td>Grupal</td><td>Presentación de las tareas resueltas y retroalimentación</td><td class="num">2 h</td></tr>
@@ -252,7 +336,7 @@
     </section>
 
     <section id="herramientas">
-      <h2 class="section-title">5. Herramientas y costo aproximado</h2>
+      <h2 class="section-title">6. Herramientas y costo aproximado</h2>
       <p class="section-sub">El programa se trabaja con <b>Claude</b> y <b>ChatGPT</b>, los dos asistentes de IA generativa de uso general, junto con las herramientas que los participantes ya usan (Excel, Outlook y, si aplica, Looker Studio).</p>
       <table>
         <tr><th>Herramienta</th><th>Plan gratuito</th><th>Plan de pago (por persona)</th></tr>
@@ -264,12 +348,12 @@
     </section>
 
     <section id="alcance">
-      <h2 class="section-title">6. Alcance y entregables</h2>
+      <h2 class="section-title">7. Alcance y entregables</h2>
       <div class="list-2col">
         <div>
           <h4>Para el grupo (5 participantes)</h4>
           <ul>
-            <li>Sesión general de arranque de 2 h sobre IA generativa, Claude y ChatGPT, con material de apoyo</li>
+            <li>Sesión general de arranque de 2 h sobre las 7 capacidades de la IA generativa, Claude y ChatGPT, con material de apoyo</li>
             <li>Clínica grupal intermedia de 2 h para compartir casos y avances</li>
             <li>Sesión de cierre de 2 h con la presentación de las tareas resueltas</li>
             <li>Informe final del programa con los resultados de cada participante y recomendaciones de continuidad</li>
@@ -291,7 +375,7 @@
     </section>
 
     <section id="inversion">
-      <h2 class="section-title">7. Inversión</h2>
+      <h2 class="section-title">8. Inversión</h2>
       <div class="cards2">
         <div class="opt-card">
           <div class="kicker">MENTORÍA · 5 PARTICIPANTES</div>
@@ -307,12 +391,12 @@
         <tr><td>IGV (18%)</td><td class="num">S/ 1,350.00</td></tr>
         <tr class="total"><td>Total</td><td class="num">S/ 8,850.00</td></tr>
       </table>
-      <div class="note amber">Monto preliminar en soles, más IGV, por el programa de mentoría descrito (≈ 42 h). No incluye las licencias de Claude o ChatGPT, cuyo costo se detalla aparte en la sección 5. Monto negociable y sujeto a la confirmación del alcance final.</div>
+      <div class="note amber">Monto preliminar en soles, más IGV, por el programa de mentoría descrito (≈ 42 h). No incluye las licencias de Claude o ChatGPT, cuyo costo se detalla aparte en la sección 6. Monto negociable y sujeto a la confirmación del alcance final.</div>
       <button data-filename="cotizacion-mentoria-ia-utp.pdf" onclick="downloadQuotePDF(this)" style="margin-top:18px; background:var(--green-700); color:#fff; border:none; border-radius:10px; padding:12px 20px; font-family:'Poppins',sans-serif; font-weight:600; font-size:14px; cursor:pointer;">📄 Descargar resumen de cotización (PDF)</button>
     </section>
 
     <section id="cronograma">
-      <h2 class="section-title">8. Cronograma</h2>
+      <h2 class="section-title">9. Cronograma</h2>
       <div class="timeline">
         <div class="tl-item"><div class="phase">Arranque y diagnóstico</div><div class="dur">Semana 1</div><div class="what">Sesión general de 2 h (Claude y ChatGPT) y mentoría 1: perfil y ruta</div></div>
         <div class="tl-item"><div class="phase">Mapeo de tareas operativas</div><div class="dur">Semana 2</div><div class="what">Mentoría 2: lista de tareas y elección de la que más tiempo consume</div></div>
@@ -330,11 +414,11 @@
     </section>
 
     <section id="pasos">
-      <h2 class="section-title">9. Próximos pasos</h2>
+      <h2 class="section-title">10. Próximos pasos</h2>
       <div class="steps">
         <div class="step"><div class="num"></div><p>Confirmación del alcance: número de semanas, distribución de horas y modalidad</p></div>
         <div class="step"><div class="num"></div><p>Confirmación de la lista de participantes y de las tareas operativas que quiere resolver cada uno</p></div>
-        <div class="step"><div class="num"></div><p>Definición de los planes de Claude o ChatGPT a utilizar (gratuitos o de pago, sección 5)</p></div>
+        <div class="step"><div class="num"></div><p>Definición de los planes de Claude o ChatGPT a utilizar (gratuitos o de pago, sección 6)</p></div>
         <div class="step"><div class="num"></div><p>Aprobación del presupuesto definitivo</p></div>
         <div class="step"><div class="num"></div><p>Calendarización de sesiones e inicio del programa</p></div>
       </div>
