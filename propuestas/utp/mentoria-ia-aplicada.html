@@ -232,19 +232,13 @@
   }
 
   /* NIVELES DE USO: escalera de menor a mayor complejidad */
-  .stairs{display:grid; grid-template-columns:repeat(6,1fr); gap:8px; align-items:end; height:210px; margin-top:26px;}
+  .stairs{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; align-items:end; height:150px; margin-top:26px;}
   .stairs .blk{
     height:calc(46px + var(--n) * 26px); background:var(--tone); color:#fff; border-radius:12px 12px 0 0;
     padding:10px 10px; display:flex; flex-direction:column; justify-content:flex-start;
   }
   .stairs .blk b{font-family:'Poppins',sans-serif; font-size:26px; font-weight:800; line-height:1;}
   .stairs .blk span{font-family:'Poppins',sans-serif; font-size:12px; font-weight:600; margin-top:4px; line-height:1.25;}
-  .stair-routes{display:grid; grid-template-columns:repeat(6,1fr); gap:8px; margin-top:8px;}
-  .stair-routes span{
-    border-top:3px solid var(--green-700); padding-top:6px; text-align:center;
-    font-family:'Poppins',sans-serif; font-size:11px; font-weight:700; letter-spacing:.04em; color:var(--green-700);
-  }
-  .stair-routes span.vision{border-top-style:dashed; border-top-color:var(--sage-600); color:var(--sage-600);}
 
   .lvl-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:26px;}
   .lvl{
@@ -257,10 +251,6 @@
     display:flex; align-items:center; justify-content:center; font-family:'Poppins',sans-serif; font-weight:800; font-size:15px;
   }
   .lvl h4{font-size:15.5px; font-weight:700; line-height:1.25;}
-  .lvl .term{
-    align-self:flex-start; margin-top:10px; font-size:10.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase;
-    color:var(--green-700); background:var(--mint-bg); padding:2px 9px; border-radius:20px; font-family:'Poppins',sans-serif;
-  }
   .lvl p{margin:10px 0 0; font-size:13.5px;}
   .lvl .eg{margin-top:auto; padding-top:12px;}
   .lvl .eg div{background:var(--paper); border-radius:10px; padding:9px 11px; font-size:12.5px; color:var(--ink-soft);}
@@ -269,11 +259,9 @@
   @media(max-width:900px){ .lvl-grid{grid-template-columns:repeat(2,1fr);} }
   @media(max-width:600px){
     .lvl-grid{grid-template-columns:1fr;}
-    .stairs{height:160px; gap:5px;}
-    .stairs .blk{height:calc(30px + var(--n) * 20px); padding:8px 6px;}
-    .stairs .blk span{display:none;}
-    .stair-routes{gap:5px;}
-    .stair-routes span{font-size:9px; letter-spacing:0;}
+    .stairs{height:130px; gap:5px;}
+    .stairs .blk{height:calc(40px + var(--n) * 24px); padding:8px 6px;}
+    .stairs .blk span{font-size:10.5px;}
   }
 
   footer{padding:40px 0 20px; color:var(--ink-soft); font-size:13px; border-top:1px solid var(--line); margin-top:40px;}
@@ -298,7 +286,7 @@
     <a href="#resumen">Resumen ejecutivo</a>
     <a href="#enfoque">Enfoque</a>
     <a href="#capacidades">Capacidades de la IA</a>
-    <a href="#niveles">Niveles de uso</a>
+    <a href="#niveles">Usos de la IA</a>
     <a href="#estructura">Estructura del programa</a>
     <a href="#horas">Distribución de horas</a>
     <a href="#herramientas">Herramientas necesarias</a>
@@ -312,7 +300,7 @@
     <div class="hero">
       <span class="tag">Propuesta económica preliminar · Mentoría en Inteligencia Artificial</span>
       <h1>Mentoría en IA Aplicada: menos tareas operativas, más tiempo para lo que importa</h1>
-      <p class="lead">Programa de acompañamiento personalizado para que cinco participantes conozcan las posibilidades de la IA generativa y resuelvan con ella, al menos, una tarea operativa real de su trabajo que hoy les toma tiempo.</p>
+      <p class="lead">Programa de acompañamiento personalizado para que cinco participantes conozcan las posibilidades de la IA generativa y, a partir de un diagnóstico inicial, la apliquen a tareas operativas reales de su trabajo que hoy les toman tiempo.</p>
       <div class="meta">
         <div><b>Inés Evaristo</b>Cliente / contacto</div>
         <div><b>UTP · Sostenibilidad y RSU</b>Institución / equipo</div>
@@ -323,7 +311,7 @@
 
     <section id="resumen">
       <h2 class="section-title">1. Resumen ejecutivo</h2>
-      <p>Programa de mentoría de aproximadamente ocho semanas para un grupo de cinco participantes. Parte de una base común sobre inteligencia artificial generativa, sus capacidades y sus potencialidades, y luego pasa al trabajo de cada participante: identificar las tareas operativas que más tiempo le consumen y resolver al menos una de ellas con IA generativa, de forma que quede aplicada en su día a día. Combina una sesión general de arranque, seis mentorías individuales de una hora, una clínica grupal intermedia y una sesión de cierre para presentar los resultados.</p>
+      <p>Programa de mentoría de aproximadamente ocho semanas para un grupo de cinco participantes. Empieza con un diagnóstico de los conocimientos, las necesidades y las oportunidades de aplicación de la IA generativa en el equipo y, a partir de sus resultados, define una ruta de aprendizaje y aplicación ajustada a cada participante. Sobre esa base, cada participante trabaja con acompañamiento en las tareas operativas que más tiempo le consumen. Combina un diagnóstico inicial, una sesión general de arranque, seis mentorías individuales de una hora, un taller práctico grupal y una sesión de cierre para presentar los avances.</p>
       <p>Hoy las herramientas de IA generativa más populares son <b>Claude</b>, <b>ChatGPT</b>, <b>Gemini</b> y <b>Microsoft Copilot</b>. El programa no depende de una sola: lo que se enseña aplica a cualquiera de ellas, y en adelante esta propuesta se refiere a todas simplemente como <b>IA generativa</b>.</p>
       <p>La propuesta es preliminar: sirve para proyectar el gasto de los próximos dos meses y se ajustará una vez que se confirmen el número de semanas y la distribución de horas.</p>
     </section>
@@ -335,9 +323,10 @@
         <div>
           <h4>Cómo trabajamos</h4>
           <ul>
+            <li><b>Diagnóstico primero:</b> se identifica qué sabe el equipo, qué necesita y dónde la IA generativa puede ayudar; con eso se define la ruta</li>
             <li><b>Base común:</b> conceptos generales de IA generativa, sus capacidades y cuándo conviene usar cada herramienta</li>
             <li><b>Desde el trabajo real:</b> cada participante cuenta qué tareas operativas realiza y cuánto tiempo le toman; sobre eso se trabaja, no sobre ejercicios genéricos</li>
-            <li><b>Una tarea resuelta como mínimo:</b> cada participante sale del programa con al menos una tarea operativa resuelta y en uso</li>
+            <li><b>A su ritmo:</b> cada participante avanza según su punto de partida, sin exigir un nivel de dominio igual para todos</li>
             <li><b>Cierre con resultados:</b> cada participante muestra su caso ante el equipo de UTP al final del programa</li>
           </ul>
         </div>
@@ -345,7 +334,7 @@
           <h4>Qué se lleva cada participante</h4>
           <ul>
             <li>Conocimiento de las potencialidades de la IA generativa y criterio para elegir la herramienta adecuada</li>
-            <li>Al menos una tarea operativa resuelta con IA, con una estimación del tiempo que ahorra</li>
+            <li>Una tarea operativa trabajada con IA generativa, con el avance logrado y una estimación del tiempo que podría ahorrar</li>
             <li>Una guía paso a paso para repetir la solución sin depender del mentor</li>
             <li>Una lista de otras tareas propias que pueden resolverse de la misma forma</li>
             <li>Buenas prácticas de uso responsable: datos personales, verificación de resultados y sesgos</li>
@@ -513,109 +502,81 @@
     </section>
 
     <section id="niveles">
-      <h2 class="section-title">4. Niveles de uso de la IA generativa hoy</h2>
-      <p class="section-sub">La IA generativa ya no es solo un chat. Estos son los usos más comunes hoy, ordenados de menor a mayor complejidad; cada nivel suma sobre el anterior.</p>
+      <h2 class="section-title">4. Cómo se usa la IA generativa en el día a día</h2>
+      <p class="section-sub">No hace falta ser experto para aprovechar la IA generativa. Estos son tres usos sencillos, de menor a mayor complejidad. El diagnóstico inicial define desde cuál parte cada participante y hasta dónde es realista avanzar durante el programa.</p>
 
       <div class="stairs" aria-hidden="true">
-        <div class="blk" style="--n:1; --tone:#8CC5A4;"><b>1</b><span>Chat</span></div>
-        <div class="blk" style="--n:2; --tone:#6BB08A;"><b>2</b><span>Proyectos</span></div>
-        <div class="blk" style="--n:3; --tone:#4F9872;"><b>3</b><span>Multimodal</span></div>
-        <div class="blk" style="--n:4; --tone:#3B805E;"><b>4</b><span>Automatización</span></div>
-        <div class="blk" style="--n:5; --tone:#2F6B4F;"><b>5</b><span>Agentes</span></div>
-        <div class="blk" style="--n:6; --tone:#1F3D2E;"><b>6</b><span>RAG avanzado</span></div>
-      </div>
-      <div class="stair-routes">
-        <span style="grid-column:1 / 3;">EXPLORADOR</span>
-        <span style="grid-column:3 / 5;">CONSTRUCTOR</span>
-        <span style="grid-column:5 / 6;">AUTOMATIZADOR</span>
-        <span class="vision" style="grid-column:6 / 7;">VISIÓN</span>
+        <div class="blk" style="--n:1; --tone:#8CC5A4;"><b>1</b><span>Conversar</span></div>
+        <div class="blk" style="--n:2; --tone:#4F9872;"><b>2</b><span>Usar documentos</span></div>
+        <div class="blk" style="--n:3; --tone:#2F6B4F;"><b>3</b><span>Integrarla al trabajo</span></div>
       </div>
 
       <div class="lvl-grid">
         <div class="lvl" style="--tone:#8CC5A4;">
-          <div class="head"><span class="num">1</span><h4>Chat conversacional</h4></div>
-          <span class="term">Prompting</span>
-          <p>Conversar con la IA generativa para preguntar, redactar, resumir o traducir. Cada conversación empieza desde cero.</p>
+          <div class="head"><span class="num">1</span><h4>Conversar con la IA</h4></div>
+          <p>Pedirle que redacte, resuma, corrija o explique algo, como se lo pediríamos a un colega.</p>
           <div class="eg"><div><b>EJEMPLO</b>“Redacta un correo para confirmar la reunión del viernes con los coordinadores de campus.”</div></div>
         </div>
-        <div class="lvl" style="--tone:#6BB08A;">
-          <div class="head"><span class="num">2</span><h4>Proyectos con contexto</h4></div>
-          <span class="term">Asistentes personalizados</span>
-          <p>Espacios de trabajo con instrucciones y archivos fijos (manuales, plantillas, reglamentos) que la IA generativa tiene presentes en cada conversación.</p>
-          <div class="eg"><div><b>EJEMPLO</b>Un proyecto “Voluntariado RSU” con el reglamento, el tono institucional y las plantillas de correo.</div></div>
-        </div>
         <div class="lvl" style="--tone:#4F9872;">
-          <div class="head"><span class="num">3</span><h4>Creación multimodal</h4></div>
-          <span class="term">Multimodal</span>
-          <p>Generar y entender mucho más que texto: imágenes, audio, voz, video, presentaciones y hojas de cálculo.</p>
-          <div class="eg"><div><b>EJEMPLO</b>Crear la pieza gráfica de una convocatoria, o transcribir y resumir el audio de una reunión.</div></div>
-        </div>
-        <div class="lvl" style="--tone:#3B805E;">
-          <div class="head"><span class="num">4</span><h4>Tareas programadas y automatizaciones</h4></div>
-          <span class="term">Automatización</span>
-          <p>La IA generativa ejecuta una tarea sola, en un horario fijo o cuando ocurre algo, conectada al correo, al calendario o a los archivos.</p>
-          <div class="eg"><div><b>EJEMPLO</b>Cada lunes a las 8:00, un resumen de los correos pendientes de los campus con lo que requiere respuesta.</div></div>
+          <div class="head"><span class="num">2</span><h4>Trabajar con tus documentos</h4></div>
+          <p>Compartirle un archivo (un reglamento, un acta o una hoja de Excel) para que responda o trabaje sobre esa información.</p>
+          <div class="eg"><div><b>EJEMPLO</b>“Resume los acuerdos de esta acta y haz una lista de responsables y fechas.”</div></div>
         </div>
         <div class="lvl" style="--tone:#2F6B4F;">
-          <div class="head"><span class="num">5</span><h4>Agentes de IA</h4></div>
-          <span class="term">IA agéntica</span>
-          <p>La IA generativa recibe un objetivo y lo cumple en varios pasos por su cuenta: busca, navega, usa herramientas, revisa su trabajo y entrega el resultado.</p>
-          <div class="eg"><div><b>EJEMPLO</b>“Revisa las inscripciones de esta semana, detecta datos incompletos y prepara los correos de seguimiento.”</div></div>
-        </div>
-        <div class="lvl" style="--tone:#1F3D2E;">
-          <div class="head"><span class="num">6</span><h4>RAG avanzado y conocimiento conectado</h4></div>
-          <span class="term">Investigación profunda</span>
-          <p>La IA generativa consulta, cruza y cita muchas fuentes a la vez (documentos, bases de datos y sistemas de la institución, o la web) y responde con evidencia verificable.</p>
-          <div class="eg"><div><b>EJEMPLO</b>Un asistente que responde dudas de voluntarios con base en todos los reglamentos y registros de UTP, citando la fuente.</div></div>
+          <div class="head"><span class="num">3</span><h4>Integrarla a una tarea frecuente</h4></div>
+          <p>Usarla de forma habitual en una tarea que se repite, con instrucciones y plantillas guardadas, o dentro de Outlook, Word y Excel con Copilot.</p>
+          <div class="eg"><div><b>EJEMPLO</b>Preparar cada mes los correos personalizados para los gerentes a partir de una lista en Excel.</div></div>
         </div>
       </div>
-      <div class="note">Cada ruta del programa avanza hasta un nivel distinto: <b>Explorador</b> trabaja los niveles 1 y 2, <b>Constructor</b> los niveles 3 y 4, y <b>Automatizador</b> llega hasta el 5. El nivel 6 se presenta como visión de hacia dónde puede crecer el uso de la IA generativa en el equipo.</div>
+      <div class="note">Existen usos más avanzados, como automatizaciones o agentes que trabajan por su cuenta, pero no forman parte del alcance de este programa. Si el diagnóstico muestra que algún participante está listo para explorarlos, se propondrá como un siguiente paso.</div>
     </section>
 
     <section id="estructura">
       <h2 class="section-title">5. Estructura del programa</h2>
 
-      <h3 class="sub">5.1 Rutas según perfil</h3>
-      <p>En la sesión de arranque y la primera mentoría se identifica el punto de partida de cada participante. Las mentorías individuales siguen la ruta que mejor le corresponda, de modo que nadie se quede atrás ni repita lo que ya domina.</p>
+      <h3 class="sub">5.1 Diagnóstico inicial</h3>
+      <p>Antes de las mentorías se realiza un diagnóstico del equipo, con un cuestionario breve y la primera mentoría individual. Permite identificar:</p>
       <div class="cards3">
         <div class="opt-card">
-          <div class="kicker">RUTA 1 · INICIAL · NIVELES 1–2</div>
-          <h4>Explorador</h4>
-          <p>Primer contacto con IA generativa. Foco en el chat para redactar, resumir y organizar información, y en crear proyectos con el contexto de su trabajo.</p>
+          <div class="kicker">1</div>
+          <h4>Conocimientos</h4>
+          <p>Qué herramientas usa hoy cada participante, con qué frecuencia y con cuánta confianza.</p>
         </div>
         <div class="opt-card">
-          <div class="kicker">RUTA 2 · INTERMEDIA · NIVELES 3–4</div>
-          <h4>Constructor</h4>
-          <p>Ya usa IA en su día a día. Foco en creación multimodal, en combinar la IA con Excel y documentos, y en programar tareas que se ejecuten solas.</p>
+          <div class="kicker">2</div>
+          <h4>Necesidades</h4>
+          <p>Qué tareas le consumen más tiempo y dónde encuentra más dificultades en su trabajo diario.</p>
         </div>
         <div class="opt-card">
-          <div class="kicker">RUTA 3 · AVANZADA · HASTA NIVEL 5</div>
-          <h4>Automatizador</h4>
-          <p>Busca resolver tareas repetitivas de punta a punta. Foco en agentes de IA, correos personalizados masivos, reportes y tableros.</p>
+          <div class="kicker">3</div>
+          <h4>Oportunidades</h4>
+          <p>En qué tareas concretas la IA generativa puede ayudar de forma realista y cuáles conviene priorizar.</p>
         </div>
       </div>
+      <p style="margin-top:20px;">Con los resultados se define una <b>ruta de aprendizaje y aplicación</b> ajustada a las necesidades reales del equipo y de cada participante: qué contenidos reforzar, qué uso de la IA generativa trabajar (sección 4) y qué tarea abordar en las mentorías. La ruta se comparte con UTP antes de continuar con la etapa 2.</p>
 
       <h3 class="sub">5.2 Etapas</h3>
       <table>
         <tr><th>Etapa</th><th>Objetivo</th><th>Resultado esperado</th></tr>
-        <tr><td><b>1. Arranque y diagnóstico</b></td><td>Explicar conceptos generales, capacidades y beneficios de la IA generativa; conocer el perfil de cada participante</td><td>Ruta asignada por participante</td></tr>
+        <tr><td><b>1. Arranque y diagnóstico</b></td><td>Explicar conceptos generales, capacidades y beneficios de la IA generativa; realizar el diagnóstico inicial del equipo</td><td>Diagnóstico y ruta de aprendizaje y aplicación</td></tr>
         <tr><td><b>2. Mapeo de tareas</b></td><td>Listar las tareas operativas de cada participante y elegir la que más tiempo le consume</td><td>Tarea priorizada y tiempo actual estimado</td></tr>
-        <tr><td><b>3. Solución guiada</b></td><td>Resolver la tarea priorizada con IA generativa, con acompañamiento uno a uno</td><td>Primera versión de la solución</td></tr>
+        <tr><td><b>3. Solución guiada</b></td><td>Aplicar la IA generativa a la tarea priorizada, con acompañamiento uno a uno</td><td>Primera versión de la solución</td></tr>
         <tr><td><b>4. Prueba y ajuste</b></td><td>Usar la solución en el trabajo real, recibir retroalimentación cruzada y mejorar</td><td>Solución en uso y guía paso a paso</td></tr>
-        <tr><td><b>5. Cierre</b></td><td>Presentar cada caso ante el equipo de UTP</td><td>Tiempo ahorrado estimado y siguientes tareas a resolver</td></tr>
+        <tr><td><b>5. Cierre</b></td><td>Presentar cada caso ante el equipo de UTP</td><td>Avances logrados, tiempo ahorrado estimado y siguientes pasos</td></tr>
       </table>
     </section>
 
     <section id="horas">
       <h2 class="section-title">6. Distribución estimada de horas</h2>
-      <p class="section-sub">Basada en un modelo de seis mentorías individuales de una hora por participante, complementadas con sesiones grupales puntuales.</p>
+      <p class="section-sub">Basada en un diagnóstico inicial y seis mentorías individuales de una hora por participante, complementadas con sesiones grupales puntuales.</p>
       <table>
         <tr><th>Componente</th><th>Modalidad</th><th>Detalle</th><th style="text-align:right;">Horas</th></tr>
+        <tr><td>Diagnóstico inicial</td><td>Remoto</td><td>Cuestionario previo, análisis de resultados y definición de la ruta de aprendizaje y aplicación</td><td class="num">2 h</td></tr>
         <tr><td>Asesoría general de arranque</td><td>Grupal</td><td>Las 7 capacidades de la IA generativa, sus beneficios y potencialidades, y uso responsable</td><td class="num">2 h</td></tr>
         <tr><td>Mentorías personalizadas</td><td>Individual</td><td>6 sesiones de 1 h por participante × 5 participantes, sobre sus propias tareas operativas</td><td class="num">30 h</td></tr>
-        <tr><td>Clínica grupal intermedia</td><td>Grupal</td><td>Intercambio de casos entre participantes y solución de bloqueos comunes</td><td class="num">2 h</td></tr>
-        <tr><td>Sesión de cierre</td><td>Grupal</td><td>Presentación de las tareas resueltas y retroalimentación</td><td class="num">2 h</td></tr>
-        <tr><td>Acompañamiento asíncrono</td><td>Remoto</td><td>Revisión de avances entre sesiones, consultas puntuales y preparación de materiales</td><td class="num">6 h</td></tr>
+        <tr><td>Taller práctico grupal</td><td>Grupal</td><td>Intercambio de casos entre participantes y solución de dificultades comunes</td><td class="num">2 h</td></tr>
+        <tr><td>Sesión de cierre</td><td>Grupal</td><td>Presentación de los avances y retroalimentación</td><td class="num">2 h</td></tr>
+        <tr><td>Acompañamiento asíncrono</td><td>Remoto</td><td>Revisión de avances entre sesiones, consultas puntuales y preparación de materiales</td><td class="num">4 h</td></tr>
         <tr class="total"><td colspan="3">Total estimado</td><td class="num">≈ 42 h</td></tr>
       </table>
       <div class="note">Equivale a aproximadamente <b>5–6 horas semanales</b> durante ocho semanas. La distribución por semana y el número total de semanas se confirman con UTP antes de iniciar; si cambian, las horas se reajustan manteniendo la misma lógica.</div>
@@ -633,7 +594,7 @@
         <div class="opt-card">
           <div class="kicker">VERSIÓN DE PAGO</div>
           <h4>Necesaria para el programa</h4>
-          <p>Un uso más intensivo y funciones como la generación de imágenes, los proyectos con contexto, las tareas programadas o los agentes requieren una versión de pago.</p>
+          <p>Un uso más intensivo y funciones como trabajar con documentos extensos o guardar instrucciones y archivos en proyectos requieren una versión de pago.</p>
         </div>
       </div>
       <div class="note"><b>Microsoft Copilot:</b> como UTP trabaja con Microsoft 365, el programa también muestra cómo aprovechar Copilot dentro de las herramientas institucionales (correo, documentos, hojas de cálculo y reuniones), para que la IA generativa se integre en el trabajo diario.</div>
@@ -646,19 +607,19 @@
         <div>
           <h4>Para el grupo (5 participantes)</h4>
           <ul>
+            <li>Diagnóstico inicial del equipo y ruta de aprendizaje y aplicación</li>
             <li>Sesión general de arranque de 2 h sobre las 7 capacidades de la IA generativa, con material de apoyo</li>
-            <li>Clínica grupal intermedia de 2 h para compartir casos y avances</li>
-            <li>Sesión de cierre de 2 h con la presentación de las tareas resueltas</li>
+            <li>Taller práctico grupal de 2 h para compartir casos y avances</li>
+            <li>Sesión de cierre de 2 h con la presentación de los avances</li>
             <li>Informe final del programa con los resultados de cada participante y recomendaciones de continuidad</li>
           </ul>
         </div>
         <div>
           <h4>Para cada participante</h4>
           <ul>
-            <li>Diagnóstico de perfil y ruta personalizada</li>
-            <li>Seis mentorías individuales de 1 h sobre sus propias tareas</li>
+            <li>Seis mentorías individuales de 1 h sobre sus propias tareas, según su ruta</li>
             <li>Mapa de sus tareas operativas, con la tarea priorizada</li>
-            <li>Al menos una tarea operativa resuelta con IA generativa y en uso, con el tiempo ahorrado estimado</li>
+            <li>Aplicación de la IA generativa a su tarea priorizada, con el avance logrado y el tiempo ahorrado estimado</li>
             <li>Guía paso a paso de la solución, para repetirla de forma autónoma</li>
             <li>Acompañamiento asíncrono entre sesiones para resolver dudas</li>
           </ul>
@@ -672,19 +633,19 @@
       <div class="cards2">
         <div class="opt-card">
           <div class="kicker">MENTORÍA · 5 PARTICIPANTES</div>
-          <div class="price">S/ 7,500 <small>sin IGV</small></div>
+          <div class="price">S/ 7,500 <small>+ IGV</small></div>
         </div>
       </div>
-      <div class="note amber">Monto preliminar en soles, más IGV. No incluye la cuenta de IA generativa, que asume UTP (sección 7), y puede ajustarse según el alcance final.</div>
+      <div class="note amber">Monto preliminar en soles; el IGV se suma a este importe. Incluye el diagnóstico inicial, las sesiones grupales, las mentorías y el acompañamiento descritos en la sección 6. No incluye la cuenta de IA generativa, que asume UTP (sección 7), y puede ajustarse según el alcance final.</div>
       <button data-filename="cotizacion-mentoria-ia-utp.pdf" onclick="downloadQuotePDF(this)" style="margin-top:18px; background:var(--green-700); color:#fff; border:none; border-radius:10px; padding:12px 20px; font-family:'Poppins',sans-serif; font-weight:600; font-size:14px; cursor:pointer;">📄 Descargar resumen de cotización (PDF)</button>
     </section>
 
     <section id="cronograma">
       <h2 class="section-title">10. Cronograma</h2>
       <div class="timeline">
-        <div class="tl-item"><div class="phase">Arranque y diagnóstico</div><div class="dur">Semana 1</div><div class="what">Sesión general de 2 h (IA generativa) y mentoría 1: perfil y ruta</div></div>
+        <div class="tl-item"><div class="phase">Arranque y diagnóstico</div><div class="dur">Semana 1</div><div class="what">Cuestionario de diagnóstico, sesión general de 2 h y mentoría 1: ruta de aprendizaje y aplicación</div></div>
         <div class="tl-item"><div class="phase">Mapeo de tareas operativas</div><div class="dur">Semana 2</div><div class="what">Mentoría 2: lista de tareas y elección de la que más tiempo consume</div></div>
-        <div class="tl-item"><div class="phase">Solución guiada</div><div class="dur">Semanas 3–5</div><div class="what">Mentorías 3 y 4, y clínica grupal intermedia</div></div>
+        <div class="tl-item"><div class="phase">Solución guiada</div><div class="dur">Semanas 3–5</div><div class="what">Mentorías 3 y 4, y taller práctico grupal</div></div>
         <div class="tl-item"><div class="phase">Prueba y ajuste en el trabajo real</div><div class="dur">Semanas 6–7</div><div class="what">Mentorías 5 y 6: ajustes, guía paso a paso y preparación del cierre</div></div>
         <div class="tl-item"><div class="phase">Cierre y presentación de resultados</div><div class="dur">Semana 8</div><div class="what">Sesión de cierre e informe final</div></div>
       </div>
@@ -701,7 +662,7 @@
       <h2 class="section-title">11. Próximos pasos</h2>
       <div class="steps">
         <div class="step"><div class="num"></div><p>Confirmación del alcance: número de semanas, distribución de horas y modalidad</p></div>
-        <div class="step"><div class="num"></div><p>Confirmación de la lista de participantes y de las tareas operativas que quiere resolver cada uno</p></div>
+        <div class="step"><div class="num"></div><p>Confirmación de la lista de participantes y envío del cuestionario de diagnóstico</p></div>
         <div class="step"><div class="num"></div><p>Habilitación por parte de UTP de la cuenta genérica de Claude para los participantes (sección 7)</p></div>
         <div class="step"><div class="num"></div><p>Calendarización de sesiones e inicio del programa</p></div>
       </div>
